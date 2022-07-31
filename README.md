@@ -24,7 +24,7 @@ convert to 1234 format:
 
 
 ## NHL Stats API
-Dataset collection via API was explored, an API was to be available, but not well documented
+Dataset collection via API was explored. An API was found to be available, but not well documented.
 
 * https://statsapi.web.nhl.com/api/v1/
 * https://statsapi.web.nhl.com/api/v1/teams

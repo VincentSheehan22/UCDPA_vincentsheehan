@@ -40,6 +40,8 @@ Dataset collection via web scraping was explored, but the tabular data on NHL.co
 * Scatter plot of points vs. games played.
     * Show retired vs. active.
 
+![](Career Points vs Games Played_Regular Season.png)
+
 ## Ideas For Analysis
 * Define gap to Wayne Gretzky - P/G/A.
 * Players capable of matching/surpassing - P/G/A.

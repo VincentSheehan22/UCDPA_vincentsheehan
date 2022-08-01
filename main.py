@@ -6,18 +6,32 @@ import matplotlib.pyplot as plt
 
 # Don't suppress columns in terminal output.
 pd.options.display.width = 0
+pd.options.display.max_rows = 7461
 
 if __name__ == '__main__':
     df_nhl = pd.read_csv("0001-7461_corrected.csv")
 
     # Sort dataframe by Points ('P') and Games Played ('GP') columns.
-    df_nhl = df_nhl.sort_values(by=['P', 'GP'], ascending=False)
+    df_nhl = df_nhl.sort_values(by=['P', 'GP'], ascending=False).reset_index()
 
     # Summarise dataset.
-    print(df_nhl.head())
-    print(df_nhl.tail())
-    print(df_nhl.describe())
-    print(df_nhl.info())
+    print(df_nhl.head(), "\n")
+    print(df_nhl.tail(), "\n")
+    print(df_nhl.describe(), "\n")
+    print(df_nhl.info(), "\n")
+
+    # Check for duplicate rows.
+    print("Checking for duplicates...\n")
+    duplicates = df_nhl.duplicated()
+
+    if True in duplicates:
+        raise Exception("Duplicate entry found.\n")
+    elif True not in duplicates:
+        print("Duplicate entry not found.\n")
+    else:
+        print("Duplicate check conditions not met. Continuing...\n")
+
+    # Check for missing data.
 
     # Define features of interest.
     games_played = df_nhl['GP']

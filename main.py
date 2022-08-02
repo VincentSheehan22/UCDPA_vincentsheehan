@@ -31,6 +31,12 @@ if __name__ == '__main__':
     else:
         print("Duplicate check conditions not met. Continuing...\n")
 
+    # Convert data types.
+    # Requires replacement of '--' in series.
+    df_nhl['EVG'] = df_nhl['EVG'].astype('int64')
+
+    print(df_nhl.info())
+
     # Check for missing data.
 
     # Define features of interest.

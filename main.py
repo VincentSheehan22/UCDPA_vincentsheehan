@@ -31,9 +31,22 @@ if __name__ == '__main__':
     else:
         print("Duplicate check conditions not met. Continuing...\n")
 
+    # Handle missing data.
+    # Dataset contains entries for players who played prior to modern record keeping. Missing values are represented
+    # with '--'.
+    # Options:
+    #     1. Replace '--' with NaN, and use .dropna().
+    #         * Excludes notable players from analysis.
+    #     2. Replace '--' with 0.
+    #         * May under-represent actual value.
+    #         * Lowers mean of the series.
+    #     3. Replace '--' with league mean.
+    #         * May over- or under-represent actual value.
+    #         * Preserves mean of the series.
+
     # Convert data types.
     # Requires replacement of '--' in series.
-    df_nhl['EVG'] = df_nhl['EVG'].astype('int64')
+    # df_nhl['EVG'] = df_nhl['EVG'].astype('int64')
 
     print(df_nhl.info())
 

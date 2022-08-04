@@ -36,19 +36,19 @@ ReactTable objects, and not parsable with the BeautifulSoup library.
 NHL.com provides the stats data for download in Excel format. This was found to be the most direct approach to acquiring
 the dataset. However, the table view, and thus export, is limited to 100 rows per page.
 
-A script - `get_data_urls.py` - was created for pagination of the tabular data by incrementing the page number within the
-URL, writing all page URLs to file for future reference. It is left as an exercise, beyond the scope of the is project,
-to utilise page URLs for browser automation of the Excel file export.
+A script - `get_data_urls.py` - was created for pagination of the tabular data by incrementing the page number within
+the URL, writing all page URLs to file for future reference. It is left as an exercise, beyond the scope of this
+project, to utilise page URLs for browser automation of the Excel file export.
 
 The dataset was manually downloaded as a set of 75 Excel files (~100 entries apiece), containing 7461 records - player
 career statistics from 1917-18 to 2021-2022 seasons.
 
-With the data collected and stored in the `Raw Data Files` directory, the `pandas.read_excel()` method was used to compile
-the Excel file into a DataFrame, within the `get_dataset_excel()` function defined in `get_dataset.py`.
+With the data collected and stored in the `Raw Data Files` directory, the `pandas.read_excel()` method was used to
+compile the Excel file into a DataFrame, within the `get_dataset_excel()` function defined in `get_dataset.py`.
 
 ### Data Cleaning
-The dataset contains text and numeric data. Numeric values greater than 3 digits are represented as `"1,234"`. Regex used
-to convert to `1234` format:  
+The dataset contains text and numeric data. Numeric values greater than 3 digits are represented as `"1,234"`. Regex
+used to convert to `1234` format:  
 * Find: `\"(\d),(\d)(\d)(\d)\"`  
 * Replace: `$1$2$3$4`
 

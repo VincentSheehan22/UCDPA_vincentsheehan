@@ -2,6 +2,7 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+from get_dataset import get_dataset_excel
 
 
 # Don't suppress columns in terminal output.
@@ -9,7 +10,7 @@ pd.options.display.width = 0
 pd.options.display.max_rows = 7461
 
 if __name__ == '__main__':
-    df_nhl = pd.read_csv("0001-7461_corrected.csv")
+    df_nhl = get_dataset_excel("./Raw Data Files/")
 
     # Sort dataframe by Points ('P') and Games Played ('GP') columns.
     df_nhl = df_nhl.sort_values(by=['P', 'GP'], ascending=False).reset_index()

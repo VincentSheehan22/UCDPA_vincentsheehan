@@ -3,17 +3,27 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from get_dataset import get_dataset_excel
-
+from find_and_replace import find_and_replace
 
 # Don't suppress columns in terminal output.
 pd.options.display.width = 0
 pd.options.display.max_rows = 7461
 
 if __name__ == '__main__':
+    # Compile dataframe from Excel files.
     df_nhl = get_dataset_excel("./Raw Data Files/")
 
+    # Check format of 4-digit value.
+    print("\nChecking format of 4-digit values...\n", df_nhl.loc[df_nhl['Player'] == 'Wayne Gretzky'], "\n")
+
+    # Use Regex to remove ',' from four-digit values, with capture groups.
+    df_nhl = find_and_replace(df_nhl, r'(\d),(\d)(\d)(\d)', r'\1\2\3\4')
+
+    # Check format of 4-digit value after replacement.
+    print("Reformatted 4-digit values...\n", df_nhl.loc[df_nhl['Player'] == 'Wayne Gretzky'], "\n")
+
     # Sort dataframe by Points ('P') and Games Played ('GP') columns.
-    df_nhl = df_nhl.sort_values(by=['P', 'GP'], ascending=False).reset_index()
+    df_nhl = df_nhl.sort_values(by=['P', 'G', 'A'], ascending=False).reset_index()
 
     # Summarise dataset.
     print(df_nhl.head(), "\n")

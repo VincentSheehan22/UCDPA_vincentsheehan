@@ -36,7 +36,7 @@ ReactTable objects, and not parsable with the BeautifulSoup library.
 NHL.com provides the stats data for download in Excel format. This was found to be the most direct approach to acquiring
 the dataset. However, the table view, and thus export, is limited to 100 rows per page.
 
-A script - get_data_urls.py - was created for pagination of the tabular data by incrementing the page number within the
+A script - `get_data_urls.py` - was created for pagination of the tabular data by incrementing the page number within the
 URL, writing all page URLs to file for future reference. It is left as an exercise, beyond the scope of the is project,
 to utilise page URLs for browser automation of the Excel file export.
 

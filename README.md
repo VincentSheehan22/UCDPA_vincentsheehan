@@ -81,26 +81,19 @@ Reformatted 4-digit values...
 0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890  73  149    2   91  5088  17.6     --   49 
 ```
 
-
+Dataframe sorted by 'P' (points), 'G' (goals), and 'A' (assists) columns, with index reset.
 ```
-# Dataset includes 4-digit numbers represented as strings with ','. Use regex to replace string with 4-digit integer
-# equivalent without ',', using capture groups:
-#     Find: \"(\d),(\d)(\d)(\d)\"
-#     Replace: $1$2$3$4
-# df_nhl = df_nhl.replace(r'\"(\d),(\d)(\d)(\d)\"', r'$1$2$3$4', regex=True)
+df_nhl = df_nhl.sort_values(by=['P', 'G', 'A'], ascending=False).reset_index()
 ```
-
-Dataframe created from `0001-7461_corrected.csv` with `pd.read_csv()`. Sorted by 'P' (points) and 'GP' (games played)
-columns, with index reset.
 
 `df.head()`:
 ```
- index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP  EVG   EVP  PPG  PPP SHG  SHP  OTG  GWG     S    S% TOI/GP  FOW%
-0   5861  Wayne Gretzky   L   C  1487  894  1963  2857  520   577  1.92  617  1818  204  890  73  149    2   91  5088  17.6     --    49
-1   5862   Jaromir Jagr   L   R  1733  766  1155  1921  322  1167  1.11  538  1296  217  610  11   15   19  135  5637  13.6     --  24.5
-2   5863   Mark Messier   L   C  1756  694  1193  1887  211  1912  1.07  452  1162  179  581  63  144    8   92  4221  16.4     --  54.7
-3   5864    Gordie Howe   R   R  1767  801  1049  1850  160  1685  1.05  566  1250  211  564  24   36    0  121  3803    --     --    --
-4   5865    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349  1040  188  727  12   31    4   79  3756  14.6     --  54.8 
+   index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP  EVG   EVP  PPG  PPP SHG  SHP  OTG  GWG     S    S% TOI/GP  FOW%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520   577  1.92  617  1818  204  890  73  149    2   91  5088  17.6     --    49
+1      1   Jaromir Jagr   L   R  1733  766  1155  1921  322  1167  1.11  538  1296  217  610  11   15   19  135  5637  13.6     --  24.5
+2      2   Mark Messier   L   C  1756  694  1193  1887  211  1912  1.07  452  1162  179  581  63  144    8   92  4221  16.4     --  54.7
+3      3    Gordie Howe   R   R  1767  801  1049  1850  160  1685  1.05  566  1250  211  564  24   36    0  121  3803    --     --    --
+4      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349  1040  188  727  12   31    4   79  3756  14.6     --  54.8 
 ```
 
 Dataframe contains numeric columns stored as object type, as shown by `df.info()`. As such, these columns are not
@@ -116,12 +109,12 @@ Data columns (total 23 columns):
  1   Player  7461 non-null   object 
  2   S/C     7461 non-null   object 
  3   Pos     7461 non-null   object 
- 4   GP      7461 non-null   int64  
+ 4   GP      7461 non-null   object 
  5   G       7461 non-null   int64  
- 6   A       7461 non-null   int64  
- 7   P       7461 non-null   int64  
+ 6   A       7461 non-null   object 
+ 7   P       7461 non-null   object 
  8   +/-     7461 non-null   int64  
- 9   PIM     7461 non-null   int64  
+ 9   PIM     7461 non-null   object 
  10  P/GP    7461 non-null   float64
  11  EVG     7461 non-null   object 
  12  EVP     7461 non-null   object 
@@ -135,24 +128,28 @@ Data columns (total 23 columns):
  20  S%      7461 non-null   object 
  21  TOI/GP  7461 non-null   object 
  22  FOW%    7461 non-null   object 
-dtypes: float64(1), int64(9), object(13)
+dtypes: float64(1), int64(5), object(17)
 memory usage: 1.3+ MB
 None 
 ```
 
 ```
-             index           GP            G            A            P          +/-          PIM         P/GP          OTG          GWG
-count  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000
-mean   3730.000000   275.652862    48.818523    79.337086   128.155609    -1.992494   226.795604     0.300551     0.593486     6.974132
-std    2153.949512   332.883318    90.422003   137.903378   223.013756    50.056509   385.005601     0.240413     1.702940    13.468123
-min       0.000000     1.000000     0.000000     0.000000     0.000000  -257.000000     0.000000     0.000000     0.000000     0.000000
-25%    1865.000000    20.000000     1.000000     2.000000     3.000000   -14.000000     8.000000     0.130000     0.000000     0.000000
-50%    3730.000000   119.000000    10.000000    18.000000    29.000000    -1.000000    60.000000     0.250000     0.000000     1.000000
-75%    5595.000000   453.000000    53.000000    97.000000   156.000000     0.000000   276.000000     0.430000     0.000000     7.000000
-max    7460.000000  1779.000000   894.000000  1963.000000  2857.000000   722.000000  3971.000000     1.920000    24.000000   135.000000 
+             index            G          +/-         P/GP          OTG          GWG
+count  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000
+mean     49.340571    48.807935    -2.009382     0.300495     0.593486     6.973596
+std      28.847304    90.376002    50.052797     0.240286     1.702940    13.465574
+min       0.000000     0.000000  -257.000000     0.000000     0.000000     0.000000
+25%      24.000000     1.000000   -14.000000     0.130000     0.000000     0.000000
+50%      49.000000    10.000000    -1.000000     0.250000     0.000000     1.000000
+75%      74.000000    53.000000     0.000000     0.430000     0.000000     7.000000
+max      99.000000   894.000000   722.000000     1.920000    24.000000   135.000000 
 ```
 
-Columns requiring type conversion:  
+Columns requiring type conversion:
+* GP: int64
+* A: int64
+* P: int64
+* PIM: int64
 * EVG: int64  
 * EVP: int64  
 * PPG: int64  

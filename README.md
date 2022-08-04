@@ -49,8 +49,38 @@ compile the Excel file into a DataFrame, within the `get_dataset_excel()` functi
 ### Data Cleaning
 The dataset contains text and numeric data. Numeric values greater than 3 digits are represented as `"1,234"`. Regex
 used to convert to `1234` format:  
-* Find: `\"(\d),(\d)(\d)(\d)\"`  
-* Replace: `$1$2$3$4`
+* Find: `(\d),(\d)(\d)(\d)`  
+* Replace: `\1\2\3\4`
+
+The above regex strings were provided as parameters to the `find_and replace()` function defined in
+`find_and_replace.py`, along with the dataframe `df_nhl`. The regex strings use capture groups (parenthesis) to capture
+and return the 1st, 2nd, 3rd and 4th digit characters, eliminating the ',' characters.
+
+```
+# Check format of 4-digit value.
+print("\nChecking format of 4-digit values...\n",
+      df_nhl.loc[df_nhl['Player'] == 'Wayne Gretzky'],
+      "\n")
+
+# Use Regex to remove ',' from four-digit values, with capture groups.
+df_nhl = find_and_replace(df_nhl, r'(\d),(\d)(\d)(\d)', r'\1\2\3\4')
+
+# Check format of 4-digit value after replacement.
+print("Reformatted 4-digit values...\n",
+      df_nhl.loc[df_nhl['Player'] == 'Wayne Gretzky'],
+      "\n")
+```
+
+```
+Checking format of 4-digit values...
+           Player S/C Pos     GP    G      A      P  +/-  PIM  P/GP  EVG    EVP  PPG  PPP SHG  SHP  OTG  GWG      S    S% TOI/GP FOW%
+0  Wayne Gretzky   L   C  1,487  894  1,963  2,857  520  577  1.92  617  1,818  204  890  73  149    2   91  5,088  17.6     --   49 
+
+Reformatted 4-digit values...
+           Player S/C Pos    GP    G     A     P  +/-  PIM  P/GP  EVG   EVP  PPG  PPP SHG  SHP  OTG  GWG     S    S% TOI/GP FOW%
+0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890  73  149    2   91  5088  17.6     --   49 
+```
+
 
 ```
 # Dataset includes 4-digit numbers represented as strings with ','. Use regex to replace string with 4-digit integer

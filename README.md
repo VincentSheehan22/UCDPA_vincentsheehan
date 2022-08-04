@@ -47,6 +47,7 @@ With the data collected and stored in the `Raw Data Files` directory, the `panda
 compile the Excel file into a DataFrame, within the `get_dataset_excel()` function defined in `get_dataset.py`.
 
 ### Data Cleaning
+#### Regex Replacement
 The dataset contains text and numeric data. Numeric values greater than 3 digits are represented as `"1,234"`. Regex
 used to convert to `1234` format:  
 * Find: `(\d),(\d)(\d)(\d)`  
@@ -81,6 +82,7 @@ Reformatted 4-digit values...
 0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890  73  149    2   91  5088  17.6     --   49 
 ```
 
+#### Sorting
 Dataframe sorted by 'P' (points), 'G' (goals), and 'A' (assists) columns, with index reset.
 ```
 df_nhl = df_nhl.sort_values(by=['P', 'G', 'A'], ascending=False).reset_index()
@@ -96,8 +98,9 @@ df_nhl = df_nhl.sort_values(by=['P', 'G', 'A'], ascending=False).reset_index()
 4      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349  1040  188  727  12   31    4   79  3756  14.6     --  54.8 
 ```
 
-Dataframe contains numeric columns stored as object type, as shown by `df.info()`. As such, these columns are not
-represented with `df.describe()` Conversion to int and float types required.
+#### Type Conversion
+The dataframe contains numeric columns stored as object type, as shown by `df.info()`. As such, these columns are not
+represented with `df.describe()` Conversion to int and float types is required.
 
 ```
 <class 'pandas.core.frame.DataFrame'>
@@ -161,10 +164,30 @@ Columns requiring type conversion:
 * TOI/GP: time (mm:ss)
 * FOW%: float64
 
-Checked dataframe fro duplicate entries with `df_nhl.duplicated()`. No duplicate entries found.
+Type conversion:
+```
+df_nhl['GP'] = df_nhl['GP'].astype('int64')
+```
+
+#### Missing Data
+The dataset contains entries for players who played prior to modern record keeping. Some columns such as 'EVG' contain
+missing data, represented as '--'. These require replacement in order to complete type conversion.
+
+Replacement options:
+1. Replace '--' with `NaN`, and use `.dropna()`.
+    * Excludes notable players from analysis.
+2. Replace '--' with 0.
+    * May under-represent actual value.
+    * Lowers mean of the series.
+3. Replace '--' with league mean.
+   * May over- or under-represent actual value.
+   * Preserves mean of the series.
+
+#### Duplicate Data
+Checked dataframe for duplicate entries with `df_nhl.duplicated()`. No duplicate entries found.
 
 
-## NHL Player Stats EDA
+### Exploratory Data Analysis
 * Scatter plot of points vs. games played.
     * Show retired vs. active.
 

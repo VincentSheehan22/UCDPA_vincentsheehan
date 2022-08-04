@@ -62,6 +62,9 @@ if __name__ == '__main__':
     # Convert data types.
     # Requires replacement of '--' in series.
     # df_nhl['EVG'] = df_nhl['EVG'].astype('int64')
+    df_nhl['GP'] = df_nhl['GP'].astype('int64')
+    df_nhl['A'] = df_nhl['A'].astype('int64')
+    df_nhl['P'] = df_nhl['P'].astype('int64')
 
     print(df_nhl.info())
 

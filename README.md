@@ -14,18 +14,42 @@ on the Skaters/All-Time/Regular Season/Summary report, the first page of which i
 NHL all-time player statistics for regular season games - summary report:  
 https://www.nhl.com/stats/skaters?reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points&page=0&pageSize=100
 
-Data downloaded as set of 75 Excel files (~100 entries apiece), containing 7461 records - player career statistics from
-1917-18 to 2021-2022 seasons.
-
 Analysis of other available reports in combination with the summary report is left as an exercise, beyond the scope of
 this project.
 
 ## Implementation
-Excel files saved as CSV, and then CSV files combined using `combine-csv-files.py`. Full dataset saved as `0001-7461.csv`. 
+### Data Import
+Multiple methods of data import were explored.
 
-Dataset contains text and numeric data. Numeric values greater than 3 digits are represented as "1,234". Regex used to
-convert to 1234 format:  
-* Find: `\"(\d),(\d)(\d)(\d)"`  
+#### NHL Stats API
+Dataset collection via API was explored. An API was found to be available, but not well documented.
+
+Team and season data can be found at below links, but a useful API for the player career stats dataset was not found. 
+* https://statsapi.web.nhl.com/api/v1/teams
+* https://statsapi.web.nhl.com/api/v1/seasons
+
+#### Web Scraping
+Dataset collection via web scraping was explored, but the tabular data on NHL.com was found to be implemented as
+ReactTable objects, and not parsable with the BeautifulSoup library.
+
+#### Pandas File Reading
+NHL.com provides the stats data for download in Excel format. This was found to be the most direct approach to acquiring
+the dataset. However, the table view, and thus export, is limited to 100 rows per page.
+
+A script - get_data_urls.py - was created for pagination of the tabular data by incrementing the page number within the
+URL, writing all page URLs to file for future reference. It is left as an exercise, beyond the scope of the is project,
+to utilise page URLs for browser automation of the Excel file export.
+
+The dataset was manually downloaded as a set of 75 Excel files (~100 entries apiece), containing 7461 records - player
+career statistics from 1917-18 to 2021-2022 seasons.
+
+With the data collected and stored in the `Raw Data Files` directory, the `pandas.read_excel()` method was used to compile
+the Excel file into a DataFrame, within the `get_dataset_excel()` function defined in `get_dataset.py`.
+
+### Data Cleaning
+The dataset contains text and numeric data. Numeric values greater than 3 digits are represented as `"1,234"`. Regex used
+to convert to `1234` format:  
+* Find: `\"(\d),(\d)(\d)(\d)\"`  
 * Replace: `$1$2$3$4`
 
 ```
@@ -34,7 +58,6 @@ convert to 1234 format:
 #     Find: \"(\d),(\d)(\d)(\d)\"
 #     Replace: $1$2$3$4
 # df_nhl = df_nhl.replace(r'\"(\d),(\d)(\d)(\d)\"', r'$1$2$3$4', regex=True)
-#   CSV corrected manually with IDE find/replace tool for brevity.
 ```
 
 Dataframe created from `0001-7461_corrected.csv` with `pd.read_csv()`. Sorted by 'P' (points) and 'GP' (games played)
@@ -111,18 +134,7 @@ Columns requiring type conversion:
 * TOI/GP: time (mm:ss)
 * FOW%: float64
 
-## NHL Stats API
-Dataset collection via API was explored. An API was found to be available, but not well documented.
 
-* https://statsapi.web.nhl.com/api/v1/
-* https://statsapi.web.nhl.com/api/v1/teams
-* https://statsapi.web.nhl.com/api/v1/seasons
-
-## Web Scraping
-Dataset collection via web scraping was explored, but the tabular data on NHL.com was found to be implemented as ReactTable, not supported by BeautifulSoup library.
-
-## Pandas
-* pd.readcsv()
 
 ## NHL Player Stats EDA
 * Scatter plot of points vs. games played.

@@ -1,11 +1,26 @@
-## Data Source
-NHL all-time player statistics for regular season games - summary report.
+# UCDPA Project Assignment - Analysing NHL Regular Season Career Statistics
 
+## Data Source
+The National Hockey League, a North American ice-hockey league, operating since 1917 maintains on its website - 
+https://www.nhl.com - a record of player statistics dating back to the inaugural 1917-18 season. This dataset includes
+entries for over 7000 players to have played a regular season game in the NHL, and offers player-by-player comparison
+in areas such as Games Played, Goals, Assists (primary and secondary passes leading to goals), and Points (goals +
+assists).
+
+The website provides filtering of stats by season, team, player position and game type, among others. Data is available
+in several reports, with different statistics tracked in each. For the scope of this project, analysis will be performed
+on the Skaters/All-Time/Regular Season/Summary report, the first page of which is available at the link below. 
+
+NHL all-time player statistics for regular season games - summary report:  
 https://www.nhl.com/stats/skaters?reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points&page=0&pageSize=100
 
 Data downloaded as set of 75 Excel files (~100 entries apiece), containing 7461 records - player career statistics from
 1917-18 to 2021-2022 seasons.
 
+Analysis of other available reports in combination with the summary report is left as an exercise, beyond the scope of
+this project.
+
+## Implementation
 Excel files saved as CSV, and then CSV files combined using `combine-csv-files.py`. Full dataset saved as `0001-7461.csv`. 
 
 Dataset contains text and numeric data. Numeric values greater than 3 digits are represented as "1,234". Regex used to

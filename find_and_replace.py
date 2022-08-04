@@ -2,6 +2,7 @@ import pandas as pd
 
 
 def find_and_replace(df, find_string, replace_string):
+    """Substitute values in DataFrame"""
     df = df.replace(to_replace=find_string, value=replace_string, regex=True)
 
     return df

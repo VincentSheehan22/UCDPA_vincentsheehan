@@ -161,6 +161,7 @@ Columns requiring type conversion:
 * TOI/GP: time (mm:ss)
 * FOW%: float64
 
+Checked dataframe fro duplicate entries with `df_nhl.duplicated()`. No duplicate entries found.
 
 
 ## NHL Player Stats EDA

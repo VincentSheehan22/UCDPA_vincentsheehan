@@ -66,6 +66,12 @@ if __name__ == '__main__':
     df_nhl["SHG"] = handle_missing_data.impute_with_mean(df_nhl["SHG"])
     df_nhl["SHP"] = handle_missing_data.impute_with_mean(df_nhl["SHP"])
 
+    # S/S% - Impute with mean.
+    #df_nhl["S"] = handle_missing_data.impute_with_mean(df_nhl["S"])        # TypeError: can only concatenate str (not "int") to str
+    #df_nhl["S%"] = handle_missing_data.impute_with_mean(df_nhl["S%"])      # TypeError: can only concatenate str (not "int") to str
+
+    
+
     # Convert data types.
     # Requires replacement of '--' in series.
     # df_nhl['EVG'] = df_nhl['EVG'].astype('int64')

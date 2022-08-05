@@ -48,6 +48,7 @@ if __name__ == '__main__':
     else:
         print("Duplicate check conditions not met. Continuing...\n")
 
+
     # Handle missing data.
     # Explore missing data to determine how best to handle.
     df_nhl, missing_count = handle_missing_data.replace_with_nan(df_nhl)
@@ -57,8 +58,13 @@ if __name__ == '__main__':
     # S/C - Impute with mode.
     df_nhl["S/C"] = handle_missing_data.impute_with_mode(df_nhl["S/C"])
 
-    # EVG - Impute with mean.
+    # EVG/EVP/PPG/PPP/SHG/SHP - Impute with mean.
     df_nhl["EVG"] = handle_missing_data.impute_with_mean(df_nhl["EVG"])
+    #df_nhl["EVP"] = handle_missing_data.impute_with_mean(df_nhl["EVP"])    # TypeError: can only concatenate str (not "int") to str
+    df_nhl["PPG"] = handle_missing_data.impute_with_mean(df_nhl["PPG"])
+    df_nhl["PPP"] = handle_missing_data.impute_with_mean(df_nhl["PPP"])
+    df_nhl["SHG"] = handle_missing_data.impute_with_mean(df_nhl["SHG"])
+    df_nhl["SHP"] = handle_missing_data.impute_with_mean(df_nhl["SHP"])
 
     # Convert data types.
     # Requires replacement of '--' in series.

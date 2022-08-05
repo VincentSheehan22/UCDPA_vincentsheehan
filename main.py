@@ -57,7 +57,8 @@ if __name__ == '__main__':
     # S/C - Impute with mode.
     df_nhl["S/C"] = handle_missing_data.impute_with_mode(df_nhl["S/C"])
 
-    
+    # EVG - Impute with mean.
+
 
     # Convert data types.
     # Requires replacement of '--' in series.

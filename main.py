@@ -58,23 +58,31 @@ if __name__ == '__main__':
     # S/C - Impute with mode.
     df_nhl["S/C"] = handle_missing_data.impute_with_mode(df_nhl["S/C"])
 
-    # EVG/EVP/PPG/PPP/SHG/SHP - Impute with mean.
+    # EVG, EVP, PPG, PPP, SHG, SHP - Impute with mean.
     df_nhl["EVG"] = handle_missing_data.impute_with_mean(df_nhl["EVG"])
-    #df_nhl["EVP"] = handle_missing_data.impute_with_mean(df_nhl["EVP"])    # TypeError: can only concatenate str (not "int") to str
+    df_nhl['EVP'] = df_nhl['EVP'].astype('float64')                        # Intermediate type coversion to resolve TypeError on impute_with_mean.
+                                                                           # Include conversion in impute_with_mean() function definition?
+    df_nhl["EVP"] = handle_missing_data.impute_with_mean(df_nhl["EVP"])    # TypeError: can only concatenate str (not "int") to str
     df_nhl["PPG"] = handle_missing_data.impute_with_mean(df_nhl["PPG"])
     df_nhl["PPP"] = handle_missing_data.impute_with_mean(df_nhl["PPP"])
     df_nhl["SHG"] = handle_missing_data.impute_with_mean(df_nhl["SHG"])
     df_nhl["SHP"] = handle_missing_data.impute_with_mean(df_nhl["SHP"])
 
-    # S/S% - Impute with mean.
-    #df_nhl["S"] = handle_missing_data.impute_with_mean(df_nhl["S"])        # TypeError: can only concatenate str (not "int") to str
-    #df_nhl["S%"] = handle_missing_data.impute_with_mean(df_nhl["S%"])      # TypeError: can only concatenate str (not "int") to str
+    # S, S% - Impute with mean.
+    df_nhl['S'] = df_nhl['S'].astype('float64')
+    df_nhl["S"] = handle_missing_data.impute_with_mean(df_nhl["S"])        # TypeError: can only concatenate str (not "int") to str
+    df_nhl['S%'] = df_nhl['S%'].astype('float64')
+    df_nhl["S%"] = handle_missing_data.impute_with_mean(df_nhl["S%"])      # TypeError: can only concatenate str (not "int") to str
 
-    
+    # TOI/GP, FOW % - Drop columns.
+    print("Dropping TOI/GP and FOW% colums...\n")
+    df_nhl = df_nhl.drop(["TOI/GP", "FOW%"], axis=1)
+
+    print(df_nhl.head())
+    print(df_nhl.describe())
 
     # Convert data types.
     # Requires replacement of '--' in series.
-    # df_nhl['EVG'] = df_nhl['EVG'].astype('int64')
     df_nhl['GP'] = df_nhl['GP'].astype('int64')
     df_nhl['A'] = df_nhl['A'].astype('int64')
     df_nhl['P'] = df_nhl['P'].astype('int64')

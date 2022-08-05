@@ -80,6 +80,7 @@ if __name__ == '__main__':
 
     print(df_nhl.head())
     print(df_nhl.describe())
+    print(df_nhl.info())
 
     # Convert data types.
     # Requires replacement of '--' in series.
@@ -89,7 +90,6 @@ if __name__ == '__main__':
 
     print(df_nhl.info())
 
-    # Check for missing data.
 
     # Define features of interest.
     games_played = df_nhl['GP']

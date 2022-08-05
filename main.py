@@ -50,11 +50,14 @@ if __name__ == '__main__':
 
     # Handle missing data.
     # Explore missing data to determine how best to handle.
-    df_nhl, missing_count = handle_missing_data.replace_with_nana(df_nhl)
+    df_nhl, missing_count = handle_missing_data.replace_with_nan(df_nhl)
     print(df_nhl.head(), "\n")
     print(missing_count, "\n")
 
+    # S/C - Impute with mode.
+    df_nhl["S/C"] = handle_missing_data.impute_with_mode(df_nhl["S/C"])
 
+    
 
     # Convert data types.
     # Requires replacement of '--' in series.

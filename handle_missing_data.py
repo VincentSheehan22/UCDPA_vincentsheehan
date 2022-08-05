@@ -15,8 +15,10 @@ def replace_with_nan(df):
 
 def impute_with_mode(series):
     """Fill NA in Pandas Series with the mode (most frequent value) of the series."""
-    print(series.mode())
-    series = series.fillna(series.mode()[0])
+    mode = series.mode()
+
+    print(f"Imputing {series.name} with mode: '{mode[0]}'...\n")
+    series = series.fillna(mode[0])
 
     return series
 
@@ -32,6 +34,7 @@ if __name__ == '__main__':
     print(null_count)
 
     df_test = pd.DataFrame({"col_1": ["L", "L", "R", np.nan, np.nan]})
+    print(df_test)
 
     df_mode = impute_with_mode(df_test["col_1"])
     print(df_mode)

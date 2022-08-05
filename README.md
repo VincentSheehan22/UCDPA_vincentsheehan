@@ -182,6 +182,33 @@ Replacement options:
 3. Replace '--' with league mean.
    * May over- or under-represent actual value.
    * Preserves mean of the series.
+4. Remove columns containing '--'.
+   * Excludes features from further analysis.
+
+Missing data was explored to determine how best to handle. A function `handle_missing_data.py` was created to take
+dataframe as input, convert entries with value "--" - representing missing in the NHL dataset - to `NaN`. With NaNs
+populated in the dataframe, the function then obtains a count of missing data per column. The modified data frame and
+missing data counts are then returned.
+
+```
+# Explore missing data to determine how best to handle.
+df_nhl, missing_count = handle_missing_data.handle_missing_data(df_nhl)
+print(df_nhl.head(), "\n")
+print(missing_count, "\n")
+```
+
+Passing `df_nhl` to `handle_missing_data()`, conversion of missing data to `NaN` was successful, as shown with
+`df_nhl.head()`:
+```
+   index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP    EVG   EVP    PPG    PPP   SHG    SHP  OTG  GWG     S    S% TOI/GP  FOW%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520   577  1.92  617.0  1818  204.0  890.0  73.0  149.0    2   91  5088  17.6    NaN  49.0
+1      1   Jaromir Jagr   L   R  1733  766  1155  1921  322  1167  1.11  538.0  1296  217.0  610.0  11.0   15.0   19  135  5637  13.6    NaN  24.5
+2      2   Mark Messier   L   C  1756  694  1193  1887  211  1912  1.07  452.0  1162  179.0  581.0  63.0  144.0    8   92  4221  16.4    NaN  54.7
+3      3    Gordie Howe   R   R  1767  801  1049  1850  160  1685  1.05  566.0  1250  211.0  564.0  24.0   36.0    0  121  3803   NaN    NaN   NaN
+4      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349.0  1040  188.0  727.0  12.0   31.0    4   79  3756  14.6    NaN  54.8 
+```
+
+
 
 #### Duplicate Data
 Checked dataframe for duplicate entries with `df_nhl.duplicated()`. No duplicate entries found.

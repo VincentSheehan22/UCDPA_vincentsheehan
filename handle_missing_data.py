@@ -26,7 +26,7 @@ def impute_with_mode(series):
 def impute_with_mean(series):
     """Fill NA in Pandas Series with the mean of the series."""
     mean = np.mean(series)
-    print(f"Imputing {series.name} with mode: '{mean}'...\n")
+    print(f"Imputing {series.name} with mean: '{mean}'...\n")
     series = series.fillna(mean)
 
     return series

@@ -240,6 +240,9 @@ dtype: int64
 exploring only out-field players and not the Goalie position, this field refers to shooting hand.
   * One approach to impute this, would be to take the ratio of L:R for the available data and distribute 'L' and 'R'
   values for the missing data, according to the overall ratio.
+  * Another option is to replace with mode, the most frequently occurring value.
+    * Suitable given low number of missing values, assuming right-handedness is prevalent.
+    * Skews dataset in favour of L or R, which may not be representative.
   * It may also be useful to drop this column, as having limited applicability. However, analysis of success for
   left-handed vs. right-handed shooters may be of interest.
 * **EVG/EVP/PPG/PPP/SHG/SHP**: Represent goals and points in various game scenarios.

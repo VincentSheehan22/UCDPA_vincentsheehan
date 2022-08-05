@@ -49,26 +49,12 @@ if __name__ == '__main__':
         print("Duplicate check conditions not met. Continuing...\n")
 
     # Handle missing data.
-    # Dataset contains entries for players who played prior to modern record keeping. Missing values are represented
-    # with '--'.
-    # Options:
-    #     1. Replace '--' with NaN, and use .dropna().
-    #         * Excludes notable players from analysis.
-    #         * `print(df_nhl.replace("--", np.nan))`
-    #     2. Replace '--' with 0.
-    #         * May under-represent actual value.
-    #         * Lowers mean of the series.
-    #     3. Replace '--' with league mean.
-    #         * May over- or under-represent actual value.
-    #         * Preserves mean of the series.
-    #     4. Remove columns containing '--'.
-    #         * Excludes features from further analysis.
-    #     5. For binary values, replace with ratio from rest of data set. E.g., S/C - L or R.
-
     # Explore missing data to determine how best to handle.
-    df_nhl, missing_count = handle_missing_data.handle_missing_data(df_nhl)
+    df_nhl, missing_count = handle_missing_data.replace_with_nana(df_nhl)
     print(df_nhl.head(), "\n")
     print(missing_count, "\n")
+
+
 
     # Convert data types.
     # Requires replacement of '--' in series.

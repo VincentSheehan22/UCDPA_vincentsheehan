@@ -186,7 +186,7 @@ Replacement options:
    * Excludes features from further analysis.
 
 Missing data was explored to determine how best to handle. A function `handle_missing_data.py` was created to take
-dataframe as input, convert entries with value "--" - representing missing in the NHL dataset - to `NaN`. With NaNs
+dataframe as input, convert entries with value "--" - representing missing data in the NHL dataset - to `NaN`. With NaNs
 populated in the dataframe, the function then obtains a count of missing data per column. The modified data frame and
 missing data counts are then returned.
 

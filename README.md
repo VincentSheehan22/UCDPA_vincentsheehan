@@ -43,7 +43,7 @@ project, to utilise page URLs for browser automation of the Excel file export.
 The dataset was manually downloaded as a set of 75 Excel files (~100 entries apiece), containing 7461 records - player
 career statistics from 1917-18 to 2021-2022 seasons.
 
-With the data collected and stored in the `Raw Data Files` directory, the `pandas.read_excel()` method was used to
+With the data collected and stored in the `Raw Data Files` directory, the `pandas.read_excel()` function was used to
 compile the Excel file into a DataFrame, within the `get_dataset_excel()` function defined in `get_dataset.py`.
 
 ### Data Cleaning

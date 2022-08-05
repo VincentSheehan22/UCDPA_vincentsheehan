@@ -190,7 +190,7 @@ dataframe as input, convert entries with value "--" - representing missing in th
 populated in the dataframe, the function then obtains a count of missing data per column. The modified data frame and
 missing data counts are then returned.
 
-```
+``` Python
 # Explore missing data to determine how best to handle.
 df_nhl, missing_count = handle_missing_data.handle_missing_data(df_nhl)
 print(df_nhl.head(), "\n")
@@ -208,7 +208,58 @@ Passing `df_nhl` to `handle_missing_data()`, conversion of missing data to `NaN`
 4      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349.0  1040  188.0  727.0  12.0   31.0    4   79  3756  14.6    NaN  54.8 
 ```
 
+The missing data counts provide some insight on how to handle missing values for each column.
+```
+index        0
+Player       0
+S/C         74
+Pos          0
+GP           0
+G            0
+A            0
+P            0
++/-          0
+PIM          0
+P/GP         0
+EVG        272
+EVP        272
+PPG        272
+PPP        272
+SHG        272
+SHP        272
+OTG          0
+GWG          0
+S         1057
+S%        1461
+TOI/GP    4321
+FOW%      4680
+dtype: int64 
+```
 
+* **S/C (Shoots/Catches)**: Represents 'handedness' of the player, either left (L) or right (R). In this in instance,
+exploring only out-field players and not the Goalie position, this field refers to shooting hand.
+  * One approach to impute this, would be to take the ratio of L:R for the available data and distribute 'L' and 'R'
+  values for the missing data, according to the overall ratio.
+  * It may also be useful to drop this column, as having limited applicability. However, analysis of success for
+  left-handed vs. right-handed shooters may be of interest.
+* **EVG/EVP/PPG/PPP/SHG/SHP**: Represent goals and points in various game scenarios.
+  * EV: Even-strength, both teams have the same number of players on the ice.
+  * PP: Power-play, team has additional players(s) on the ice relative to opponent due to a penalty situation.
+  * SH: Shorthanded, team has fewer players(s) on the ice relative to opponent due to a penalty situation.
+  * As there are relatively few missing entries, values are imputed to league mean.
+* **S**: Shots taken by player.
+  * Imputed to league mean.
+    * Does not account for historical variance in playing styles.
+* **S%**: Shooting percentage, i.e., `(goals / shots) * 100`.
+  * Imputed to league mean.
+    * Does not account for historical variance in playing styles.
+* **TOI/GP**: Time-on-ice per game played. Skaters rotate onto and off the playing surface in shifts of ~30-90 seconds
+duration. Typical cumulative time-on-ice for a player in a 60-minute game can range from 5 to 20 minutes. Data likely
+unavailable due to recency of player location tracking technology.
+  * As data is not available for over 50% of players in the dataset, this column will be dropped.
+* **FOW%**: Face-off win percentage. Game scenario in which two players contest possession of the puck. Typically taken
+by players in the centre position.
+  * As data is not available for over 50% of players in the dataset, this column will be dropped.
 
 #### Duplicate Data
 Checked dataframe for duplicate entries with `df_nhl.duplicated()`. No duplicate entries found.

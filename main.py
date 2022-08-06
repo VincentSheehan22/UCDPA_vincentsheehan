@@ -17,9 +17,10 @@ if __name__ == '__main__':
     df_nhl = get_dataset_excel("./Raw Data Files/")
 
     # Summarise dataset.
-    print(df_nhl.head(), "\n")
-    print(df_nhl.tail(), "\n")
-    print(df_nhl.describe(), "\n")
+    print("Getting df_nhl.head()...\n", df_nhl.head(), "\n")
+    print("Getting df_nhl.tail()...\n", df_nhl.tail(), "\n")
+    print("Getting df_nhl.describe()...\n", df_nhl.describe(), "\n")
+    print("Getting df_nhl.info()...\n")     # Separating print statements for .info() as output conflicts when combined.
     print(df_nhl.info(), "\n")
 
     # Data Cleaning
@@ -38,14 +39,14 @@ if __name__ == '__main__':
           "\n")
 
     # Sort dataframe by Points, Goals, and Assists and columns.
-    print("Sorting by P, G, A...")
+    print("Sorting by P, G, A...\n")
     df_nhl = df_nhl.sort_values(by=['P', 'G', 'A'], ascending=False).reset_index()
 
     # Summarise dataset.
-    print(df_nhl.head(), "\n")
-    print(df_nhl.tail(), "\n")
-    print(df_nhl.describe(), "\n")
-    print(df_nhl.info(), "\n")
+    print("Getting df_nhl.head()...\n", df_nhl.head(), "\n")
+    print("Getting df_nhl.tail()...\n", df_nhl.tail(), "\n")
+    print("Getting df_nhl.describe()...\n", df_nhl.describe(), "\n")
+    print("Getting df_nhl.info()...\n", df_nhl.info(), "\n")
 
     # Check for duplicate rows.
     print("Checking for duplicates...\n")

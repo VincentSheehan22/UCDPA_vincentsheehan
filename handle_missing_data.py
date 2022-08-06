@@ -5,6 +5,7 @@ import numpy as np
 def replace_with_nan(df):
     """Function to process missing values in dataframe."""
     # Replace "--" entries in datframe with NaN.
+    print("Replacing missing entries (--) with NaN...\n")
     df = df.replace("--", np.nan)
 
     # Count NaNs per column.

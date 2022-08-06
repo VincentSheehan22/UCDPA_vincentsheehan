@@ -16,21 +16,29 @@ if __name__ == '__main__':
     # Compile dataframe from Excel files.
     df_nhl = get_dataset_excel("./Raw Data Files/")
 
+    # Summarise dataset.
+    print(df_nhl.head(), "\n")
+    print(df_nhl.tail(), "\n")
+    print(df_nhl.describe(), "\n")
+    print(df_nhl.info(), "\n")
+
     # Data Cleaning
     # Check format of 4-digit value.
-    print("\nChecking format of 4-digit values...\n",
+    print("Checking format of 4-digit values...\n",
           df_nhl.loc[df_nhl['Player'] == 'Wayne Gretzky'],
           "\n")
 
     # Use Regex to remove ',' from four-digit values, with capture groups.
+    print("Reformatting 4-digit values...\n")
     df_nhl = find_and_replace(df_nhl, r'(\d),(\d)(\d)(\d)', r'\1\2\3\4')
 
     # Check format of 4-digit value after replacement.
-    print("Reformatted 4-digit values...\n",
+    print("Checking format of 4-digit values...\n",
           df_nhl.loc[df_nhl['Player'] == 'Wayne Gretzky'],
           "\n")
 
-    # Sort dataframe by Points ('P') and Games Played ('GP') columns.
+    # Sort dataframe by Points, Goals, and Assists and columns.
+    print("Sorting by P, G, A...")
     df_nhl = df_nhl.sort_values(by=['P', 'G', 'A'], ascending=False).reset_index()
 
     # Summarise dataset.

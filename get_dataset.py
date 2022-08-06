@@ -8,6 +8,7 @@ def get_dataset_excel(directory):
     df_nhl = pd.DataFrame()
 
     # Iterate over .xlsx files in target directory.
+    print("Compiling dataframe...")
     files_parsed = 0
     for file in glob(f"{directory}*.xlsx"):
         print(file)
@@ -18,7 +19,7 @@ def get_dataset_excel(directory):
         # Concatenate existing dataframe with dataframe generated from file.
         df_nhl = pd.concat([df_nhl, df_players])
 
-    print(f"Files parsed: {files_parsed}")
+    print(f"\nFiles parsed: {files_parsed}\n")
 
     return df_nhl
 

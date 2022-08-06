@@ -30,7 +30,6 @@ if __name__ == '__main__':
           "\n")
 
     # Use Regex to remove ',' from four-digit values, with capture groups.
-    print("Reformatting 4-digit values...\n")
     df_nhl = find_and_replace(df_nhl, r'(\d),(\d)(\d)(\d)', r'\1\2\3\4')
 
     # Check format of 4-digit value after replacement.

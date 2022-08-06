@@ -20,7 +20,7 @@ if __name__ == '__main__':
     print("Getting df_nhl.head()...\n", df_nhl.head(), "\n")
     print("Getting df_nhl.tail()...\n", df_nhl.tail(), "\n")
     print("Getting df_nhl.describe()...\n", df_nhl.describe(), "\n")
-    print("Getting df_nhl.info()...\n")     # Separating print statements for .info() as output conflicts when combined.
+    print("Getting df_nhl.info()...")     # Separating print statements for .info() as output conflicts when combined.
     print(df_nhl.info(), "\n")
 
     # Data Cleaning
@@ -46,7 +46,8 @@ if __name__ == '__main__':
     print("Getting df_nhl.head()...\n", df_nhl.head(), "\n")
     print("Getting df_nhl.tail()...\n", df_nhl.tail(), "\n")
     print("Getting df_nhl.describe()...\n", df_nhl.describe(), "\n")
-    print("Getting df_nhl.info()...\n", df_nhl.info(), "\n")
+    print("Getting df_nhl.info()...")
+    print(df_nhl.info(), "\n")
 
     # Check for duplicate rows.
     print("Checking for duplicates...\n")
@@ -62,15 +63,15 @@ if __name__ == '__main__':
     # Handling Missing Data
     # Explore missing data to determine how best to handle.
     df_nhl, missing_count = handle_missing_data.replace_with_nan(df_nhl)
-    print(df_nhl.head(), "\n")
-    print(missing_count, "\n")
+    print("Getting df_nhl.head()...\n", df_nhl.head(), "\n")
+    print("Getting missing_count...\n", missing_count, "\n")
 
     # S/C - Impute with mode.
     df_nhl["S/C"] = handle_missing_data.impute_with_mode(df_nhl["S/C"])
 
     # EVG, EVP, PPG, PPP, SHG, SHP - Impute with mean.
     df_nhl["EVG"] = handle_missing_data.impute_with_mean(df_nhl["EVG"])
-    df_nhl["EVP"] = df_nhl["EVP"].astype("float64")                        # Intermediate type coversion to resolve TypeError on impute_with_mean.
+    df_nhl["EVP"] = df_nhl["EVP"].astype("float64")                        # Intermediate type coversion to resolve TypeError on impute_with_mean().
                                                                            # Include conversion in impute_with_mean() function definition?
     df_nhl["EVP"] = handle_missing_data.impute_with_mean(df_nhl["EVP"])    # TypeError: can only concatenate str (not "int") to str
     df_nhl["PPG"] = handle_missing_data.impute_with_mean(df_nhl["PPG"])
@@ -85,12 +86,15 @@ if __name__ == '__main__':
     df_nhl["S%"] = handle_missing_data.impute_with_mean(df_nhl["S%"])      # TypeError: can only concatenate str (not "int") to str
 
     # TOI/GP, FOW % - Drop columns.
-    print("Dropping TOI/GP and FOW% colums...\n")
+    print("Dropping TOI/GP and FOW% columns...\n")
     df_nhl = df_nhl.drop(["TOI/GP", "FOW%"], axis=1)
 
-    print(df_nhl.head())
-    print(df_nhl.describe())
-    print(df_nhl.info())
+    # Summarise dataset.
+    print("Getting df_nhl.head()...\n", df_nhl.head(), "\n")
+    print("Getting df_nhl.tail()...\n", df_nhl.tail(), "\n")
+    print("Getting df_nhl.describe()...\n", df_nhl.describe(), "\n")
+    print("Getting df_nhl.info()...")
+    print(df_nhl.info(), "\n")
 
     # Convert data types.
     print("Converting data types...\n")
@@ -114,9 +118,10 @@ if __name__ == '__main__':
     df_nhl["S%"] = df_nhl["S%"].astype("float64").round(1)
 
     # Summarise dataset after cleaning.
-    print(df_nhl.head(), "\n")
-    print(df_nhl.tail(), "\n")
-    print(df_nhl.describe(), "\n")
+    print("Getting df_nhl.head()...\n", df_nhl.head(), "\n")
+    print("Getting df_nhl.tail()...\n", df_nhl.tail(), "\n")
+    print("Getting df_nhl.describe()...\n", df_nhl.describe(), "\n")
+    print("Getting df_nhl.info()...")
     print(df_nhl.info(), "\n")
 
     # Exploratory Data Analysis

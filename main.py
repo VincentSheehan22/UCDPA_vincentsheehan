@@ -60,7 +60,7 @@ if __name__ == '__main__':
 
     # EVG, EVP, PPG, PPP, SHG, SHP - Impute with mean.
     df_nhl["EVG"] = handle_missing_data.impute_with_mean(df_nhl["EVG"])
-    df_nhl['EVP'] = df_nhl['EVP'].astype('float64')                        # Intermediate type coversion to resolve TypeError on impute_with_mean.
+    df_nhl["EVP"] = df_nhl["EVP"].astype("float64")                        # Intermediate type coversion to resolve TypeError on impute_with_mean.
                                                                            # Include conversion in impute_with_mean() function definition?
     df_nhl["EVP"] = handle_missing_data.impute_with_mean(df_nhl["EVP"])    # TypeError: can only concatenate str (not "int") to str
     df_nhl["PPG"] = handle_missing_data.impute_with_mean(df_nhl["PPG"])
@@ -69,9 +69,9 @@ if __name__ == '__main__':
     df_nhl["SHP"] = handle_missing_data.impute_with_mean(df_nhl["SHP"])
 
     # S, S% - Impute with mean.
-    df_nhl['S'] = df_nhl['S'].astype('float64')
+    df_nhl["S"] = df_nhl["S"].astype("float64")
     df_nhl["S"] = handle_missing_data.impute_with_mean(df_nhl["S"])        # TypeError: can only concatenate str (not "int") to str
-    df_nhl['S%'] = df_nhl['S%'].astype('float64')
+    df_nhl["S%"] = df_nhl["S%"].astype("float64")
     df_nhl["S%"] = handle_missing_data.impute_with_mean(df_nhl["S%"])      # TypeError: can only concatenate str (not "int") to str
 
     # TOI/GP, FOW % - Drop columns.
@@ -83,12 +83,29 @@ if __name__ == '__main__':
     print(df_nhl.info())
 
     # Convert data types.
-    # Requires replacement of '--' in series.
-    df_nhl['GP'] = df_nhl['GP'].astype('int64')
-    df_nhl['A'] = df_nhl['A'].astype('int64')
-    df_nhl['P'] = df_nhl['P'].astype('int64')
+    print("Converting data types...\n")
+    df_nhl["Player"] = df_nhl["Player"].astype("string")
+    df_nhl["S/C"] = df_nhl["S/C"].astype("string")
+    df_nhl["Pos"] = df_nhl["Pos"].astype("string")
+    df_nhl["GP"] = df_nhl["GP"].astype("int64")
+    df_nhl["A"] = df_nhl["A"].astype("int64")
+    df_nhl["P"] = df_nhl["P"].astype("int64")
+    df_nhl["PIM"] = df_nhl["PIM"].astype("int64")
+    df_nhl["P/GP"] = df_nhl["P/GP"].astype("float64").round(2)
+    df_nhl["EVG"] = df_nhl["EVG"].astype("int64")
+    df_nhl["EVP"] = df_nhl["EVP"].astype("int64")
+    df_nhl["PPG"] = df_nhl["PPG"].astype("int64")
+    df_nhl["PPP"] = df_nhl["PPP"].astype("int64")
+    df_nhl["SHG"] = df_nhl["SHG"].astype("int64")
+    df_nhl["SHP"] = df_nhl["SHP"].astype("int64")
+    df_nhl["OTG"] = df_nhl["OTG"].astype("int64")
+    df_nhl["GWG"] = df_nhl["GWG"].astype("int64")
+    df_nhl["S"] = df_nhl["S"].astype("int64")
+    df_nhl["S%"] = df_nhl["S%"].astype("float64").round(1)
+
 
     print(df_nhl.info())
+    print(df_nhl.head())
 
 
     # Define features of interest.

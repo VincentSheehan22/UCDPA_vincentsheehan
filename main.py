@@ -12,9 +12,11 @@ pd.options.display.width = 0
 pd.options.display.max_rows = 7461
 
 if __name__ == '__main__':
+    # Data Collection
     # Compile dataframe from Excel files.
     df_nhl = get_dataset_excel("./Raw Data Files/")
 
+    # Data Cleaning
     # Check format of 4-digit value.
     print("\nChecking format of 4-digit values...\n",
           df_nhl.loc[df_nhl['Player'] == 'Wayne Gretzky'],
@@ -48,8 +50,7 @@ if __name__ == '__main__':
     else:
         print("Duplicate check conditions not met. Continuing...\n")
 
-
-    # Handle missing data.
+    # Handling Missing Data
     # Explore missing data to determine how best to handle.
     df_nhl, missing_count = handle_missing_data.replace_with_nan(df_nhl)
     print(df_nhl.head(), "\n")
@@ -103,11 +104,13 @@ if __name__ == '__main__':
     df_nhl["S"] = df_nhl["S"].astype("int64")
     df_nhl["S%"] = df_nhl["S%"].astype("float64").round(1)
 
+    # Summarise dataset after cleaning.
+    print(df_nhl.head(), "\n")
+    print(df_nhl.tail(), "\n")
+    print(df_nhl.describe(), "\n")
+    print(df_nhl.info(), "\n")
 
-    print(df_nhl.info())
-    print(df_nhl.head())
-
-
+    # Exploratory Data Analysis
     # Define features of interest.
     games_played = df_nhl['GP']
     points = df_nhl['P']

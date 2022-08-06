@@ -267,10 +267,69 @@ by players in the centre position.
 #### Duplicate Data
 Checked dataframe for duplicate entries with `df_nhl.duplicated()`. No duplicate entries found.
 
+#### `dtype` Conversion
+With missing data handled and duplicate entries checked for, data types were converted to representative formats,
+explicit calls to the Pandas `astype()` function. E.g.,
+```Python
+df_nhl["Player"] = df_nhl["Player"].astype("string")
+```
+
+This was done for all remaining columns in the dataset, concluding data cleaning operations.
+
+The Pandas `describe()` method now returns a more complete picture of the dataset, showing summary statistics for all
+numeric fields.
+```
+Getting df_nhl.describe()...
+              index           GP            G            A            P          +/-          PIM         P/GP          EVG          EVP          PPG          PPP          SHG          SHP          OTG          GWG            S           S%
+count  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000
+mean     49.340571   275.735692    48.807935    79.347675   128.155609    -2.009382   226.903096     0.300495    36.007104    94.091677    11.624983    33.245141     1.577134     3.237368     0.593486     6.973596   497.521914     8.098727
+std      28.847304   333.120972    90.376002   137.938019   223.013756    50.052797   385.208034     0.240286    61.805525   147.620472    26.892809    74.653007     4.124062     7.390620     1.702940    13.465574   698.925353     6.877763
+min       0.000000     1.000000     0.000000     0.000000     0.000000  -257.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000
+25%      24.000000    20.000000     1.000000     2.000000     3.000000   -14.000000     8.000000     0.130000     1.000000     3.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000    28.000000     4.400000
+50%      49.000000   119.000000    10.000000    18.000000    29.000000    -1.000000    60.000000     0.250000     9.000000    29.000000     1.000000     3.000000     0.000000     0.000000     0.000000     1.000000   256.000000     8.100000
+75%      74.000000   453.000000    53.000000    97.000000   156.000000     0.000000   276.000000     0.430000    39.000000   118.000000    11.000000    33.000000     1.000000     3.000000     0.000000     7.000000   554.000000    10.700000
+max      99.000000  1779.000000   894.000000  1963.000000  2857.000000   722.000000  3971.000000     1.920000   617.000000  1818.000000   285.000000   890.000000    73.000000   149.000000    24.000000   135.000000  6209.000000   100.000000 
+```
 
 ### Exploratory Data Analysis
-* Scatter plot of points vs. games played.
-    * Show retired vs. active.
+Specifying the include parameter with `describe()` allows to expand analysis to non-numeric fields - adding Player,
+S/C, and Pos.
+```
+Getting df_nhl.describe(include='all')...
+               index          Player   S/C   Pos           GP            G            A            P          +/-          PIM         P/GP          EVG          EVP          PPG          PPP          SHG          SHP          OTG          GWG            S           S%
+count   7461.000000            7461  7461  7461  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000
+unique          NaN            7413     2     4          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN
+top             NaN  Mikko Lehtonen     L     D          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN
+freq            NaN               3  4746  2434          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN
+mean      49.340571             NaN   NaN   NaN   275.735692    48.807935    79.347675   128.155609    -2.009382   226.903096     0.300495    36.007104    94.091677    11.624983    33.245141     1.577134     3.237368     0.593486     6.973596   497.521914     8.098727
+std       28.847304             NaN   NaN   NaN   333.120972    90.376002   137.938019   223.013756    50.052797   385.208034     0.240286    61.805525   147.620472    26.892809    74.653007     4.124062     7.390620     1.702940    13.465574   698.925353     6.877763
+min        0.000000             NaN   NaN   NaN     1.000000     0.000000     0.000000     0.000000  -257.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000
+25%       24.000000             NaN   NaN   NaN    20.000000     1.000000     2.000000     3.000000   -14.000000     8.000000     0.130000     1.000000     3.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000    28.000000     4.400000
+50%       49.000000             NaN   NaN   NaN   119.000000    10.000000    18.000000    29.000000    -1.000000    60.000000     0.250000     9.000000    29.000000     1.000000     3.000000     0.000000     0.000000     0.000000     1.000000   256.000000     8.100000
+75%       74.000000             NaN   NaN   NaN   453.000000    53.000000    97.000000   156.000000     0.000000   276.000000     0.430000    39.000000   118.000000    11.000000    33.000000     1.000000     3.000000     0.000000     7.000000   554.000000    10.700000
+max       99.000000             NaN   NaN   NaN  1779.000000   894.000000  1963.000000  2857.000000   722.000000  3971.000000     1.920000   617.000000  1818.000000   285.000000   890.000000    73.000000   149.000000    24.000000   135.000000  6209.000000   100.000000 
+```
+
+Some immediate insights can be obtained from this:
+* Of 7461 player names, only 7413 are unique - implying that 48 players share a name with another player in the dataset.
+* The most frequent name is Mikko Lehtonen, occurring 3 times.
+* The majority of players (~63%) shoot left (i.e., carry the stick blade on their left side). This appears to be
+counterintuitive to the general prevalence of right-hand dominance (~90%) [1]. Some initial reading suggests that the
+reasoning for the prevalence of left side shooting is that the dominant hand is most-effective at the butt of the stick
+[2]. However, if taking L from this dataset to represent right-hand dominance, there is still a disparity with the
+general distribution. An analysis of the equivalent Goalie dataset may give insight as to whether there is adaptation in 
+response to coaching, in order to exploit weaknesses in Goalie effectiveness.
+* The frequent player position is defense, representing 33% of the dataset. Unlike the forward positions (centre,
+left wing, right wing). The defense position is not further. A team typically plays with 1 left side defender 1 right
+side defender on the ice at a given time - 6 per team, and 12 forwards. The ratio of defenders in the dataset aligns
+with the standard team composition. Further analysis to be performed to confirm if the same true of other positions.
+
+Further analysis to be done using the Pandas `loc()` function to return players responsible for max value in each
+column, and other standout-out values (e.g., minimum +/- of -257).
+
+
+#### Scatter plot of points vs. games played.
+* Show retired vs. active.
 
 ![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Career%20Points%20vs%20Games%20Played_Regular%20Season.png)
 ![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Career%20Points-Goals-Assists%20vs%20Games%20Played_Regular%20Season.png)
@@ -279,3 +338,7 @@ Checked dataframe for duplicate entries with `df_nhl.duplicated()`. No duplicate
 * Define gap to Wayne Gretzky - P/G/A.
 * Players capable of matching/surpassing - P/G/A.
 * Exponential distribution on Gretzky's points total being matched/beaten - P/G/A. 
+
+## References
+[1] https://en.wikipedia.org/wiki/Handedness  
+[2] https://hockeyhow.com/why-most-hockey-players-left-handed/

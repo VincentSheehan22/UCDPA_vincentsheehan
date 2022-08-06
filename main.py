@@ -124,6 +124,8 @@ if __name__ == '__main__':
     print(df_nhl.info(), "\n")
 
     # Exploratory Data Analysis
+    print("Getting df_nhl.describe(include='all')...\n", df_nhl.describe(include="all"), "\n")
+
     # Define features of interest.
     games_played = df_nhl['GP']
     points = df_nhl['P']

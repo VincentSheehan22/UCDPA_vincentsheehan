@@ -126,8 +126,29 @@ if __name__ == '__main__':
     # Exploratory Data Analysis
     print("Getting df_nhl.describe(include='all')...\n", df_nhl.describe(include="all"), "\n")
 
-    # Extract standout players.
-    print("Getting player with max. GP...\n", df_nhl.loc[df_nhl["GP"] == max(df_nhl["GP"])], "\n")
+    # Extract standout players. To be refactored as function taking list of columns as input.
+    print("Getting player with most GP...\n", df_nhl.loc[df_nhl["GP"] == max(df_nhl["GP"])], "\n")
+    print("Getting player with most G...\n", df_nhl.loc[df_nhl["G"] == max(df_nhl["G"])], "\n")
+    print("Getting player with most A...\n", df_nhl.loc[df_nhl["A"] == max(df_nhl["A"])], "\n")
+    print("Getting player with most P...\n", df_nhl.loc[df_nhl["P"] == max(df_nhl["P"])], "\n")
+    print("Getting player with highest +/-...\n", df_nhl.loc[df_nhl["+/-"] == max(df_nhl["+/-"])], "\n")
+    print("Getting player with most PIM...\n", df_nhl.loc[df_nhl["PIM"] == max(df_nhl["PIM"])], "\n")
+    print("Getting player with most P/PG...\n", df_nhl.loc[df_nhl["P/GP"] == max(df_nhl["P/GP"])], "\n")
+    print("Getting player with most EVG...\n", df_nhl.loc[df_nhl["EVG"] == max(df_nhl["EVG"])], "\n")
+    print("Getting player with most EVP...\n", df_nhl.loc[df_nhl["EVP"] == max(df_nhl["EVP"])], "\n")
+    print("Getting player with most PPG...\n", df_nhl.loc[df_nhl["PPG"] == max(df_nhl["PPG"])], "\n")
+    print("Getting player with most PPP...\n", df_nhl.loc[df_nhl["PPP"] == max(df_nhl["PPP"])], "\n")
+    print("Getting player with most SHG...\n", df_nhl.loc[df_nhl["SHG"] == max(df_nhl["SHG"])], "\n")
+    print("Getting player with most SHP...\n", df_nhl.loc[df_nhl["SHP"] == max(df_nhl["SHP"])], "\n")
+    print("Getting player with most OTG...\n", df_nhl.loc[df_nhl["OTG"] == max(df_nhl["OTG"])], "\n")
+    print("Getting player with most GWG...\n", df_nhl.loc[df_nhl["GWG"] == max(df_nhl["GWG"])], "\n")
+    print("Getting player with most S...\n", df_nhl.loc[df_nhl["S"] == max(df_nhl["S"])], "\n")
+
+    df_significant_shots = df_nhl[df_nhl["S"] >= 100]
+    print("Getting player with highest S% (min. 100 shots)...\n",
+          df_significant_shots.loc[df_significant_shots["S%"] == max(df_significant_shots["S%"])], "\n")
+
+    print("Getting player with lowest +/-...\n", df_nhl.loc[df_nhl["+/-"] == min(df_nhl["+/-"])], "\n")
 
     # Define features of interest.
     games_played = df_nhl['GP']

@@ -348,9 +348,28 @@ Getting player with most G...
 0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890   73  149    2   91  5088  17.6  
 ```
 
+Pandas `loc()` function used to extract other noteworthy players by name (stored in list as strings).
+```Python
+for name in names:
+    print(f"Getting player {name}...\n", df_nhl.loc[df_nhl["Player"] == name], "\n")
+```
+
+```
+Getting player Mario Lemieux...
+    index         Player S/C Pos   GP    G     A     P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+7      7  Mario Lemieux   R   C  915  690  1033  1723  114  834  1.88  405  951  236  701   49   71   11   74  3633  19.0 
+
+Getting player Mike Bossy...
+     index      Player S/C Pos   GP    G    A     P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+60     60  Mike Bossy   R   R  752  573  553  1126  380  210   1.5  385  739  180  378    8    9    4   80  2707  21.2 
+```
+
+GP and P of above players to be used to annotate EDA scatter plots to follow.
+
 
 #### Scatter plot of points vs. games played.
 * Annotate for stand-out players defined above.
+  * List of tuples with players' (GP, P) for annotation.
 * Show retired vs. active.
 
 ![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Career%20Points%20vs%20Games%20Played_Regular%20Season.png)

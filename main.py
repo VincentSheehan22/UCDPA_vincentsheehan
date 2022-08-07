@@ -126,7 +126,7 @@ if __name__ == '__main__':
     # Exploratory Data Analysis
     print("Getting df_nhl.describe(include='all')...\n", df_nhl.describe(include="all"), "\n")
 
-    # Extract standout players. To be refactored as function taking list of columns as input.
+    # Extract standout players - per df_nhl.describe(). To be refactored as function taking list of columns as input.
     print("Getting player with most GP...\n", df_nhl.loc[df_nhl["GP"] == max(df_nhl["GP"])], "\n")
     print("Getting player with most G...\n", df_nhl.loc[df_nhl["G"] == max(df_nhl["G"])], "\n")
     print("Getting player with most A...\n", df_nhl.loc[df_nhl["A"] == max(df_nhl["A"])], "\n")
@@ -149,6 +149,13 @@ if __name__ == '__main__':
           df_significant_shots.loc[df_significant_shots["S%"] == max(df_significant_shots["S%"])], "\n")
 
     print("Getting player with lowest +/-...\n", df_nhl.loc[df_nhl["+/-"] == min(df_nhl["+/-"])], "\n")
+
+    # Extract other noteworthy players, by name.
+    names = ["Mario Lemieux", "Mike Bossy", "Gordie Howe", "Sidney Crosby", "Evgeni Malkin", "Nicklas Lidstrom",
+             "Erik Karlsson", "Cale Makar", "Connor McDavid", "Auston Matthews"]
+    for name in names:
+        print(f"Getting player {name}...\n", df_nhl.loc[df_nhl["Player"] == name], "\n")
+
 
     # Define features of interest.
     games_played = df_nhl['GP']

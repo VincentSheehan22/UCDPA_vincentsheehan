@@ -315,9 +315,9 @@ Some immediate insights can be obtained from this:
 * Of 7461 player names, only 7413 are unique - implying that 48 players share a name with another player in the dataset.
 * The most frequent name is Mikko Lehtonen, occurring 3 times.
 * The majority of players (~63%) shoot left (i.e., carry the stick blade on their left side). This appears to be
-counterintuitive to the general prevalence of right-hand dominance (~90%) [1]. Some initial reading suggests that the
+counterintuitive to the general prevalence of right-hand dominance (~90%) [2]. Some initial reading suggests that the
 reasoning for the prevalence of left side shooting is that the dominant hand is most-effective at the butt of the stick
-[2]. However, if taking L from this dataset to represent right-hand dominance, there is still a disparity with the
+[3]. However, if taking L from this dataset to represent right-hand dominance, there is still a disparity with the
 general distribution. An analysis of the equivalent Goalie dataset may give insight as to whether there is adaptation in 
 response to coaching, in order to exploit weaknesses in Goalie effectiveness.
 * The frequent player position is defense, representing 33% of the dataset. Unlike the forward positions (centre,
@@ -381,5 +381,6 @@ GP and P of above players to be used to annotate EDA scatter plots to follow.
 * Exponential distribution on Gretzky's points total being matched/beaten - P/G/A. 
 
 ## References
-[1] https://en.wikipedia.org/wiki/Handedness  
-[2] https://hockeyhow.com/why-most-hockey-players-left-handed/
+[1] NHL Stats page - https://www.nhl.com/stats/skaters?reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points&page=0&pageSize=100  
+[2] https://en.wikipedia.org/wiki/Handedness  
+[3] https://hockeyhow.com/why-most-hockey-players-left-handed/

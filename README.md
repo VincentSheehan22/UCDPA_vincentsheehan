@@ -292,6 +292,7 @@ max      99.000000  1779.000000   894.000000  1963.000000  2857.000000   722.000
 ```
 
 ### Exploratory Data Analysis
+#### Dataset Summary Statistics
 Specifying the include parameter with `describe()` allows to expand analysis to non-numeric fields - adding Player,
 S/C, and Pos.
 ```
@@ -327,8 +328,28 @@ with the standard team composition. Further analysis to be performed to confirm 
 Further analysis to be done using the Pandas `loc()` function to return players responsible for max value in each
 column, and other standout-out values (e.g., minimum +/- of -257).
 
+Max. GP
+Max. G
+Max. A
+Max.P +/-
+Max.PIM
+Max.P/GP
+Max.EVG
+Max.EVP
+Max.PPG
+Max.PPP
+Max.EVG
+Max.EVP
+Max.OTG
+Max.GWG
+Max.S
+Max.S%
+
+Min. +/-
+
 
 #### Scatter plot of points vs. games played.
+* Annotate for stand-out players defined above.
 * Show retired vs. active.
 
 ![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Career%20Points%20vs%20Games%20Played_Regular%20Season.png)

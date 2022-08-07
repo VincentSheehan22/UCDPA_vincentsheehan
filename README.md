@@ -325,27 +325,28 @@ left wing, right wing). The defense position is not further. A team typically pl
 side defender on the ice at a given time - 6 per team, and 12 forwards. The ratio of defenders in the dataset aligns
 with the standard team composition. Further analysis to be performed to confirm if the same true of other positions.
 
-Further analysis to be done using the Pandas `loc()` function to return players responsible for max value in each
-column, and other standout-out values (e.g., minimum +/- of -257).
+The Pandas `loc()` function was used to return players responsible for max values of columns in the `.describe()`
+table.
 
-Max. GP
-Max. G
-Max. A
-Max.P +/-
-Max.PIM
-Max.P/GP
-Max.EVG
-Max.EVP
-Max.PPG
-Max.PPP
-Max.EVG
-Max.EVP
-Max.OTG
-Max.GWG
-Max.S
-Max.S%
+Player with the highest shooting percentage was taken as player with the highest shooting percentage having a minimum of
+100 shots taken, as multiple players have 1 shot and 1 goal in few games played.
 
-Min. +/-
+The player with minimum +/- of -257 is also returned, as being a notable value.
+
+```Python
+print("Getting player with most GP...\n", df_nhl.loc[df_nhl["GP"] == max(df_nhl["GP"])], "\n")
+```
+
+
+```
+Getting player with most GP...
+     index           Player S/C Pos    GP    G    A     P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+49     49  Patrick Marleau   L   C  1779  566  631  1197  -27  527  0.67  377  761  172  415   17   21   11  109  4333  13.1 
+
+Getting player with most G...
+    index         Player S/C Pos    GP    G     A     P  +/-  PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890   73  149    2   91  5088  17.6  
+```
 
 
 #### Scatter plot of points vs. games played.

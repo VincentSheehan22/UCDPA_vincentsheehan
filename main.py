@@ -126,6 +126,9 @@ if __name__ == '__main__':
     # Exploratory Data Analysis
     print("Getting df_nhl.describe(include='all')...\n", df_nhl.describe(include="all"), "\n")
 
+    # Extract standout players.
+    print("Getting player with max. GP...\n", df_nhl.loc[df_nhl["GP"] == max(df_nhl["GP"])], "\n")
+
     # Define features of interest.
     games_played = df_nhl['GP']
     points = df_nhl['P']

@@ -2,6 +2,7 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
 from get_dataset import get_dataset_excel
 from find_and_replace import find_and_replace
 import handle_missing_data
@@ -155,6 +156,24 @@ if __name__ == '__main__':
              "Erik Karlsson", "Cale Makar", "Connor McDavid", "Auston Matthews"]
     for name in names:
         print(f"Getting player {name}...\n", df_nhl.loc[df_nhl["Player"] == name], "\n")
+
+    # Plot Date for EDA.
+    # Box Plot of a numeric features in dataset.
+    sns.set_style("darkgrid")
+    sns.boxplot(data=df_nhl, palette="deep")
+    plt.show()
+
+
+    # Box plot of points vs. position.
+    # Set plot theme.
+    sns.set()
+    _ = sns.boxplot(x='Pos', y='P', data=df_nhl)
+
+    # Label the axes
+    _ = plt.xlabel('Position')
+    _ = plt.ylabel('Points')
+
+    plt.show()
 
 
     # Define features of interest.

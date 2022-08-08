@@ -376,8 +376,13 @@ on NHL.com.
 
 #### Box Plot of Points vs. Player Position
 ![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P%20vs%20Pos_boxplot.png)
-* Left plot shows percentiles for each player position: Centre (C), Right Wing (R), Defense (D), Left Wing (L).
-* Right plot shows the same categorisation, further broken down by shooting hand (left (L) or right (R))
+* Left plot shows percentiles for all player positions combined.
+* Centre plot shows percentiles for each player position: Centre (C), Right Wing (R), Defense (D), Left Wing (L).
+* Right plot shows the same categorisation as the centre plot, further broken down by shooting hand (left (L) or right
+* (R)).
+
+From this it is clear that tha data contains many outliers, with point totals skewing low. Further analysis to be
+performed by standardizing the dataset. 
 
 ## Ideas For Analysis
 * Define gap to Wayne Gretzky - P/G/A.

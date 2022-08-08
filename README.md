@@ -368,10 +368,16 @@ GP and P of above players to be used to annotate EDA scatter plots to follow.
 
 
 #### Scatter plot of points vs. games played.
-* Annotate for stand-out players defined above.
+Relational Plot of P/G/A vs GP
+  * Annotate for stand-out players defined above.
   * List of tuples with players' (GP, P) for annotation.
   * Show retired vs. active.
-* Boxplot of categorical variable - Pos. Show percentiles for P (points) by each Pos (player position): C, D, L, R.
+  
+Distribution Plot
+
+Categorical Plot of Pos vs. GP
+  * Boxplot of categorical variable - Pos. Show percentiles for P (points) by each Pos (player position): C, D, L, R.
+  * boxplot with nested grouping by two categorical variables. P by Pos with hue on S/C.
 
 ![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Career%20Points%20vs%20Games%20Played_Regular%20Season.png)
 ![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Career%20Points-Goals-Assists%20vs%20Games%20Played_Regular%20Season.png)

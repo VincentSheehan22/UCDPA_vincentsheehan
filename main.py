@@ -157,21 +157,27 @@ if __name__ == '__main__':
     for name in names:
         print(f"Getting player {name}...\n", df_nhl.loc[df_nhl["Player"] == name], "\n")
 
-    # Plot Date for EDA.
-    # Box Plot of a numeric features in dataset.
-    sns.set_style("darkgrid")
-    sns.boxplot(data=df_nhl, palette="deep")
-    plt.show()
-
-
-    # Box plot of points vs. position.
+    # Plot Data for EDA.
     # Set plot theme.
     sns.set()
-    _ = sns.boxplot(x='Pos', y='P', data=df_nhl)
+
+    fig, (ax0, ax1) = plt.subplots(1, 2)
+    fig.suptitle('Point per Position')
+    # Box plot of P vs. Pos.
+    _ = sns.boxplot(x="Pos", y="P", data=df_nhl)
 
     # Label the axes
-    _ = plt.xlabel('Position')
-    _ = plt.ylabel('Points')
+    _ = plt.xlabel("Position")
+    _ = plt.ylabel("Points")
+
+    plt.show()
+
+    # Box plot of P vs. Pos, with hue on S/C.
+    _ = sns.boxplot(x="Pos", y="P", hue="S/C", data=df_nhl)
+
+    # Label the axes
+    _ = plt.xlabel("Position")
+    _ = plt.ylabel("Points")
 
     plt.show()
 

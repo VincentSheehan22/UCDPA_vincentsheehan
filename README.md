@@ -381,13 +381,23 @@ on NHL.com.
 * Right plot shows the same categorisation as the centre plot, further broken down by shooting hand (left (L) or right
 * (R)).
 
+From this, it is clear that tha data contains many outliers, with point totals skewing low. Further analysis to be
+performed by standardizing the dataset. 
+
 #### Histogram of Points
 ![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P_histogram.png)
 * Left plot shows complete histogram of Points for all players in the dataset.
 * Right plot shows the same histogram zoomed in at the high end (P >= 1200).
+* Model to fit such histogram?
 
-From this it is clear that tha data contains many outliers, with point totals skewing low. Further analysis to be
-performed by standardizing the dataset. 
+#### Clustering
+* Standardising data.
+* Scatter plot.
+* Dendrogram.
+
+### Machine Learning
+* Decision trees
+* Ensembling
 
 ## Ideas For Analysis
 * Define gap to Wayne Gretzky - P/G/A.

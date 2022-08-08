@@ -166,26 +166,26 @@ if __name__ == '__main__':
     points = df_nhl['P']
 
     # Scatter plots of points/goals/assists vs. games played, using plt.
-    fig1, (ax0, ax1, ax2) = plt.subplots(3, 1)
+    fig1, axs = plt.subplots(3, 1)
     fig1.suptitle('Career Points/Goals/Assists vs. Games Played - Regular Season')
 
-    ax0.plot(games_played, points, 'o', color='b', alpha=0.5, label='Points')
-    ax0.set_xlabel('Games Played')
-    ax0.set_ylabel('Count')
-    ax0.set_yticks(range(0, 3500, 500))
-    ax0.legend(loc='upper left')
+    sns.scatterplot(x=games_played, y=points, color='b', alpha=0.5, label='Points', ax=axs[0])
+    axs[0].set(xlabel='Games Played')
+    axs[0].set(ylabel='Count')
+    axs[0].set_yticks(range(0, 3500, 500))
+    axs[0].legend(loc='upper left')
 
-    ax1.plot(games_played, df_nhl['G'], 'o', color='r', alpha=0.5, label='Goals')
-    ax1.set_xlabel('Games Played')
-    ax1.set_ylabel('Count')
-    ax1.set_yticks(range(0, 3500, 500))
-    ax1.legend(loc='upper left')
+    sns.scatterplot(x=games_played, y=df_nhl['G'], color='r', alpha=0.5, label='Goals', ax=axs[1])
+    axs[1].set(xlabel='Games Played')
+    axs[1].set(ylabel='Count')
+    axs[1].set_yticks(range(0, 3500, 500))
+    axs[1].legend(loc='upper left')
 
-    ax2.plot(games_played, df_nhl['A'], 'o', color='g', alpha=0.5, label='Assists')
-    ax2.set_xlabel('Games Played')
-    ax2.set_ylabel('Count')
-    ax2.set_yticks(range(0, 3500, 500))
-    ax2.legend(loc='upper left')
+    sns.scatterplot(x=games_played, y=df_nhl['A'], color='g', alpha=0.5, label='Assists', ax=axs[2])
+    axs[2].set(xlabel='Games Played')
+    axs[2].set(ylabel='Count')
+    axs[2].set_yticks(range(0, 3500, 500))
+    axs[2].legend(loc='upper left')
 
     plt.show()
 

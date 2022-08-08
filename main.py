@@ -161,34 +161,13 @@ if __name__ == '__main__':
     # Set plot theme.
     sns.set()
 
-    fig, (ax0, ax1) = plt.subplots(1, 2)
-    fig.suptitle('Point per Position')
-    # Box plot of P vs. Pos.
-    _ = sns.boxplot(x="Pos", y="P", data=df_nhl)
-
-    # Label the axes
-    _ = plt.xlabel("Position")
-    _ = plt.ylabel("Points")
-
-    plt.show()
-
-    # Box plot of P vs. Pos, with hue on S/C.
-    _ = sns.boxplot(x="Pos", y="P", hue="S/C", data=df_nhl)
-
-    # Label the axes
-    _ = plt.xlabel("Position")
-    _ = plt.ylabel("Points")
-
-    plt.show()
-
-
     # Define features of interest.
     games_played = df_nhl['GP']
     points = df_nhl['P']
 
     # Explore dataset with scatter plots of points/goals/assists vs. games played.
-    fig, (ax0, ax1, ax2) = plt.subplots(3, 1)
-    fig.suptitle('Career Points/Goals/Assists vs. Games Played - Regular Season')
+    fig1, (ax0, ax1, ax2) = plt.subplots(3, 1)
+    fig1.suptitle('Career Points/Goals/Assists vs. Games Played - Regular Season')
 
     ax0.plot(games_played, points, 'o', color='b', alpha=0.5, label='Points')
     ax0.set_xlabel('Games Played')
@@ -207,5 +186,25 @@ if __name__ == '__main__':
     ax2.set_ylabel('Count')
     ax2.set_yticks(range(0, 3500, 500))
     ax2.legend(loc='upper left')
+
+    plt.show()
+
+    # Set up figure for multiple plots.
+    f, axs = plt.subplots(1, 2)
+    f.suptitle('Points per Position')
+
+    # Box plot of P vs. Pos.
+    sns.boxplot(x="Pos", y="P", data=df_nhl, ax=axs[0])
+
+    # Label the axes
+    axs[0].grid(True, axis='both')
+    axs[0].set(xlabel="Position")
+    axs[0].set(ylabel="Points")
+
+    # Box plot of P vs. Pos, with further categorisation on S/C.
+    sns.boxplot(x="Pos", y="P", hue="S/C", data=df_nhl, ax=axs[1])
+    axs[1].grid(True, axis='both')
+    axs[1].set(xlabel="Position")
+    axs[1].set(ylabel="Points")
 
     plt.show()

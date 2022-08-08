@@ -367,20 +367,17 @@ Getting player Mike Bossy...
 GP and P of above players to be used to annotate EDA scatter plots to follow.
 
 
-#### Scatter plot of points vs. games played.
-Relational Plot of P/G/A vs GP
-  * Annotate for stand-out players defined above.
+#### Scatter Plot of Points-Goals-Assists vs. Games Played
+![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P-G-A%20vs%20GP_scatterplot.png)
+* Annotate for stand-out players defined above.
   * List of tuples with players' (GP, P) for annotation.
-  * Show retired vs. active.
-  
-Distribution Plot
+* Show retired vs. active, using marker type. Left as exercise. Requires supplemental date such Bio report available
+on NHL.com.
 
-Categorical Plot of Pos vs. GP
-  * Boxplot of categorical variable - Pos. Show percentiles for P (points) by each Pos (player position): C, D, L, R.
-  * boxplot with nested grouping by two categorical variables. P by Pos with hue on S/C.
-
-![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Career%20Points%20vs%20Games%20Played_Regular%20Season.png)
-![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Career%20Points-Goals-Assists%20vs%20Games%20Played_Regular%20Season.png)
+#### Box Plot of Points vs. Player Position
+![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P%20vs%20Pos_boxplot.png)
+* Left plot shows percentiles for each player position: Centre (C), Right Wing (R), Defense (D), Left Wing (L).
+* Right plot shows the same categorisation, further broken down by shooting hand (left (L) or right (R))
 
 ## Ideas For Analysis
 * Define gap to Wayne Gretzky - P/G/A.

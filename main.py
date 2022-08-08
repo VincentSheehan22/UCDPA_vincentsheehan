@@ -174,6 +174,12 @@ if __name__ == '__main__':
     axs[0].set(ylabel='Count')
     axs[0].set_yticks(range(0, 3500, 500))
     axs[0].legend(loc='upper left')
+    axs[0].text(1487, 2857, "Wayne Gretzky")
+    axs[0].text(1779, 1197, "Patrick Marleau")
+    axs[0].text(915, 1723, "Mario Lemieux")
+    axs[0].text(752, 1126, "Mike Bossy")
+    axs[0].text(1274, 1410, "Alex Ovechkin")
+    axs[0].text(1108, 1409, "Sidney Crosby")
 
     sns.scatterplot(x=games_played, y=df_nhl['G'], color='r', alpha=0.5, label='Goals', ax=axs[1])
     axs[1].set(xlabel='Games Played')

@@ -368,7 +368,7 @@ GP and P of above players to be used to annotate EDA scatter plots to follow.
 
 
 #### Scatter Plot of Points-Goals-Assists vs. Games Played
-![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P-G-A%20vs%20GP_scatterplot_sns.png)
+![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P-G-A%20vs%20GP_scatterplot_sns_annotated.png)
 * Annotate for stand-out players defined above.
   * List of tuples with players' (GP, P) for annotation.
 * Show retired vs. active, using marker type. Left as exercise. Requires supplemental date such Bio report available

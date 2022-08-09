@@ -4,6 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from get_dataset import get_dataset_excel
+from summarise_dataset import summarise_dataset
 from find_and_replace import find_and_replace
 import handle_missing_data
 import numpy as np
@@ -18,11 +19,7 @@ if __name__ == '__main__':
     df_nhl = get_dataset_excel("./Raw Data Files/")
 
     # Summarise dataset.
-    print("Getting df_nhl.head()...\n", df_nhl.head(), "\n")
-    print("Getting df_nhl.tail()...\n", df_nhl.tail(), "\n")
-    print("Getting df_nhl.describe()...\n", df_nhl.describe(), "\n")
-    print("Getting df_nhl.info()...")     # Separating print statements for .info() as output conflicts when combined.
-    print(df_nhl.info(), "\n")
+    summarise_dataset(df_nhl)
 
     # Data Cleaning
     # Check format of 4-digit value.
@@ -43,11 +40,7 @@ if __name__ == '__main__':
     df_nhl = df_nhl.sort_values(by=['P', 'G', 'A'], ascending=False).reset_index()
 
     # Summarise dataset.
-    print("Getting df_nhl.head()...\n", df_nhl.head(), "\n")
-    print("Getting df_nhl.tail()...\n", df_nhl.tail(), "\n")
-    print("Getting df_nhl.describe()...\n", df_nhl.describe(), "\n")
-    print("Getting df_nhl.info()...")
-    print(df_nhl.info(), "\n")
+    summarise_dataset(df_nhl)
 
     # Check for duplicate rows.
     print("Checking for duplicates...\n")
@@ -90,11 +83,7 @@ if __name__ == '__main__':
     df_nhl = df_nhl.drop(["TOI/GP", "FOW%"], axis=1)
 
     # Summarise dataset.
-    print("Getting df_nhl.head()...\n", df_nhl.head(), "\n")
-    print("Getting df_nhl.tail()...\n", df_nhl.tail(), "\n")
-    print("Getting df_nhl.describe()...\n", df_nhl.describe(), "\n")
-    print("Getting df_nhl.info()...")
-    print(df_nhl.info(), "\n")
+    summarise_dataset(df_nhl)
 
     # Convert data types.
     print("Converting data types...\n")
@@ -118,11 +107,7 @@ if __name__ == '__main__':
     df_nhl["S%"] = df_nhl["S%"].astype("float64").round(1)
 
     # Summarise dataset after cleaning.
-    print("Getting df_nhl.head()...\n", df_nhl.head(), "\n")
-    print("Getting df_nhl.tail()...\n", df_nhl.tail(), "\n")
-    print("Getting df_nhl.describe()...\n", df_nhl.describe(), "\n")
-    print("Getting df_nhl.info()...")
-    print(df_nhl.info(), "\n")
+    summarise_dataset(df_nhl)
 
     # Exploratory Data Analysis
     print("Getting df_nhl.describe(include='all')...\n", df_nhl.describe(include="all"), "\n")
@@ -152,9 +137,9 @@ if __name__ == '__main__':
     print("Getting player with lowest +/-...\n", df_nhl.loc[df_nhl["+/-"] == min(df_nhl["+/-"])], "\n")
 
     # Extract other noteworthy players, by name.
-    names = ["Mario Lemieux", "Mike Bossy", "Gordie Howe", "Sidney Crosby", "Evgeni Malkin", "Nicklas Lidstrom",
+    notable_players = ["Mario Lemieux", "Mike Bossy", "Gordie Howe", "Sidney Crosby", "Evgeni Malkin", "Nicklas Lidstrom",
              "Erik Karlsson", "Cale Makar", "Connor McDavid", "Auston Matthews"]
-    for name in names:
+    for name in notable_players:
         print(f"Getting player {name}...\n", df_nhl.loc[df_nhl["Player"] == name], "\n")
 
     # Plot Data for EDA.

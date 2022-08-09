@@ -4,10 +4,11 @@ import pandas as pd
 def check_for_duplicates(df):
     """Function to check dataframe for duplicate row, print any duplicates found, and return dataframe with
     duplicates dropped."""
+
     print("Checking for duplicates...\n")
     df_duplicates = df[df.duplicated()]
 
-    print("Getting duplicates...\n", df_duplicates)
+    print("Getting duplicates...\n", df_duplicates, "\n")
 
     df = df.drop_duplicates(keep='last')
 

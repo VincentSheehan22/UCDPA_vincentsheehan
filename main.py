@@ -3,6 +3,7 @@
 import pandas as pd
 from get_dataset import get_dataset_excel
 from summarise_dataset import summarise_dataset
+from check_for_duplicates import check_for_duplicates
 from find_and_replace import find_and_replace
 import handle_missing_data
 import matplotlib.pyplot as plt
@@ -42,15 +43,16 @@ if __name__ == '__main__':
     summarise_dataset(df_nhl)
 
     # Check for duplicate rows.
-    print("Checking for duplicates...\n")
-    duplicates = df_nhl.duplicated()
-
-    if True in duplicates:
-        raise Exception("Duplicate entry found.\n")
-    elif True not in duplicates:
-        print("Duplicate entry not found.\n")
-    else:
-        print("Duplicate check conditions not met. Continuing...\n")
+    # print("Checking for duplicates...\n")
+    # duplicates = df_nhl.duplicated()
+    #
+    # if True in duplicates:
+    #     raise Exception("Duplicate entry found.\n")
+    # elif True not in duplicates:
+    #     print("Duplicate entry not found.\n")
+    # else:
+    #     print("Duplicate check conditions not met. Continuing...\n")
+    check_for_duplicates(df_nhl)
 
     # Handling Missing Data
     # Explore missing data to determine how best to handle.

@@ -43,15 +43,6 @@ if __name__ == '__main__':
     summarise_dataset(df_nhl)
 
     # Check for duplicate rows.
-    # print("Checking for duplicates...\n")
-    # duplicates = df_nhl.duplicated()
-    #
-    # if True in duplicates:
-    #     raise Exception("Duplicate entry found.\n")
-    # elif True not in duplicates:
-    #     print("Duplicate entry not found.\n")
-    # else:
-    #     print("Duplicate check conditions not met. Continuing...\n")
     check_for_duplicates(df_nhl)
 
     # Handling Missing Data
@@ -112,35 +103,40 @@ if __name__ == '__main__':
     # Exploratory Data Analysis
     print("Getting df_nhl.describe(include='all')...\n", df_nhl.describe(include="all"), "\n")
 
-    # Extract standout players - per df_nhl.describe(). To be refactored as function taking list of columns as input.
-    print("Getting player with most GP...\n", df_nhl.loc[df_nhl["GP"] == max(df_nhl["GP"])], "\n")
-    print("Getting player with most G...\n", df_nhl.loc[df_nhl["G"] == max(df_nhl["G"])], "\n")
-    print("Getting player with most A...\n", df_nhl.loc[df_nhl["A"] == max(df_nhl["A"])], "\n")
-    print("Getting player with most P...\n", df_nhl.loc[df_nhl["P"] == max(df_nhl["P"])], "\n")
-    print("Getting player with highest +/-...\n", df_nhl.loc[df_nhl["+/-"] == max(df_nhl["+/-"])], "\n")
-    print("Getting player with most PIM...\n", df_nhl.loc[df_nhl["PIM"] == max(df_nhl["PIM"])], "\n")
-    print("Getting player with most P/PG...\n", df_nhl.loc[df_nhl["P/GP"] == max(df_nhl["P/GP"])], "\n")
-    print("Getting player with most EVG...\n", df_nhl.loc[df_nhl["EVG"] == max(df_nhl["EVG"])], "\n")
-    print("Getting player with most EVP...\n", df_nhl.loc[df_nhl["EVP"] == max(df_nhl["EVP"])], "\n")
-    print("Getting player with most PPG...\n", df_nhl.loc[df_nhl["PPG"] == max(df_nhl["PPG"])], "\n")
-    print("Getting player with most PPP...\n", df_nhl.loc[df_nhl["PPP"] == max(df_nhl["PPP"])], "\n")
-    print("Getting player with most SHG...\n", df_nhl.loc[df_nhl["SHG"] == max(df_nhl["SHG"])], "\n")
-    print("Getting player with most SHP...\n", df_nhl.loc[df_nhl["SHP"] == max(df_nhl["SHP"])], "\n")
-    print("Getting player with most OTG...\n", df_nhl.loc[df_nhl["OTG"] == max(df_nhl["OTG"])], "\n")
-    print("Getting player with most GWG...\n", df_nhl.loc[df_nhl["GWG"] == max(df_nhl["GWG"])], "\n")
-    print("Getting player with most S...\n", df_nhl.loc[df_nhl["S"] == max(df_nhl["S"])], "\n")
+    # Extract standout players - per df_nhl.describe().
+    # Extract players responsible for max values - iterating over cols_max.
+    cols_max = ["GP", "G", "A", "P", "PIM", "P/GP", "EVG", "EVP", "PPG", "PPP", "SHG", "SHP", "OTG", "GWG", "S"]
+    for col in cols_max:
+        print(f"Getting player with most {col}...\n", df_nhl.loc[df_nhl[f"{col}"] == max(df_nhl[f"{col}"])], "\n")
 
+    # Eliminate players with insignificant shot totals from max. S% calculation.
     df_significant_shots = df_nhl[df_nhl["S"] >= 100]
+
+    # Extract player with max. S% (with minimum of 100 shots taken).
     print("Getting player with highest S% (min. 100 shots)...\n",
           df_significant_shots.loc[df_significant_shots["S%"] == max(df_significant_shots["S%"])], "\n")
 
+    # Extract player with highest +/-.
+    print("Getting player with highest +/-...\n", df_nhl.loc[df_nhl["+/-"] == max(df_nhl["+/-"])], "\n")
+
+    # Extract player with lowest +/-.
     print("Getting player with lowest +/-...\n", df_nhl.loc[df_nhl["+/-"] == min(df_nhl["+/-"])], "\n")
 
-    # Extract other noteworthy players, by name.
-    notable_players = ["Mario Lemieux", "Mike Bossy", "Gordie Howe", "Sidney Crosby", "Evgeni Malkin", "Nicklas Lidstrom",
-             "Erik Karlsson", "Cale Makar", "Connor McDavid", "Auston Matthews"]
-    for name in notable_players:
+    # Extract other noteworthy players, by name - using for loop.
+    notable_players_1 = ["Mario Lemieux", "Mike Bossy", "Gordie Howe",
+                       "Sidney Crosby", "Evgeni Malkin",
+                       "Nicklas Lidstrom", "Erik Karlsson", "Cale Makar"]
+    for name in notable_players_1:
         print(f"Getting player {name}...\n", df_nhl.loc[df_nhl["Player"] == name], "\n")
+
+    # Extract other noteworthy players, by name - using for iter()/next().
+    notable_players_2 = ["Connor McDavid", "Connor McDavid",    # Same value required twice for print statement using
+                       "Auston Matthews", "Auston Matthews"]    # iter()/next(). For loop preferred for this use case.
+    notable_players_2_iter = iter(notable_players_2)
+    print(f"Getting player {next(notable_players_2_iter)}...\n",
+          df_nhl.loc[df_nhl["Player"] == next(notable_players_2_iter)], "\n")
+    print(f"Getting player {next(notable_players_2_iter)}...\n",
+          df_nhl.loc[df_nhl["Player"] == next(notable_players_2_iter)], "\n")
 
     # Plot Data for EDA.
     # Set plot theme.

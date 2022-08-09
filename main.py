@@ -24,17 +24,13 @@ if __name__ == '__main__':
 
     # Data Cleaning
     # Check format of 4-digit value.
-    print("Checking format of 4-digit values...\n",
-          df_nhl.loc[df_nhl['Player'] == 'Wayne Gretzky'],
-          "\n")
+    print("Checking format of 4-digit values...\n", df_nhl.loc[df_nhl['Player'] == 'Wayne Gretzky'], "\n")
 
     # Use Regex to remove ',' from four-digit values, with capture groups.
     df_nhl = find_and_replace(df_nhl, r'(\d),(\d)(\d)(\d)', r'\1\2\3\4')
 
     # Check format of 4-digit value after replacement.
-    print("Checking format of 4-digit values...\n",
-          df_nhl.loc[df_nhl['Player'] == 'Wayne Gretzky'],
-          "\n")
+    print("Checking format of 4-digit values...\n", df_nhl.loc[df_nhl['Player'] == 'Wayne Gretzky'], "\n")
 
     # Sort dataframe by Points, Goals, and Assists and columns.
     print("Sorting by P, G, A...\n")
@@ -215,3 +211,8 @@ if __name__ == '__main__':
     axs[1].set(ylabel="Player Count")
 
     plt.show()
+
+    # Machine Learning
+    # Decision Tree
+    # Ensembling
+    # Hyperparametre tuning

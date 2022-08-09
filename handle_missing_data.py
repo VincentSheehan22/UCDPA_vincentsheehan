@@ -4,7 +4,7 @@ import numpy as np
 
 def replace_with_nan(df):
     """Function to process missing values in dataframe."""
-    # Replace "--" entries in datframe with NaN.
+    # Replace "--" entries in dataframe with NaN.
     print("Replacing missing entries (--) with NaN...\n")
     df = df.replace("--", np.nan)
 
@@ -40,7 +40,6 @@ if __name__ == '__main__':
     print(df_test)
 
     df_nan, null_count = replace_with_nan(df_test)
-
     print(df_nan)
     print(null_count)
 

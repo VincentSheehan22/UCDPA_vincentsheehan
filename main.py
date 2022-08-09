@@ -1,12 +1,12 @@
 # Main file for implementation of data analytics on NHL player dataset - 0001-7461.csv.
 
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 from get_dataset import get_dataset_excel
 from summarise_dataset import summarise_dataset
 from find_and_replace import find_and_replace
 import handle_missing_data
+import matplotlib.pyplot as plt
+import seaborn as sns
 import numpy as np
 
 # Don't suppress columns in terminal output.
@@ -39,7 +39,6 @@ if __name__ == '__main__':
     print("Sorting by P, G, A...\n")
     df_nhl = df_nhl.sort_values(by=['P', 'G', 'A'], ascending=False).reset_index()
 
-    # Summarise dataset.
     summarise_dataset(df_nhl)
 
     # Check for duplicate rows.
@@ -82,7 +81,6 @@ if __name__ == '__main__':
     print("Dropping TOI/GP and FOW% columns...\n")
     df_nhl = df_nhl.drop(["TOI/GP", "FOW%"], axis=1)
 
-    # Summarise dataset.
     summarise_dataset(df_nhl)
 
     # Convert data types.

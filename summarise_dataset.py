@@ -3,11 +3,11 @@ import pandas as pd
 
 def summarise_dataset(df):
     """Function to get summary of dataset - .shape, .head(), .tail(), .describe(), .info()"""
-    print("Getting df.shape...\n", df_nhl.shape, "\n")
-    print("Getting df.head()...\n", df.head(), "\n")
-    print("Getting df.tail()...\n", df.tail(), "\n")
-    print("Getting df.describe()...\n", df.describe(), "\n")
-    print("Getting df.info()...")     # Separating print statements for .info() as output conflicts when combined.
+    print("Getting .shape...\n", df.shape, "\n")
+    print("Getting .head()...\n", df.head(), "\n")
+    print("Getting .tail()...\n", df.tail(), "\n")
+    print("Getting .describe()...\n", df.describe(), "\n")
+    print("Getting .info()...")     # Separating print statements for .info() as output conflicts when combined.
     print(df.info(), "\n")
 
 

@@ -219,8 +219,7 @@ if __name__ == '__main__':
     print("Getting df_bio_top_100.head()...\n", df_bio_top_100.head(), "\n")
 
     # Copy top 100 players (based on earlier sorting by P, G, A) from df_nhl into df_nhl_top_100.
-    #df_nhl_top_100 = df_nhl[df_nhl["Index"][0:100]]
-    #print(df_nhl_top_100)
+    df_nhl_top_100 = df_nhl.head(100)
 
     # Machine Learning
     # Decision Tree

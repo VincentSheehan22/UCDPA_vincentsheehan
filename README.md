@@ -402,6 +402,24 @@ is collected in the same manner as the summary report, from the below URL, with 
 method:
 https://www.nhl.com/stats/skaters?report=bios&reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points,goals,assists&page=0&pageSize=100
 
+The Bio Info report (first page, containing top 100 players ranked by P, G, A) is stored in the 'Raw Data Files'
+directory as 'Bio Info-01.xlsx'. the dataframe df_bio_top_100 is compiled from this with a call to the
+`get_dataset_excel()` from the `get_dataset.py` module. The first argument, `directory`, is the path name
+"./Raw Data Files/" as for the first call to generate df_nhl. However, in this case the second argument, 'report', is
+set to 'Bio Info' to differentiate between report types. The default value of `report` is defined as 'Summary'.
+
+The new dataframe, `df_bio_top_100` is cleaned as per `df_nhl` earlier, with some notable differences:
+* Contains multiple columns with date entries.
+* Contains column S/P, representing State/Province, which does not apply to European players.
+  * Not logical to impute values for these.
+* Height and weight are in imperial units, and height provided only in inches.
+  * Metric conversions to be performed.
+* Not all players have a draft year. Notably, the data indicates that Wayne Gretzky was not drafted to the NHL.
+  * Not logical to impute values for these.
+* 1st Season column contains values that are represented as YYYYYYYY (e.g., 19791980).
+  * To use regex to insert '-' between years. Replace '(\d\d\d\d)(\d\d\d\d)' with '\1-\2'.
+* Some columns duplicate data found in df_nhl. These are to be dropped, with the exception of the Player column, on
+which the merge will be performed.
 
 
 #### Clustering

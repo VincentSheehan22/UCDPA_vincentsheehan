@@ -163,12 +163,18 @@ if __name__ == '__main__':
     axs[1].set(ylabel='Count')
     axs[1].set_yticks(range(0, 3500, 500))
     axs[1].legend(loc='upper left')
+    axs[1].text(1487, 894, "Wayne Gretzky")
+    axs[1].text(1767, 801, "Gordie Howe")
+    axs[1].text(1274, 780, "Alex Ovechkin")
 
     sns.scatterplot(x=games_played, y=df_nhl['A'], color='g', alpha=0.5, label='Assists', ax=axs[2])
     axs[2].set(xlabel='Games Played')
     axs[2].set(ylabel='Count')
     axs[2].set_yticks(range(0, 3500, 500))
     axs[2].legend(loc='upper left')
+    axs[2].text(1487, 1963, "Wayne Gretzky")
+    axs[2].text(1731, 1249, "Ron Francis")
+    axs[2].text(1756, 1193, "Mark Messier")
 
     plt.show()
 

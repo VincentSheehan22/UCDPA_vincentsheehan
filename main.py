@@ -221,6 +221,13 @@ if __name__ == '__main__':
     # Copy top 100 players (based on earlier sorting by P, G, A) from df_nhl into df_nhl_top_100.
     df_nhl_top_100 = df_nhl.head(100)
 
+    df_nhl_top_100_extended = pd.merge(df_nhl_top_100,
+                                       df_bio_top_100[["DOB", "Birth City", "S/P", "Ctry", "Ntnlty", "Ht", "Wt",
+                                                      "Draft Yr", "Round", "Overall", "1st Season", "HOF"]],
+                                       left_on=df_nhl_top_100["Player"],
+                                       right_on=df_bio_top_100["Player"])
+    print("Getting df_nhl_top_100_extended.head()...\n", df_nhl_top_100_extended.head(), "\n")
+
     # Machine Learning
     # Decision Tree
     # Ensembling

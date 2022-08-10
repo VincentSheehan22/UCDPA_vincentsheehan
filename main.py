@@ -18,7 +18,6 @@ if __name__ == '__main__':
     # Data Collection
     # Compile dataframe from Excel files.
     df_nhl = get_dataset_excel("./Raw Data Files/")
-    df_nhl.shape()
 
     # Summarise dataset.
     summarise_dataset(df_nhl)

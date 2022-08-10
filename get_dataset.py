@@ -8,7 +8,7 @@ def get_dataset_excel(directory, report):
     # Create empty dataframe.
     df_nhl = pd.DataFrame()
 
-    # Iterate over .xlsx files in target directory.
+    # Iterate over .xlsx files in target directory, of target report type.
     print(f"Compiling dataframe from {report} report...")
     files_parsed = 0
     for file in glob(f"{directory}/{report}*.xlsx"):

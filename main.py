@@ -213,11 +213,12 @@ if __name__ == '__main__':
     plt.show()
 
     # Merging Dataframes
-    # Generating second data frame based on the 'Bio Info' from NHL.com. Only the fist page is taken, sorted by P, G, A,
-    # for additional analysis on top 100 players in the df_nhl dataset.
+    # Generating second data frame based on the 'Bio Info' report from NHL.com. Only the fist page is taken, sorted by
+    # P, G, A, for additional analysis on top 100 players in the df_nhl dataset.
     df_bio_top_100 = get_dataset_excel("./Raw Data Files/", report="Bio Info")
     print("Getting df_bio_top_100.head()...\n", df_bio_top_100.head(), "\n")
 
+    # Copy top 100 players (based on earlier sorting by P, G, A) from df_nhl into df_nhl_top_100.
     #df_nhl_top_100 = df_nhl[df_nhl["Index"][0:100]]
     #print(df_nhl_top_100)
 

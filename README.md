@@ -390,6 +390,20 @@ performed by standardizing the dataset.
 * Right plot shows the same histogram zoomed in at the high end (P >= 1200).
 * Model to fit such histogram?
 
+#### Merging Dataframes for Further Analysis on Top 100
+In addition to the Summary report described earlier, a supplemantal Bio Info report is available on NHL.com [4]. This
+inlcudes biographical information of players, such as first season, height, weight, nationality. This provides
+opportunities categorical classification, more so than the mostly numeric data in the Summary report.
+
+For the purpose of further analysis on highest performing player (as sorted by P, G, A), the first 100 entries of the
+Bio Info report is to be merged with the top 100 entries in df_nhl (representing the same group of players). It is left
+as an exercise, beyond the scope of this project, to expand this merge to all 7461 players int df_nhl dataset. Bio Info
+is collected in the same manner as the summary report, from the below URL, with particular attention payed to sorting
+method:
+https://www.nhl.com/stats/skaters?report=bios&reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points,goals,assists&page=0&pageSize=100
+
+
+
 #### Clustering
 * Standardising data.
 * Scatter plot.
@@ -405,6 +419,7 @@ performed by standardizing the dataset.
 * Exponential distribution on Gretzky's points total being matched/beaten - P/G/A. 
 
 ## References
-[1] NHL Stats page - https://www.nhl.com/stats/skaters?reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points&page=0&pageSize=100  
+[1] NHL Stats page - Skaters/All-Time/Regular Season/Summary - https://www.nhl.com/stats/skaters?reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points&page=0&pageSize=100  
 [2] https://en.wikipedia.org/wiki/Handedness  
-[3] https://hockeyhow.com/why-most-hockey-players-left-handed/
+[3] https://hockeyhow.com/why-most-hockey-players-left-handed/  
+[4] NHL Stats page - Skater/All-Time/Regular Season/Bio Info - https://www.nhl.com/stats/skaters?report=bios&reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points,goals,assists&page=0&pageSize=100

@@ -213,10 +213,13 @@ if __name__ == '__main__':
     plt.show()
 
     # Merging Dataframes
-    # Create G/GP dataframe and merge with df_nhl.
-    df_g_gp = df_nhl[["Player", "GP", "G"]]
-    df_g_gp["G/GP"] = df_g_gp["G"] / df_g_gp["GP"]
-    print(df_g_gp.head())
+    # Generating second data frame based on the 'Bio Info' from NHL.com. Only the fist page is taken, sorted by P, G, A,
+    # for additional analysis on top 100 players in the df_nhl dataset.
+    df_bio_top_100 = get_dataset_excel("./Raw Data Files/", report="Bio Info")
+    print("Getting df_bio_top_100.head()...\n", df_bio_top_100.head(), "\n")
+
+    #df_nhl_top_100 = df_nhl[df_nhl["Index"][0:100]]
+    #print(df_nhl_top_100)
 
     # Machine Learning
     # Decision Tree

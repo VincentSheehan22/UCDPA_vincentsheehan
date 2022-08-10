@@ -27,7 +27,7 @@ if __name__ == '__main__':
     print("Checking format of 4-digit values...\n", df_nhl.loc[df_nhl['Player'] == 'Wayne Gretzky'], "\n")
 
     # Use Regex to remove ',' from four-digit values, with capture groups.
-    df_nhl = find_and_replace(df_nhl, r'(\d),(\d)(\d)(\d)', r'\1\2\3\4')
+    df_nhl = find_and_replace(df_nhl, r"(\d),(\d)(\d)(\d)", r"\1\2\3\4")
 
     # Check format of 4-digit value after replacement.
     print("Checking format of 4-digit values...\n", df_nhl.loc[df_nhl['Player'] == 'Wayne Gretzky'], "\n")
@@ -211,6 +211,12 @@ if __name__ == '__main__':
     axs[1].set(ylabel="Player Count")
 
     plt.show()
+
+    # Merging Dataframes
+    # Create G/GP dataframe and merge with df_nhl.
+    df_g_gp = df_nhl[["Player", "GP", "G"]]
+    df_g_gp["G/GP"] = df_g_gp["G"] / df_g_gp["GP"]
+    print(df_g_gp.head())
 
     # Machine Learning
     # Decision Tree

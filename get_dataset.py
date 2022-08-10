@@ -2,37 +2,16 @@ import pandas as pd
 from glob import glob
 
 
-def get_dataset_excel_summary(directory):
-    """Generate Pandas DataFrame from input Excel files."""
+def get_dataset_excel(directory, report):
+    """Generate Pandas DataFrame from input Excel files.
+    Takes two strings as input: the directory path and the report type (represented in file name)."""
     # Create empty dataframe.
     df_nhl = pd.DataFrame()
 
     # Iterate over .xlsx files in target directory.
-    print("Compiling dataframe from Summary report...")
+    print(f"Compiling dataframe from {report} report...")
     files_parsed = 0
-    for file in glob(f"{directory}/Summary*.xlsx"):
-        print(file)
-        df_players = pd.read_excel(file, engine="openpyxl")
-
-        files_parsed += 1
-
-        # Concatenate existing dataframe with dataframe generated from file.
-        df_nhl = pd.concat([df_nhl, df_players])
-
-    print(f"\nFiles parsed: {files_parsed}\n")
-
-    return df_nhl
-
-
-def get_dataset_excel_bio(directory):
-    """Generate Pandas DataFrame from input Excel files."""
-    # Create empty dataframe.
-    df_nhl = pd.DataFrame()
-
-    # Iterate over .xlsx files in target directory.
-    print("Compiling dataframe from Bio Info report...")
-    files_parsed = 0
-    for file in glob(f"{directory}/Bio*.xlsx"):
+    for file in glob(f"{directory}/{report}*.xlsx"):
         print(file)
         df_players = pd.read_excel(file, engine="openpyxl")
 
@@ -49,9 +28,9 @@ def get_dataset_excel_bio(directory):
 if __name__ == '__main__':
     directory = './Raw Data Files/'
 
-    df_nhl_summary = get_dataset_excel_summary(directory)
-    print(df_nhl_summary)
+    df_nhl_summary = get_dataset_excel(directory, "Summary")
+    print(df_nhl_summary, "\n")
 
-    df_nhl_bio = get_dataset_excel_bio(directory)
-    print(df_nhl_bio)
+    df_nhl_bio = get_dataset_excel(directory, "Bio Info")
+    print(df_nhl_bio, "\n")
 

@@ -10,8 +10,10 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import mean_squared_error as MSE
 
 # Don't suppress columns in terminal output.
 pd.options.display.width = 0
@@ -245,31 +247,43 @@ if __name__ == '__main__':
     # Ensembling
     # Hyperparameter tuning
 
-    # Define feature matrix X, and target feature y, for training the model
-    # Drop target feature from X.
-    X = df_nhl.drop("P", axis=1)
+    # Define feature matrix X, and target (labels) y, for training the model.
+    # Drop target from X.
+    target = "P"
+    X = df_nhl.drop(target, axis=1).values  # .values converts DataFrame to numpy array.
+    y = df_nhl[target].values
+
+    # Get specific column in X - GP.
+    X_gp = X[:, 4]
+
+    print("Getting type(X_gp), type(y)...\n", type(X_gp), type(y), "\n")
+
+    # Reshape numpy arrays to unknown number of rows, 1 column.
+    y = y.reshape(-1, 1)
+    X_gp = X_gp.reshape(-1, 1)
 
     # Drop non-numeric features from X.
-    X = X.drop(["Player", "S/C", "Pos"], axis=1)
-
-    y = df_nhl["P"]
-
-    print("Getting X.head()...\n", X.head(), "\n")
-    print("Getting y.head()...\n", y.head(), "\n")
+    #X = X.drop(["Player", "S/C", "Pos"], axis=1)
 
     # Instantiate machine learning model.
-    dt = DecisionTreeClassifier()
+    #dt = DecisionTreeClassifier(criterion="gini", random_state=1)
+    dt = DecisionTreeRegressor(max_depth=4, min_samples_leaf=0.1, random_state=3)
 
     # Define test and training data.
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=21)
+    X_train, X_test, y_train, y_test = train_test_split(X_gp, y, test_size=0.2, random_state=21)
 
     # Fit model to training data
     dt.fit(X_train, y_train)
 
-    # Use model to predict on test data.
+    # Use model to predict labels of test data.
     y_pred = dt.predict(X_test)
 
     # Calculate accuracy of prediction against actual value.
-    accuracy = accuracy_score(y_test, y_pred)
+    #accuracy = accuracy_score(y_test, y_pred)
+    mse_dt = MSE(y_test, y_pred)
+    rmse_dt = mse_dt ** (1 / 2)
 
-    print(accuracy)
+    #print(accuracy)
+    print("Getting rmse_dt...\n", rmse_dt, "\n")
+    print("Getting y_test[0:5]...\n", y_test[0:5], "\n")
+    print("Getting y_pred[0:5]...\n", y_pred[0:5], "\n")

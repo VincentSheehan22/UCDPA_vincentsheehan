@@ -9,6 +9,9 @@ import handle_missing_data
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
 # Don't suppress columns in terminal output.
 pd.options.display.width = 0
@@ -234,9 +237,39 @@ if __name__ == '__main__':
                                        right_on=df_bio_top_100["Player"])
     print("Getting df_nhl_top_100_extended.head()...\n", df_nhl_top_100_extended.head(), "\n")
     df_nhl_top_100_extended = df_nhl_top_100_extended.drop("key_0", axis=1)
-    print(df_nhl_top_100_extended.describe(include="all").T)
+    print("Getting df_nhl_top_100_extended.describe(include='all'').T...\n",
+          df_nhl_top_100_extended.describe(include="all").T, "\n")
 
     # Machine Learning
     # Decision Tree
     # Ensembling
-    # Hyperparametre tuning
+    # Hyperparameter tuning
+
+    # Define feature matrix X, and target feature y, for training the model
+    # Drop target feature from X.
+    X = df_nhl.drop("P", axis=1)
+
+    # Drop non-numeric features from X.
+    X = X.drop(["Player", "S/C", "Pos"], axis=1)
+
+    y = df_nhl["P"]
+
+    print("Getting X.head()...\n", X.head(), "\n")
+    print("Getting y.head()...\n", y.head(), "\n")
+
+    # Instantiate machine learning model.
+    dt = DecisionTreeClassifier()
+
+    # Define test and training data.
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=21)
+
+    # Fit model to training data
+    dt.fit(X_train, y_train)
+
+    # Use model to predict on test data.
+    y_pred = dt.predict(X_test)
+
+    # Calculate accuracy of prediction against actual value.
+    accuracy = accuracy_score(y_test, y_pred)
+
+    print(accuracy)

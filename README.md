@@ -11,7 +11,7 @@ League. This dataset was chosen as it is of personal interest, and as having a d
 It is a large dataset offering opportunities for exploring regression and classification techniques.
 
 The workflow, described in detail below, begins with collecting and compiling the dataset into a Pandas DataFrame object
-for further analysis. The dataset is then cleaned of stray characters, incorrect data types and missing values, and 
+for further analysis. The dataset is then cleaned of stray characters, missing values and incorrect data types, and 
 checked for duplicate entries. The DataFrame object is summarised at multiple points to demonstrate the transformation.
 
 Once a clean DataFrame is arrived at, some first impressions are drawn form the DataFrame description table. Values of
@@ -156,64 +156,6 @@ df_nhl = df_nhl.sort_values(by=['P', 'G', 'A'], ascending=False).reset_index()
 4      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349  1040  188  727  12   31    4   79  3756  14.6     --  54.8 
 ```
 
-#### Type Conversion
-The `df_nhl` DataFrame contains numeric columns stored as object type, as shown by `df_nhl.info()`. As such, these
-columns are not represented with `df_nhl.describe()` Conversion to int and float types is required. The string-based
-columns Player, S/C, and Pos are also explicitly converted to string type.
-
-```
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 7461 entries, 0 to 7460
-Data columns (total 23 columns):
- #   Column  Non-Null Count  Dtype  
----  ------  --------------  -----  
- 0   index   7461 non-null   int64  
- 1   Player  7461 non-null   object 
- 2   S/C     7461 non-null   object 
- 3   Pos     7461 non-null   object 
- 4   GP      7461 non-null   object 
- 5   G       7461 non-null   int64  
- 6   A       7461 non-null   object 
- 7   P       7461 non-null   object 
- 8   +/-     7461 non-null   int64  
- 9   PIM     7461 non-null   object 
- 10  P/GP    7461 non-null   float64
- 11  EVG     7461 non-null   object 
- 12  EVP     7461 non-null   object 
- 13  PPG     7461 non-null   object 
- 14  PPP     7461 non-null   object 
- 15  SHG     7461 non-null   object 
- 16  SHP     7461 non-null   object 
- 17  OTG     7461 non-null   int64  
- 18  GWG     7461 non-null   int64  
- 19  S       7461 non-null   object 
- 20  S%      7461 non-null   object 
- 21  TOI/GP  7461 non-null   object 
- 22  FOW%    7461 non-null   object 
-dtypes: float64(1), int64(5), object(17)
-memory usage: 1.3+ MB
-None 
-```
-
-```
-             index            G          +/-         P/GP          OTG          GWG
-count  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000
-mean     49.340571    48.807935    -2.009382     0.300495     0.593486     6.973596
-std      28.847304    90.376002    50.052797     0.240286     1.702940    13.465574
-min       0.000000     0.000000  -257.000000     0.000000     0.000000     0.000000
-25%      24.000000     1.000000   -14.000000     0.130000     0.000000     0.000000
-50%      49.000000    10.000000    -1.000000     0.250000     0.000000     1.000000
-75%      74.000000    53.000000     0.000000     0.430000     0.000000     7.000000
-max      99.000000   894.000000   722.000000     1.920000    24.000000   135.000000 
-```
-
-Type conversion is performed 
-
-Type conversion:
-```
-df_nhl['GP'] = df_nhl['GP'].astype('int64')
-```
-
 #### Missing Data
 The dataset contains entries for players who played prior to modern record keeping. Some columns such as 'EVG' contain
 missing data, represented as '--'. These require replacement in order to complete type conversion.
@@ -308,6 +250,64 @@ unavailable due to recency of player location tracking technology.
 * **FOW%**: Face-off win percentage. Game scenario in which two players contest possession of the puck. Typically taken
 by players in the centre position.
   * As data is not available for over 50% of players in the dataset, this column will be dropped.
+
+#### Type Conversion
+The `df_nhl` DataFrame contains numeric columns stored as object type, as shown by `df_nhl.info()`. As such, these
+columns are not represented with `df_nhl.describe()` Conversion to int and float types is required. The string-based
+columns Player, S/C, and Pos are also explicitly converted to string type.
+
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 7461 entries, 0 to 7460
+Data columns (total 23 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   index   7461 non-null   int64  
+ 1   Player  7461 non-null   object 
+ 2   S/C     7461 non-null   object 
+ 3   Pos     7461 non-null   object 
+ 4   GP      7461 non-null   object 
+ 5   G       7461 non-null   int64  
+ 6   A       7461 non-null   object 
+ 7   P       7461 non-null   object 
+ 8   +/-     7461 non-null   int64  
+ 9   PIM     7461 non-null   object 
+ 10  P/GP    7461 non-null   float64
+ 11  EVG     7461 non-null   object 
+ 12  EVP     7461 non-null   object 
+ 13  PPG     7461 non-null   object 
+ 14  PPP     7461 non-null   object 
+ 15  SHG     7461 non-null   object 
+ 16  SHP     7461 non-null   object 
+ 17  OTG     7461 non-null   int64  
+ 18  GWG     7461 non-null   int64  
+ 19  S       7461 non-null   object 
+ 20  S%      7461 non-null   object 
+ 21  TOI/GP  7461 non-null   object 
+ 22  FOW%    7461 non-null   object 
+dtypes: float64(1), int64(5), object(17)
+memory usage: 1.3+ MB
+None 
+```
+
+```
+             index            G          +/-         P/GP          OTG          GWG
+count  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000
+mean     49.340571    48.807935    -2.009382     0.300495     0.593486     6.973596
+std      28.847304    90.376002    50.052797     0.240286     1.702940    13.465574
+min       0.000000     0.000000  -257.000000     0.000000     0.000000     0.000000
+25%      24.000000     1.000000   -14.000000     0.130000     0.000000     0.000000
+50%      49.000000    10.000000    -1.000000     0.250000     0.000000     1.000000
+75%      74.000000    53.000000     0.000000     0.430000     0.000000     7.000000
+max      99.000000   894.000000   722.000000     1.920000    24.000000   135.000000 
+```
+
+Type conversion is performed 
+
+Type conversion:
+```
+df_nhl['GP'] = df_nhl['GP'].astype('int64')
+```
 
 #### Duplicate Data
 Checked dataframe for duplicate entries with `df_nhl.duplicated()`. No duplicate entries found.

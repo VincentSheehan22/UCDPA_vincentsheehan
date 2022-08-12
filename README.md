@@ -318,26 +318,17 @@ max      99.000000   894.000000   722.000000     1.920000   617.000000  1818.000
 
 ```
 
-Type conversion is performed column-by-column as follows:
-```Python
-df_nhl['GP'] = df_nhl['GP'].astype('int64')
-```
-
-
-
-#### `dtype` Conversion
-With missing data handled and duplicate entries checked for, data types were converted to representative formats,
-explicit calls to the Pandas `astype()` function. E.g.,
+Type conversion is performed column-by-column with the Pandas .`astype()` function as follows:
 ```Python
 df_nhl["Player"] = df_nhl["Player"].astype("string")
 ```
 
-This was done for all remaining columns in the dataset, concluding data cleaning operations.
+This is done for all remaining columns in the dataset, concluding data cleaning operations.
 
-The Pandas `describe()` method now returns a more complete picture of the dataset, showing summary statistics for all
+The Pandas `.describe()` method now returns a more complete picture of the dataset, showing summary statistics for all
 numeric fields.
 ```
-Getting df_nhl.describe()...
+Getting .describe()...
               index           GP            G            A            P          +/-          PIM         P/GP          EVG          EVP          PPG          PPP          SHG          SHP          OTG          GWG            S           S%
 count  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000
 mean     49.340571   275.735692    48.807935    79.347675   128.155609    -2.009382   226.903096     0.300495    36.007104    94.091677    11.624983    33.245141     1.577134     3.237368     0.593486     6.973596   497.521914     8.098727
@@ -346,13 +337,14 @@ min       0.000000     1.000000     0.000000     0.000000     0.000000  -257.000
 25%      24.000000    20.000000     1.000000     2.000000     3.000000   -14.000000     8.000000     0.130000     1.000000     3.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000    28.000000     4.400000
 50%      49.000000   119.000000    10.000000    18.000000    29.000000    -1.000000    60.000000     0.250000     9.000000    29.000000     1.000000     3.000000     0.000000     0.000000     0.000000     1.000000   256.000000     8.100000
 75%      74.000000   453.000000    53.000000    97.000000   156.000000     0.000000   276.000000     0.430000    39.000000   118.000000    11.000000    33.000000     1.000000     3.000000     0.000000     7.000000   554.000000    10.700000
-max      99.000000  1779.000000   894.000000  1963.000000  2857.000000   722.000000  3971.000000     1.920000   617.000000  1818.000000   285.000000   890.000000    73.000000   149.000000    24.000000   135.000000  6209.000000   100.000000 
+max      99.000000  1779.000000   894.000000  1963.000000  2857.000000   722.000000  3971.000000     1.920000   617.000000  1818.000000   285.000000   890.000000    73.000000   149.000000    24.000000   135.000000  6209.000000   100.000000 ```
 ```
 
 ### Exploratory Data Analysis
 #### Dataset Summary Statistics
-Specifying the include parameter with `describe()` allows to expand analysis to non-numeric fields - adding Player,
-S/C, and Pos.
+Specifying the include parameter with `.describe()` allows to expand analysis to non-numeric fields - adding Player,
+S/C, and Pos columns.
+
 ```
 Getting df_nhl.describe(include='all')...
                index          Player   S/C   Pos           GP            G            A            P          +/-          PIM         P/GP          EVG          EVP          PPG          PPP          SHG          SHP          OTG          GWG            S           S%

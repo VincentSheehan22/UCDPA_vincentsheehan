@@ -91,9 +91,16 @@ career statistics from 1917-18 to 2021-2022 seasons.
 
 With the data collected and stored in the `Raw Data Files` directory, the `pandas.read_excel()` function is used to
 compile the Excel file into a DataFrame, within the `get_dataset_excel()` function defined in `get_dataset.py`. The
-returned DataFrame is assigned to the variable 'df_nhl'.
+returned DataFrame is assigned to the variable `df_nhl`.
 
 ### Data Cleaning
+#### Sanity Check
+Once generated, the `df_nhl` DataFrame is inspected to assess any further operations required before analysis can be
+performed. This is done using the `summarise_dataset()` function from `summarise_dataset.py`. This takes a DataFrame as
+argument and bundles calls to the `.shape()`, `.head()`, `.tail()`, `.describe()`, and `.info()` functions on the input
+DataFrame, printing their output. This function is called at multiple points in the execution to demonstrate how the
+DataFrame is transformed as data cleaning operations are performed.
+
 #### Regex Replacement
 The dataset contains text and numeric data. Numeric values greater than 3 digits are represented as `"1,234"`. This is
 problematic for sorting and for asseing the column as a continuous range, for example plotting as axis ticks. Regex is
@@ -150,8 +157,9 @@ df_nhl = df_nhl.sort_values(by=['P', 'G', 'A'], ascending=False).reset_index()
 ```
 
 #### Type Conversion
-The dataframe contains numeric columns stored as object type, as shown by `df.info()`. As such, these columns are not
-represented with `df.describe()` Conversion to int and float types is required.
+The `df_nhl` DataFrame contains numeric columns stored as object type, as shown by `df_nhl.info()`. As such, these
+columns are not represented with `df_nhl.describe()` Conversion to int and float types is required. The string-based
+columns Player, S/C, and Pos are also explicitly converted to string type.
 
 ```
 <class 'pandas.core.frame.DataFrame'>
@@ -199,21 +207,7 @@ min       0.000000     0.000000  -257.000000     0.000000     0.000000     0.000
 max      99.000000   894.000000   722.000000     1.920000    24.000000   135.000000 
 ```
 
-Columns requiring type conversion:
-* GP: int64
-* A: int64
-* P: int64
-* PIM: int64
-* EVG: int64  
-* EVP: int64  
-* PPG: int64  
-* PPP: int64  
-* SHG: int64
-* SHP: int64
-* S: int64
-* S%: float64
-* TOI/GP: time (mm:ss)
-* FOW%: float64
+Type conversion is performed 
 
 Type conversion:
 ```

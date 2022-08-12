@@ -1,5 +1,28 @@
 # UCDPA Project Assignment - Analysing NHL Regular Season Career Statistics
 
+## Overview
+The aim of this project is to explore and demonstrate the learning outcomes of the UCD Professional Academy Specialist
+Certificate in Data Analytics Essentials course. The project aims to cover the scope of a typical data analytics
+workflow, including data collection, data cleaning, exploratory data analysis with summary statistics and visualisation
+and application of a machine learning algorithm to the dataset.
+
+The dataset chosen for this project is a mostly numeric dataset containing player statistics from the National Hockey
+League. This dataset was chosen as it is of personal interest, as having a degree of familiarity with the contents. It
+is a large dataset offering opportunities for exploring regression and classification techniques.
+
+The workflow, described in detail below, begins with collecting and compiling the dataset into a Pandas DataFrame object
+for further analysis. The dataset is then cleaned of stray characters, incorrect data types and missing values, and 
+checked for duplicate entries. The DataFrame object is summarised at multiple points to demonstrate the transformation.
+
+Once a clean DataFrame is arrived at, some first impressions are drawn form teh DataFrame description table. Values of
+interest from the DataFrame description table are used to present the associated players (i.e., leaders in points,
+goals, etc.). A list of otherwise notable players is also provided in order to obtain their entries from the dataset
+for comparative purposes.
+
+The DataFrame is then visualised by way of a scatter plot, with annotations locating some noteworthy. A box plot is
+generated to visualise the data in terms of percentiles, with some categorisation on player position and the
+'shoots/catches' attribute.
+
 ## Data Source
 The National Hockey League, a North American ice-hockey league, operating since 1917 maintains on its website - 
 https://www.nhl.com - a record of player statistics dating back to the inaugural 1917-18 season. This dataset includes

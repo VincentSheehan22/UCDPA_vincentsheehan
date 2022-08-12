@@ -3,25 +3,45 @@
 ## Overview
 The aim of this project is to explore and demonstrate the learning outcomes of the UCD Professional Academy Specialist
 Certificate in Data Analytics Essentials course. The project aims to cover the scope of a typical data analytics
-workflow, including data collection, data cleaning, exploratory data analysis with summary statistics and visualisation
-and application of a machine learning algorithm to the dataset.
+workflow, including data collection, data cleaning, exploratory data analysis with summary statistics and visualisation,
+merging of DataFrames, and application of a machine learning algorithm to the dataset.
 
 The dataset chosen for this project is a mostly numeric dataset containing player statistics from the National Hockey
-League. This dataset was chosen as it is of personal interest, as having a degree of familiarity with the contents. It
-is a large dataset offering opportunities for exploring regression and classification techniques.
+League. This dataset was chosen as it is of personal interest, and as having a degree of familiarity with the contents.
+It is a large dataset offering opportunities for exploring regression and classification techniques.
 
 The workflow, described in detail below, begins with collecting and compiling the dataset into a Pandas DataFrame object
 for further analysis. The dataset is then cleaned of stray characters, incorrect data types and missing values, and 
 checked for duplicate entries. The DataFrame object is summarised at multiple points to demonstrate the transformation.
 
-Once a clean DataFrame is arrived at, some first impressions are drawn form teh DataFrame description table. Values of
+Once a clean DataFrame is arrived at, some first impressions are drawn form the DataFrame description table. Values of
 interest from the DataFrame description table are used to present the associated players (i.e., leaders in points,
 goals, etc.). A list of otherwise notable players is also provided in order to obtain their entries from the dataset
 for comparative purposes.
 
-The DataFrame is then visualised by way of a scatter plot, with annotations locating some noteworthy. A box plot is
-generated to visualise the data in terms of percentiles, with some categorisation on player position and the
-'shoots/catches' attribute.
+The DataFrame is then visualised by way of a scatter plot of points/goals/assists vs games played, with annotations
+locating some noteworthy players. A box plot is generated to visualise the points data in terms of percentiles, with
+some categorisation on player position and the 'shoots/catches' attribute. A histogram is also provided, giving the
+distribution of players vs. number of points.
+
+DataFrame merging is demonstrated with a subset of the top 100 entries in the dataset (sorted on points, goal, assists).
+A supplemental dataset for the same 100 players, also available from https://www.nhl.com, is supplied for the merge.
+This dataset provides biographical information, such as date-of-birth, height, weight, and nationality - further
+attributes that could be applied for classification use cases.
+
+Supervised machine learning is applied to the dataset using a decision tree regressor from the scikit-learn package. The
+target chosen for prediction, y, is points as being the most indicative measure of player performance.
+The model is first trained using only column of the dataset in the feature matrix, X. Games played is chosen for this as
+it ws explored earlier via scatter plot. The metric used for evaluating model performance is the
+root-mean-squared-error.
+
+Different columns are explored as the sole feature in X, before fitting the model with the full feature set.
+
+Ensembling is used to improve the performance of the model. 
+
+Hyperparameter tuning is used to improve the performance of the model.
+
+Insights are extracted and reported in details below.
 
 ## Data Source
 The National Hockey League, a North American ice-hockey league, operating since 1917 maintains on its website - 

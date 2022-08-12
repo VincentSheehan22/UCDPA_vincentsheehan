@@ -47,22 +47,25 @@ Insights are extracted and reported in details below.
 The National Hockey League, a North American ice-hockey league, operating since 1917 maintains on its website - 
 https://www.nhl.com - a record of player statistics dating back to the inaugural 1917-18 season. This dataset includes
 entries for over 7000 players to have played a regular season game in the NHL, and offers player-by-player comparison
-in areas such as Games Played, Goals, Assists (primary and secondary passes leading to goals), and Points (goals +
+in areas such as games played, goals, assists (primary and secondary passes leading to goals), and points (goals +
 assists).
 
 The website provides filtering of stats by season, team, player position and game type, among others. Data is available
 in several reports, with different statistics tracked in each. For the scope of this project, analysis will be performed
 on the Skaters/All-Time/Regular Season/Summary report, the first page of which is available at the link below. 
 
-NHL all-time player statistics for regular season games - summary report:  
+NHL all-time player statistics for regular season games - Summary report:  
 https://www.nhl.com/stats/skaters?reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points&page=0&pageSize=100
 
-Analysis of other available reports in combination with the summary report is left as an exercise, beyond the scope of
-this project.
+Analysis of other available reports in combination with the summary report is explored briefly with the Bio Info report,
+but left largely as an exercise, beyond the scope of this project.
+
+NHL all-time player statistics for regular season games - Bio Info report:  
+https://www.nhl.com/stats/skaters?report=bios&reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points,goals,assists&page=0&pageSize=100
 
 ## Implementation
 ### Data Import
-Multiple methods of data import were explored.
+Multiple methods of data import were explored, including via API, web scraping, and Pandas read functions.
 
 #### NHL Stats API
 Dataset collection via API was explored. An API was found to be available, but not well documented.
@@ -73,11 +76,11 @@ Team and season data can be found at below links, but a useful API for the playe
 
 #### Web Scraping
 Dataset collection via web scraping was explored, but the tabular data on NHL.com was found to be implemented as
-ReactTable objects, and not parsable with the BeautifulSoup library.
+ReactTable objects, and not parsable with the BeautifulSoup package.
 
 #### Pandas File Reading
 NHL.com provides the stats data for download in Excel format. This was found to be the most direct approach to acquiring
-the dataset. However, the table view, and thus export, is limited to 100 rows per page.
+the dataset. However, the table view, and thus exported Excel file, is limited to 100 rows per page.
 
 A script - `get_data_urls.py` - was created for pagination of the tabular data by incrementing the page number within
 the URL, writing all page URLs to file for future reference. It is left as an exercise, beyond the scope of this
@@ -86,21 +89,23 @@ project, to utilise page URLs for browser automation of the Excel file export.
 The dataset was manually downloaded as a set of 75 Excel files (~100 entries apiece), containing 7461 records - player
 career statistics from 1917-18 to 2021-2022 seasons.
 
-With the data collected and stored in the `Raw Data Files` directory, the `pandas.read_excel()` function was used to
-compile the Excel file into a DataFrame, within the `get_dataset_excel()` function defined in `get_dataset.py`.
+With the data collected and stored in the `Raw Data Files` directory, the `pandas.read_excel()` function is used to
+compile the Excel file into a DataFrame, within the `get_dataset_excel()` function defined in `get_dataset.py`. The
+returned DataFrame is assigned to the variable 'df_nhl'.
 
 ### Data Cleaning
 #### Regex Replacement
-The dataset contains text and numeric data. Numeric values greater than 3 digits are represented as `"1,234"`. Regex
-used to convert to `1234` format:  
+The dataset contains text and numeric data. Numeric values greater than 3 digits are represented as `"1,234"`. This is
+problematic for sorting and for asseing the column as a continuous range, for example plotting as axis ticks. Regex is
+used to convert to the required `1234` format:  
 * Find: `(\d),(\d)(\d)(\d)`  
 * Replace: `\1\2\3\4`
 
-The above regex strings were provided as parameters to the `find_and replace()` function defined in
-`find_and_replace.py`, along with the dataframe `df_nhl`. The regex strings use capture groups (parenthesis) to capture
-and return the 1st, 2nd, 3rd and 4th digit characters, eliminating the ',' characters.
+The above regex strings are provided as parameters to the `find_and replace()` function defined in
+`find_and_replace.py`, along with the dataframe `df_nhl`. The regex strings use capture groups (parentheses) to capture
+and return the 1st, 2nd, 3rd and 4th digit characters, eliminating the ',' character.
 
-```
+```Python
 # Check format of 4-digit value.
 print("\nChecking format of 4-digit values...\n",
       df_nhl.loc[df_nhl['Player'] == 'Wayne Gretzky'],
@@ -126,8 +131,11 @@ Reformatted 4-digit values...
 ```
 
 #### Sorting
-Dataframe sorted by 'P' (points), 'G' (goals), and 'A' (assists) columns, with index reset.
-```
+With the comma characters removed from 4-digit values, the Dataframe can be sorted by 'P' (points), 'G' (goals), and 'A'
+(assists) columns, with index reset, to match the default presentation of the data on https://www.nhl.com. This is the
+most useful ranking for this analysis as point, goal, and assists are the most direct indicators of performance.
+
+```Python
 df_nhl = df_nhl.sort_values(by=['P', 'G', 'A'], ascending=False).reset_index()
 ```
 

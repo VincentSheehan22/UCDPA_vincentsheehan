@@ -146,7 +146,7 @@ most useful ranking for this analysis as point, goal, and assists are the most d
 df_nhl = df_nhl.sort_values(by=['P', 'G', 'A'], ascending=False).reset_index()
 ```
 
-`df.head()`:
+`df_nhl.head()`:
 ```
    index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP  EVG   EVP  PPG  PPP SHG  SHP  OTG  GWG     S    S% TOI/GP  FOW%
 0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520   577  1.92  617  1818  204  890  73  149    2   91  5088  17.6     --    49
@@ -156,11 +156,16 @@ df_nhl = df_nhl.sort_values(by=['P', 'G', 'A'], ascending=False).reset_index()
 4      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349  1040  188  727  12   31    4   79  3756  14.6     --  54.8 
 ```
 
+#### Duplicate Data
+The `df_nhl` DataFrame is checked for duplicate entries with the custom function `check_for_duplicates()`. This takes a
+DataFrame as argument, uses the .duplicated() function to check for duplicates, prints duplicates if found, and drops
+duplicates from DataFrame, returning the DataFrame without  duplicates. In this instance no duplicate entries are found.
+
 #### Missing Data
 The dataset contains entries for players who played prior to modern record keeping. Some columns such as 'EVG' contain
 missing data, represented as '--'. These require replacement in order to complete type conversion.
 
-Replacement options:
+Several replacement options were considered, including those listed below:
 1. Replace '--' with `NaN`, and use `.dropna()`.
     * Excludes notable players from analysis.
 2. Replace '--' with 0.
@@ -172,10 +177,11 @@ Replacement options:
 4. Remove columns containing '--'.
    * Excludes features from further analysis.
 
-Missing data was explored to determine how best to handle. A function `handle_missing_data.py` was created to take
-dataframe as input, convert entries with value "--" - representing missing data in the NHL dataset - to `NaN`. With NaNs
-populated in the dataframe, the function then obtains a count of missing data per column. The modified data frame and
-missing data counts are then returned.
+Missing data was explored to determine how best to handle. A module, `handle_missing_data.py`, was created to define
+functions for dealing with missing data. The first function defined here, `replace_with_nan()`, takes a DataFrame as
+input and converts entries with value "--" - representing missing data in the NHL dataset - to numpy `NaN` objects. With
+`NaN` objects populated in the dataframe, the function then obtains a count of missing data per column. The modified
+DataFrame and missing data counts are then returned.
 
 ``` Python
 # Explore missing data to determine how best to handle.
@@ -184,7 +190,7 @@ print(df_nhl.head(), "\n")
 print(missing_count, "\n")
 ```
 
-Passing `df_nhl` to `handle_missing_data()`, conversion of missing data to `NaN` was successful, as shown with
+Passing `df_nhl` to `handle_missing_data()`, conversion of missing data to `NaN` is successful, as shown with
 `df_nhl.head()`:
 ```
    index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP    EVG   EVP    PPG    PPP   SHG    SHP  OTG  GWG     S    S% TOI/GP  FOW%
@@ -251,15 +257,25 @@ unavailable due to recency of player location tracking technology.
 by players in the centre position.
   * As data is not available for over 50% of players in the dataset, this column will be dropped.
 
+Based on the above assessment two further functions are defined in `handle_missing-data.py`: `impute_with_mode()` and
+`impute_with_mean()`. Both take a Pandas series (DataFrame column) as argument and replace `NaN` values with mode and
+mean, respectively.
+
+TOI/GP and FOW% columns are dropped as follows:
+```Python
+df_nhl = df_nhl.drop(["TOI/GP", "FOW%"], axis=1)
+```
+
 #### Type Conversion
-The `df_nhl` DataFrame contains numeric columns stored as object type, as shown by `df_nhl.info()`. As such, these
+The `df_nhl` DataFrame contains numeric columns stored as object type, as shown by `.info()`. As such, these
 columns are not represented with `df_nhl.describe()` Conversion to int and float types is required. The string-based
 columns Player, S/C, and Pos are also explicitly converted to string type.
 
 ```
+Getting .info()...
 <class 'pandas.core.frame.DataFrame'>
 RangeIndex: 7461 entries, 0 to 7460
-Data columns (total 23 columns):
+Data columns (total 21 columns):
  #   Column  Non-Null Count  Dtype  
 ---  ------  --------------  -----  
  0   index   7461 non-null   int64  
@@ -273,44 +289,41 @@ Data columns (total 23 columns):
  8   +/-     7461 non-null   int64  
  9   PIM     7461 non-null   object 
  10  P/GP    7461 non-null   float64
- 11  EVG     7461 non-null   object 
- 12  EVP     7461 non-null   object 
- 13  PPG     7461 non-null   object 
- 14  PPP     7461 non-null   object 
- 15  SHG     7461 non-null   object 
- 16  SHP     7461 non-null   object 
+ 11  EVG     7461 non-null   float64
+ 12  EVP     7461 non-null   float64
+ 13  PPG     7461 non-null   float64
+ 14  PPP     7461 non-null   float64
+ 15  SHG     7461 non-null   float64
+ 16  SHP     7461 non-null   float64
  17  OTG     7461 non-null   int64  
  18  GWG     7461 non-null   int64  
- 19  S       7461 non-null   object 
- 20  S%      7461 non-null   object 
- 21  TOI/GP  7461 non-null   object 
- 22  FOW%    7461 non-null   object 
-dtypes: float64(1), int64(5), object(17)
-memory usage: 1.3+ MB
+ 19  S       7461 non-null   float64
+ 20  S%      7461 non-null   float64
+dtypes: float64(9), int64(5), object(7)
+memory usage: 1.2+ MB
 None 
 ```
 
 ```
-             index            G          +/-         P/GP          OTG          GWG
-count  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000
-mean     49.340571    48.807935    -2.009382     0.300495     0.593486     6.973596
-std      28.847304    90.376002    50.052797     0.240286     1.702940    13.465574
-min       0.000000     0.000000  -257.000000     0.000000     0.000000     0.000000
-25%      24.000000     1.000000   -14.000000     0.130000     0.000000     0.000000
-50%      49.000000    10.000000    -1.000000     0.250000     0.000000     1.000000
-75%      74.000000    53.000000     0.000000     0.430000     0.000000     7.000000
-max      99.000000   894.000000   722.000000     1.920000    24.000000   135.000000 
+Getting .describe()...
+              index            G          +/-         P/GP          EVG          EVP          PPG          PPP          SHG          SHP          OTG          GWG            S           S%
+count  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000
+mean     49.340571    48.807935    -2.009382     0.300495    36.007372    94.095145    11.648630    33.254416     1.598971     3.246349     0.593486     6.973596   497.608057     8.098417
+std      28.847304    90.376002    50.052797     0.240286    61.805525   147.620471    26.892534    74.652991     4.122534     7.390476     1.702940    13.465574   698.925321     6.877763
+min       0.000000     0.000000  -257.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000
+25%      24.000000     1.000000   -14.000000     0.130000     1.000000     3.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000    28.000000     4.400000
+50%      49.000000    10.000000    -1.000000     0.250000     9.000000    29.000000     1.000000     3.000000     0.000000     0.000000     0.000000     1.000000   256.000000     8.098417
+75%      74.000000    53.000000     0.000000     0.430000    39.000000   118.000000    11.000000    33.000000     1.000000     3.246349     0.000000     7.000000   554.000000    10.700000
+max      99.000000   894.000000   722.000000     1.920000   617.000000  1818.000000   285.000000   890.000000    73.000000   149.000000    24.000000   135.000000  6209.000000   100.000000 
+
 ```
 
-Type conversion is performed 
-
-Type conversion:
-```
+Type conversion is performed column-by-column as follows:
+```Python
 df_nhl['GP'] = df_nhl['GP'].astype('int64')
 ```
 
-#### Duplicate Data
-Checked dataframe for duplicate entries with `df_nhl.duplicated()`. No duplicate entries found.
+
 
 #### `dtype` Conversion
 With missing data handled and duplicate entries checked for, data types were converted to representative formats,

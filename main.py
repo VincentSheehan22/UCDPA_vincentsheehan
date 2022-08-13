@@ -337,7 +337,9 @@ if __name__ == '__main__':
     print(f"RMSE_test_all_features_rf: {RMSE_rf_test}")
 
     # Plot feature importances.
-    importances = pd.Series(data=rf.feature_importances_)
+    importances = pd.Series(data=rf.feature_importances_,
+                            index=pd.Series(["GP", "G", "A", "P", "+/-", "PIM", "P/GP", "EVG", "EVP", "PPG", "PPP", "SHG",
+                                          "SHP", "OTG", "GWG", "S", "S%"]))
 
     importances_sorted = importances.sort_values()
 

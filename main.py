@@ -14,6 +14,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import mean_squared_error as MSE
+from sklearn.model_selection import cross_val_score
 
 # Don't suppress columns in terminal output.
 pd.options.display.width = 0
@@ -243,47 +244,72 @@ if __name__ == '__main__':
           df_nhl_top_100_extended.describe(include="all").T, "\n")
 
     # Machine Learning
-    # Decision Tree
-    # Ensembling
-    # Hyperparameter tuning
-
+    # Implement Decision Tree Regressor
     # Define feature matrix X, and target (labels) y, for training the model.
     # Drop target from X.
     target = "P"
     X = df_nhl.drop(target, axis=1).values  # .values converts DataFrame to numpy array.
     y = df_nhl[target].values
 
-    # Get specific column in X - GP.
-    X_gp = X[:, 4]
+    # Get specific column in X - GP (4).
+    X_feature = X[:, 4]
 
-    print("Getting type(X_gp), type(y)...\n", type(X_gp), type(y), "\n")
+    print("Getting type(X_gp), type(y)...\n", type(X_feature), type(y), "\n")
 
     # Reshape numpy arrays to unknown number of rows, 1 column.
     y = y.reshape(-1, 1)
-    X_gp = X_gp.reshape(-1, 1)
+    X_feature = X_feature.reshape(-1, 1)
 
     # Drop non-numeric features from X.
     #X = X.drop(["Player", "S/C", "Pos"], axis=1)
 
+    SEED = 123
+
     # Instantiate machine learning model.
     #dt = DecisionTreeClassifier(criterion="gini", random_state=1)
-    dt = DecisionTreeRegressor(max_depth=4, min_samples_leaf=0.1, random_state=3)
+    dt = DecisionTreeRegressor(max_depth=4, min_samples_leaf=0.14, random_state=SEED)
 
     # Define test and training data.
-    X_train, X_test, y_train, y_test = train_test_split(X_gp, y, test_size=0.2, random_state=21)
+    X_train, X_test, y_train, y_test = train_test_split(X_feature, y, test_size=0.3, random_state=SEED)
+
+    # Perform k-fold cross-validation to determine bias and variance.
+    MSE_CV = - cross_val_score(dt, X_train, y_train, cv=10,
+                               scoring="neg_mean_squared_error",
+                               n_jobs=-1)
 
     # Fit model to training data
     dt.fit(X_train, y_train)
 
+    # Predict the labels of the test and training sets.
+    y_pred_train = dt.predict(X_train)
+    y_pred_test = dt.predict(X_test)
+
+    print(f"CV MSE: {MSE_CV.mean()}")
+    print(f"Train MSE: {MSE(y_train, y_pred_train)}")
+    print(f"Test MSE: {MSE(y_test, y_pred_test)}")
+
+    RMSE_CV = (MSE_CV.mean()) ** (1 / 2)
+    print(f"RMSE_CV: {RMSE_CV}")
+
+    RMSE_train = (MSE(y_train, y_pred_train) ** (1 / 2))
+    print(f"RMSE_train: {RMSE_train}")
+    RMSE_test = (MSE(y_test, y_pred_test) ** (1 / 2))
+    print(f"RMSE_test: {RMSE_test}")
+
     # Use model to predict labels of test data.
-    y_pred = dt.predict(X_test)
+    #y_pred = dt.predict(X_test)
 
     # Calculate accuracy of prediction against actual value.
     #accuracy = accuracy_score(y_test, y_pred)
-    mse_dt = MSE(y_test, y_pred)
-    rmse_dt = mse_dt ** (1 / 2)
+    #mse_dt = MSE(y_test, y_pred)
+    #rmse_dt = mse_dt ** (1 / 2)
+
+
 
     #print(accuracy)
-    print("Getting rmse_dt...\n", rmse_dt, "\n")
-    print("Getting y_test[0:5]...\n", y_test[0:5], "\n")
-    print("Getting y_pred[0:5]...\n", y_pred[0:5], "\n")
+    #print("Getting rmse_dt...\n", rmse_dt, "\n")
+    #print("Getting y_test[0:5]...\n", y_test[0:10], "\n")
+    #print("Getting y_pred[0:5]...\n", y_pred[0:10], "\n")
+
+    # Ensembling
+    # Hyperparameter tuning

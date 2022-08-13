@@ -268,7 +268,7 @@ if __name__ == '__main__':
     y = y.reshape(-1, 1)
     X_feature = X_feature.reshape(-1, 1)
 
-    # Define test and training data.
+    # Define test and training data for DecisionTreeRegressor on single feature.
     X_train, X_test, y_train, y_test = train_test_split(X_feature, y, test_size=0.3, random_state=SEED)
 
     # Instantiate machine learning model - DecisionTreeRegressor.
@@ -297,24 +297,20 @@ if __name__ == '__main__':
     print(f"RMSE_train: {RMSE_train}")
 
     RMSE_test = (MSE(y_test, y_pred_test) ** (1 / 2))
-    print(f"RMSE_test: {RMSE_test}")
+    print(f"RMSE_test_single_feature: {RMSE_test}\n")
 
 
-    # DecisionTreeRegressor on full feature set.
+    # Define test and training data for DecisionTreeRegressor on full feature set.
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=SEED)
 
-    # Instantiate machine learning model - DecisionTreeRegressor.
     dt_X = DecisionTreeRegressor(max_depth=4, min_samples_leaf=0.14, random_state=SEED)
 
-    # Perform k-fold cross-validation to determine bias and variance.
     MSE_CV = - cross_val_score(dt_X, X_train, y_train, cv=10,
                                scoring="neg_mean_squared_error",
                                n_jobs=-1)
 
-    # Fit model to training data
     dt_X.fit(X_train, y_train)
 
-    # Predict the labels of the test and training sets.
     y_pred_train = dt_X.predict(X_train)
     y_pred_test = dt_X.predict(X_test)
 
@@ -329,16 +325,16 @@ if __name__ == '__main__':
     print(f"RMSE_train: {RMSE_train}")
 
     RMSE_test = (MSE(y_test, y_pred_test) ** (1 / 2))
-    print(f"RMSE_test: {RMSE_test}")
+    print(f"RMSE_test_all_features: {RMSE_test}\n")
 
-
-    # Ensembling - RandomForestRegressor
+    # Implement ensembling with RandomForestRegressor.
     rf = RandomForestRegressor(n_estimators=400, min_samples_leaf=0.12, random_state=SEED)
 
     rf.fit(X_train, np.ravel(y_train))      # Using np.ravel() to convert from column-vector to 1d array, as promted by DataConversionWarning.
     y_pred = rf.predict(X_test)
 
     RMSE_rf_test = (MSE(y_test, y_pred) ** (1 / 2))
-    print(f"Test set RMSE of rf: {RMSE_rf_test}")
+    print(f"RMSE_test_all_features_rf: {RMSE_rf_test}")
 
     # Hyperparameter tuning
+    

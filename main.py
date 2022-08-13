@@ -336,5 +336,13 @@ if __name__ == '__main__':
     RMSE_rf_test = (MSE(y_test, y_pred) ** (1 / 2))
     print(f"RMSE_test_all_features_rf: {RMSE_rf_test}")
 
+    # Plot feature importances.
+    importances = pd.Series(data=rf.feature_importances_)
+
+    importances_sorted = importances.sort_values()
+
+    importances_sorted.plot(kind='barh', color='lightgreen')
+    plt.title('Feature Importance')
+    plt.show()
+
     # Hyperparameter tuning
-    

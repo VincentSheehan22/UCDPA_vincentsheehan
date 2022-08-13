@@ -376,8 +376,9 @@ defender and 1 right side defender on the ice at a given time - 6 per team, and 
 the dataset aligns with the standard team composition. Further analysis is to be performed to confirm if the same is
 true of other positions.
 
-The Pandas `loc()` function is used to return players responsible for max values of columns in the `.describe()`
-table.
+The Pandas `.loc` function is used to return players responsible for max values of columns in the `.describe()`
+table. Max. +/- is excluded here for the purpose of later comparison with min. +/-. S% is also excluded as further
+calculation, performed later, is required to arrive at a meaningful value.
 
 ```Python
 cols_max = ["GP", "G", "A", "P", "PIM", "P/GP", "EVG", "EVP", "PPG", "PPP", "SHG", "SHP", "OTG", "GWG", "S"]
@@ -396,20 +397,65 @@ Getting player with most G...
 0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890   73  149    2   91  5088  17.6  
 ```
 
-The player with the highest shooting percentage is taken as the player with the highest shooting percentage having a minimum
-of 100 shots taken, as multiple players have 1 shot and 1 goal in few games played. This is calculated as follows:
+The player with the highest shooting percentage is taken as the player with the highest shooting percentage having a
+minimum of 100 shots taken, as multiple players have 1 shot and 1 goal in few games played. This is calculated as
+follows:
 
-
-The player with minimum +/- of -257 is also returned, as being a notable value. +/- represents a player's presence on
-the ice at the time of goals for (+) and goals against (-). A positive +/- value indicates a player is present mostly
-for goals for, whereas a negative score indicates a player is present mostly for goals against. +/- is cumulative over 
-games played. A negative +/- may infer a player has defensive limitations, while also not contributing offensively.
-
-
-
-Pandas `loc()` function used to extract other noteworthy players by name (stored in list as strings).
 ```Python
-for name in names:
+# Eliminate players with insignificant shot totals from max. S% calculation.
+df_significant_shots = df_nhl[df_nhl["S"] >= 100]
+
+# Extract player with max. S% (with minimum of 100 shots taken).
+print("Getting player with highest S% (min. 100 shots)...\n",
+      df_significant_shots.loc[df_significant_shots["S%"] == max(df_significant_shots["S%"])], "\n")
+```
+
+```
+Getting player with highest S% (min. 100 shots)...
+       index     Player S/C Pos   GP   G   A   P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG    S    S%
+3073     73  Mal Davis   L   L  100  31  22  53   -5   34  0.53   20   30   11   23    0    0    0    8  125  24.8 
+```
+
+The player with minimum +/- of -257 is also retrieved, as being a notable value. Player with maximum +/- is also
+retrieved for comparison.
+
++/- represents a player's presence on the ice at the time of goals for (+1) and goals against
+(-1). A positive +/- value indicates a player is present mostly for goals for, whereas a negative score indicates a
+player is present mostly for goals against. +/- is cumulative over games played. A negative +/- may infer a player has
+defensive limitations, while also not contributing offensively.
+
+```Python
+# Extract player with highest +/-.
+print("Getting player with highest +/-...\n", df_nhl.loc[df_nhl["+/-"] == max(df_nhl["+/-"])], "\n")
+
+# Extract player with lowest +/-.
+print("Getting player with lowest +/-...\n", df_nhl.loc[df_nhl["+/-"] == min(df_nhl["+/-"])], "\n")
+```
+
+```
+Getting player with highest +/-...
+      index          Player S/C Pos    GP    G    A    P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S   S%
+104      4  Larry Robinson   L   D  1384  208  750  958  722  793  0.69  139  639   66  309    3   10    0   29  2332  8.9 
+
+Getting player with lowest +/-...
+       index       Player S/C Pos   GP   G    A    P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG    S   S%
+2089     89  Bob Stewart   L   D  575  27  101  128 -257  809  0.22   23  113    4   10    0    5    0    1  552  4.9 
+```
+
+Given that the player with lowest +/- has a moderate career duration of 575 games played, it can be inferred that they
+give a valuable contribution outside the standard offense/defense roles. This player's role and playing style may be
+geared more towards agitation and disrupting the opponents momentum and rhythm. This is borne out by the
+penalties-in-minutes (PIM) accrued, which is relatively high for the number of games played.
+
+The Pandas `loc` function is also used to retrieve a number of otherwise noteworthy players by name, iterated over as a
+list of strings, using a for loop.
+
+```Python
+# Extract other noteworthy players, by name - using for loop.
+notable_players_1 = ["Mario Lemieux", "Mike Bossy", "Gordie Howe",
+                     "Sidney Crosby", "Evgeni Malkin",
+                     "Nicklas Lidstrom", "Erik Karlsson", "Cale Makar"]
+for name in notable_players_1:
     print(f"Getting player {name}...\n", df_nhl.loc[df_nhl["Player"] == name], "\n")
 ```
 
@@ -423,7 +469,30 @@ Getting player Mike Bossy...
 60     60  Mike Bossy   R   R  752  573  553  1126  380  210   1.5  385  739  180  378    8    9    4   80  2707  21.2 
 ```
 
-GP and P of above players to be used to annotate EDA scatter plots to follow.
+For comparative purposes, a second list of player names is specified, to be iterated over with iter()/next() syntax.
+```Python
+# Extract other noteworthy players, by name - using for iter()/next().
+notable_players_2 = ["Connor McDavid", "Connor McDavid",      # Same value required twice for print statement using
+                     "Auston Matthews", "Auston Matthews"]    # iter()/next(). For loop preferred for this use case.
+notable_players_2_iter = iter(notable_players_2)
+print(f"Getting player {next(notable_players_2_iter)}...\n",
+      df_nhl.loc[df_nhl["Player"] == next(notable_players_2_iter)], "\n")
+print(f"Getting player {next(notable_players_2_iter)}...\n",
+      df_nhl.loc[df_nhl["Player"] == next(notable_players_2_iter)], "\n")
+```
+
+```
+Getting player Connor McDavid...
+      index          Player S/C Pos   GP    G    A    P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+253     53  Connor McDavid   L   C  487  239  458  697   92  183  1.43  186  470   50  218    3    9   13   53  1596  15.0 
+
+Getting player Auston Matthews...
+      index           Player S/C Pos   GP    G    A    P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+599     99  Auston Matthews   L   C  407  259  198  457   78   74  1.12  196  336   63  121    0    0    9   45  1577  16.4 
+```
+
+The points (P), goals (G), assists (A), and games played (GP) of select players retrieved above are used to annotate
+the EDA scatter plots which follow.
 
 
 #### Scatter Plot of Points-Goals-Assists vs. Games Played

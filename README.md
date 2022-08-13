@@ -408,7 +408,7 @@ defender and 1 right side defender on the ice at a given time - 6 per team, and 
 the dataset aligns with the standard team composition. Further analysis is to be performed to confirm if the same is
 true of other positions.
 
-The Pandas `.loc` function is used to return players responsible for max values of columns in the `.describe()`
+The Pandas `.loc` function is used to retrieve players responsible for max values of columns in the `.describe()`
 table. Max. +/- is excluded here for the purpose of later comparison with min. +/-. S% is also excluded as further
 calculation, performed later, is required to arrive at a meaningful value.
 

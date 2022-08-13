@@ -379,16 +379,10 @@ true of other positions.
 The Pandas `loc()` function is used to return players responsible for max values of columns in the `.describe()`
 table.
 
-Player with the highest shooting percentage is taken as the player with the highest shooting percentage having a minimum
-of 100 shots taken, as multiple players have 1 shot and 1 goal in few games played.
-
-The player with minimum +/- of -257 is also returned, as being a notable value. +/- represents a players presence on the
-ice at the time of goals for (+) and goals against (-). A positive +/- value indicates a player is present mostly for
-goals for, whereas a negative score indicates a player is present mostly for goals against. +/- is cumulative over 
-games played. A negative +/- may infer a player has defensive limitations, while also not contributing offensively.
-
 ```Python
-print("Getting player with most GP...\n", df_nhl.loc[df_nhl["GP"] == max(df_nhl["GP"])], "\n")
+cols_max = ["GP", "G", "A", "P", "PIM", "P/GP", "EVG", "EVP", "PPG", "PPP", "SHG", "SHP", "OTG", "GWG", "S"]
+for col in cols_max:
+    print(f"Getting player with most {col}...\n", df_nhl.loc[df_nhl[f"{col}"] == max(df_nhl[f"{col}"])], "\n")
 ```
 
 
@@ -401,6 +395,17 @@ Getting player with most G...
     index         Player S/C Pos    GP    G     A     P  +/-  PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
 0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890   73  149    2   91  5088  17.6  
 ```
+
+The player with the highest shooting percentage is taken as the player with the highest shooting percentage having a minimum
+of 100 shots taken, as multiple players have 1 shot and 1 goal in few games played. This is calculated as follows:
+
+
+The player with minimum +/- of -257 is also returned, as being a notable value. +/- represents a player's presence on
+the ice at the time of goals for (+) and goals against (-). A positive +/- value indicates a player is present mostly
+for goals for, whereas a negative score indicates a player is present mostly for goals against. +/- is cumulative over 
+games played. A negative +/- may infer a player has defensive limitations, while also not contributing offensively.
+
+
 
 Pandas `loc()` function used to extract other noteworthy players by name (stored in list as strings).
 ```Python

@@ -130,7 +130,7 @@ if __name__ == '__main__':
     for name in notable_players_1:
         print(f"Getting player {name}...\n", df_nhl.loc[df_nhl["Player"] == name], "\n")
 
-    # Extract other noteworthy players, by name - using for iter()/next().
+    # Extract other noteworthy players, by name - using iter()/next().
     notable_players_2 = ["Connor McDavid", "Connor McDavid",    # Same value required twice for print statement using
                        "Auston Matthews", "Auston Matthews"]    # iter()/next(). For loop preferred for this use case.
     notable_players_2_iter = iter(notable_players_2)

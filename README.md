@@ -324,6 +324,38 @@ df_nhl["Player"] = df_nhl["Player"].astype("string")
 ```
 
 This is done for all remaining columns in the dataset, concluding data cleaning operations.
+```
+Getting .info()...
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 7461 entries, 0 to 7460
+Data columns (total 21 columns):
+ #   Column  Non-Null Count  Dtype  
+---  ------  --------------  -----  
+ 0   index   7461 non-null   int64  
+ 1   Player  7461 non-null   string 
+ 2   S/C     7461 non-null   string 
+ 3   Pos     7461 non-null   string 
+ 4   GP      7461 non-null   int64  
+ 5   G       7461 non-null   int64  
+ 6   A       7461 non-null   int64  
+ 7   P       7461 non-null   int64  
+ 8   +/-     7461 non-null   int64  
+ 9   PIM     7461 non-null   int64  
+ 10  P/GP    7461 non-null   float64
+ 11  EVG     7461 non-null   int64  
+ 12  EVP     7461 non-null   int64  
+ 13  PPG     7461 non-null   int64  
+ 14  PPP     7461 non-null   int64  
+ 15  SHG     7461 non-null   int64  
+ 16  SHP     7461 non-null   int64  
+ 17  OTG     7461 non-null   int64  
+ 18  GWG     7461 non-null   int64  
+ 19  S       7461 non-null   int64  
+ 20  S%      7461 non-null   float64
+dtypes: float64(2), int64(16), string(3)
+memory usage: 1.2 MB
+None 
+```
 
 The Pandas `.describe()` method now returns a more complete picture of the dataset, showing summary statistics for all
 numeric fields.

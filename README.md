@@ -448,8 +448,8 @@ Getting player with highest S% (min. 100 shots)...
 3073     73  Mal Davis   L   L  100  31  22  53   -5   34  0.53   20   30   11   23    0    0    0    8  125  24.8 
 ```
 
-The player with minimum +/- of -257 is also retrieved, as being a notable value. Player with maximum +/- is also
-retrieved for comparison.
+The player with minimum +/- of -257 is also retrieved, as being a notable value, along with player with maximum +/- for
+comparison.
 
 +/- represents a player's presence on the ice at the time of goals for (+1) and goals against
 (-1). A positive +/- value indicates a player is present mostly for goals for, whereas a negative score indicates a

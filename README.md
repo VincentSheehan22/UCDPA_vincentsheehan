@@ -183,7 +183,7 @@ input and converts entries with value "--" - representing missing data in the NH
 `NaN` objects populated in the dataframe, the function then obtains a count of missing data per column. The modified
 DataFrame and missing data counts are then returned.
 
-``` Python
+```Python
 # Explore missing data to determine how best to handle.
 df_nhl, missing_count = handle_missing_data.handle_missing_data(df_nhl)
 print(df_nhl.head(), "\n")
@@ -342,7 +342,7 @@ max      99.000000  1779.000000   894.000000  1963.000000  2857.000000   722.000
 
 ### Exploratory Data Analysis
 #### Dataset Summary Statistics
-Specifying the include parameter with `.describe()` allows to expand analysis to non-numeric fields - adding Player,
+Specifying the include parameter with `.describe()` expands analysis to non-numeric fields - adding Player,
 S/C, and Pos columns.
 
 ```
@@ -370,18 +370,22 @@ reasoning for the prevalence of left side shooting is that the dominant hand is 
 [3]. However, if taking L from this dataset to represent right-hand dominance, there is still a disparity with the
 general distribution. An analysis of the equivalent Goalie dataset may give insight as to whether there is adaptation in 
 response to coaching, in order to exploit weaknesses in Goalie effectiveness.
-* The frequent player position is defense, representing 33% of the dataset. Unlike the forward positions (centre,
-left wing, right wing). The defense position is not further. A team typically plays with 1 left side defender 1 right
-side defender on the ice at a given time - 6 per team, and 12 forwards. The ratio of defenders in the dataset aligns
-with the standard team composition. Further analysis to be performed to confirm if the same true of other positions.
+* The most frequent player position is defense, representing 33% of the dataset. Unlike the forward positions (centre,
+left wing, right wing). The defense position is not further sub-divided. A team typically plays with 1 left side
+defender and 1 right side defender on the ice at a given time - 6 per team, and 12 forwards. The ratio of defenders in
+the dataset aligns with the standard team composition. Further analysis is to be performed to confirm if the same is
+true of other positions.
 
-The Pandas `loc()` function was used to return players responsible for max values of columns in the `.describe()`
+The Pandas `loc()` function is used to return players responsible for max values of columns in the `.describe()`
 table.
 
-Player with the highest shooting percentage was taken as player with the highest shooting percentage having a minimum of
-100 shots taken, as multiple players have 1 shot and 1 goal in few games played.
+Player with the highest shooting percentage is taken as the player with the highest shooting percentage having a minimum
+of 100 shots taken, as multiple players have 1 shot and 1 goal in few games played.
 
-The player with minimum +/- of -257 is also returned, as being a notable value.
+The player with minimum +/- of -257 is also returned, as being a notable value. +/- represents a players presence on the
+ice at the time of goals for (+) and goals against (-). A positive +/- value indicates a player is present mostly for
+goals for, whereas a negative score indicates a player is present mostly for goals against. +/- is cumulative over 
+games played. A negative +/- may infer a player has defensive limitations, while also not contributing offensively.
 
 ```Python
 print("Getting player with most GP...\n", df_nhl.loc[df_nhl["GP"] == max(df_nhl["GP"])], "\n")

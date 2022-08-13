@@ -344,7 +344,7 @@ if __name__ == '__main__':
     importances_sorted = importances.sort_values()
 
     importances_sorted.plot(kind='barh', color='lightgreen')
-    plt.title('Feature Importance')
+    plt.title(f'Feature Importance in Prediction of {target}')
     plt.show()
 
     # Hyperparameter tuning

@@ -183,7 +183,7 @@ if __name__ == '__main__':
 
     # Machine Learning
     # Define feature matrix X, and target (labels) y.
-    target = "S%"
+    target = "G"
 
     # Drop target from X.
     X_all_features = df_nhl.drop(target, axis=1)
@@ -216,6 +216,7 @@ if __name__ == '__main__':
     # Hyperparameter tuning
     print("Getting RandomForestRegressor hyperparamters...\n", rf.get_params(), "\n")
 
+    print("Tuning hyperparameters with GridSearchCV...\n")
     params_rf = {'n_estimators': [300, 400, 500],
                  'max_depth': [4, 6, 8],
                  'min_samples_leaf': [0.1, 0.2],
@@ -233,17 +234,29 @@ if __name__ == '__main__':
     grid_rf.fit(X_train, np.ravel(y_train))
 
     best_hyperparams = grid_rf.best_params_
-    print('Best hyperparameters:\n', best_hyperparams)
+    print('Getting best hyperparameters...\n', best_hyperparams, "\n")
 
     # Extract the best model from 'grid_rf'
     best_model = grid_rf.best_estimator_
-    print('Best model:\n', best_model)
-    
-    # Predict the test set labels
+    print('Getting best model:\n', best_model, "\n")
+
+    # Predict the test set labels.
+    print("Predicting test set labels with best model...\n")
     y_pred = best_model.predict(X_test)
 
     # Evaluate the test set RMSE
-    rmse_test = MSE(y_test, y_pred)**(1/2)
+    rmse_test_rf_tuned = MSE(y_test, y_pred)**(1/2)
 
     # Print the test set RMSE
-    print('Test set RMSE of rf: {:.2f}'.format(rmse_test))
+    print(f'RMSE_test_rf_tuned: {rmse_test_rf_tuned}', "\n")
+
+    # Plot feature importances.
+    importances = pd.Series(data=best_model.feature_importances_,
+                            index=pd.Series(["GP", "G", "A", "P", "+/-", "PIM", "P/GP", "EVG", "EVP", "PPG", "PPP",
+                                             "SHG", "SHP", "OTG", "GWG", "S", "S%"]))
+
+    importances_sorted = importances.sort_values()
+
+    importances_sorted.plot(kind='barh')#, color='lightgreen')
+    plt.title(f'Feature Importance in Prediction of {target}')
+    plt.show()

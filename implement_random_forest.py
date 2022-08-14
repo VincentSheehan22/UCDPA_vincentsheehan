@@ -8,6 +8,17 @@ import seaborn as sns
 
 
 def implement_random_forest(X, y, SEED, df_X, target):
+    """Use a RandomForest Regressor model to predict target variable y , based on feature matrix X.
+
+    Takes below parameters and implements RandomForset Regression. Displays RMSE of the prediction, and generates bar
+    chart of feature importance. The plot is saved to file and displayed on screen. The RF regression model is returned.
+    :param X: feature matrix, numpy ndaarray object
+    :param y: target, numpy ndarrray  object
+    :param SEED: seed for random number generation
+    :param df_X: X as DataFrame object
+    :param target: target name, string
+    :return: RandomForestRegressor object
+    """
     # Implement ensembling with RandomForestRegressor.
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=SEED)
 
@@ -27,7 +38,8 @@ def implement_random_forest(X, y, SEED, df_X, target):
     importances_sorted = importances.sort_values()
 
     importances_sorted.plot(kind='barh')
-    plt.title(f'Feature Importance in Prediction of {target}')
+    plt.title(f'Feature Importance in Prediction of {target} - Untuned Random Forest')
+    plt.savefig(f"Feature Importance in Prediction of {target} - Untuned Random Forest.png")
     plt.show()
 
     return rf

@@ -552,7 +552,7 @@ axs[0].text(1274, 1410, "Alex Ovechkin")
 axs[0].text(1108, 1409, "Sidney Crosby")
 ```
 
-![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P-G-A%20vs%20GP_scatterplot_sns_annotated.png)
+![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P-G-A%20vs.%20Games%20Played%20Scatter%20Plot.png)
 * The top plot shows points vs. games played.
 * The middle plot shows goals vs. games played.
 * The bottom plot shows assists vs. games played.
@@ -565,7 +565,7 @@ likely to remain unsurpassed by any player in the dataset.
 played. Wayne Gretzky's career goals per game pace is calculated to be 0.60.
 
 #### Box Plot of Points vs. Player Position
-![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P%20vs%20Pos_boxplot.png)
+![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P%20vs.%20Pos%20Box%20Plot.png)
 * Left plot shows percentiles for all player positions combined.
 * Centre plot shows percentiles for each player position: Centre (C), Right Wing (R), Defense (D), Left Wing (L).
 * Right plot shows the same categorisation as the centre plot, further broken down by shooting hand (left (L) or right
@@ -575,7 +575,7 @@ From this, it is clear that tha data contains many outliers, with point totals s
 performed by standardizing the dataset. 
 
 #### Histogram of Points
-![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P_histogram.png)
+![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Points%20Histogram.png)
 * Left plot shows complete histogram of Points for all players in the dataset.
 * Right plot shows the same histogram zoomed in at the high end (P >= 1200).
 * Model to fit such histogram?

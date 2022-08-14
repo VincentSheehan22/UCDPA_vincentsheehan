@@ -4,7 +4,10 @@ from glob import glob
 
 def get_dataset_excel(directory, report="Summary"):
     """Generate Pandas DataFrame from input Excel files.
-    Takes two strings as input: the directory path and the report type (represented in file name)."""
+
+    Takes two strings as input: the directory path and the report type (represented in file name). Returns DataFrame
+    compiled from input files.
+    """
     # Create empty dataframe.
     df_nhl = pd.DataFrame()
 

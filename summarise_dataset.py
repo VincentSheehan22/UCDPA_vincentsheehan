@@ -2,7 +2,7 @@ import pandas as pd
 
 
 def summarise_dataset(df):
-    """Function to get summary of dataset - .shape, .head(), .tail(), .describe(), .info()"""
+    """Get summary of pandas DataFrame object - .shape, .head(), .tail(), .describe(), .info()."""
     print("Getting .shape...\n", df.shape, "\n")
     print("Getting .head()...\n", df.head(), "\n")
     print("Getting .tail()...\n", df.tail(), "\n")

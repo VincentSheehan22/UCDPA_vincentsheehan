@@ -5,6 +5,15 @@ from sklearn.metrics import mean_squared_error as MSE
 
 
 def implement_decision_tree(X, y, SEED):
+    """Use a DecisionTreeRegressor model to predict target variable y , based on feature matrix X.
+
+    Takes below parameters and implements Decision Tree Regression. Prints RMSE of cross-validation on the training,
+    RMSE of prediction on the training set, and RMSE of the prediction on the test set.
+    :param X: feature matrix, numpy ndaarray object
+    :param y: target, numpy ndarrray  object
+    :param SEED: seed for random number generation
+    :return: none
+    """
     # Define test and training data for DecisionTreeRegressor.
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=SEED)
 

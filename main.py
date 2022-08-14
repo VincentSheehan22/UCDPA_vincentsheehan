@@ -18,6 +18,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import mean_squared_error as MSE
 from sklearn.model_selection import cross_val_score
 from sklearn.ensemble import RandomForestRegressor
+from implement_decision_tree import implement_decision_tree
 
 SEED = 1
 
@@ -146,28 +147,13 @@ if __name__ == '__main__':
           df_nhl.loc[df_nhl["Player"] == next(notable_players_2_iter)], "\n")
 
     # Plot data for EDA.
-    # Set plot theme.
+    # Set seaborn plot theme.
     sns.set()
 
+    # Run custom plotting functions.
     get_pga_scatterplot(df_nhl)
     get_p_pos_boxplot(df_nhl)
     get_p_histogram(df_nhl)
-
-
-    # # Plot histogram of P.
-    # f, axs = plt.subplots(1, 2)
-    # f.suptitle('Points Histogram')
-    # sns.histplot(data=df_nhl, x=df_nhl["P"], ax=axs[0])
-    # axs[0].set(xlabel="Points")
-    # axs[0].set(ylabel="Player Count")
-    #
-    # # Zoom in on high-end.
-    # sns.histplot(data=df_nhl, x=df_nhl["P"], ax=axs[1])
-    # axs[1].set(xlim=(1200, 3001), ylim=(0, 20))
-    # axs[1].set(xlabel="Points")
-    # axs[1].set(ylabel="Player Count")
-    #
-    # plt.show()
 
     # Merging Dataframes
     # Generating second data frame based on the 'Bio Info' report from NHL.com. Only the fist page is taken, sorted by
@@ -189,88 +175,37 @@ if __name__ == '__main__':
           df_nhl_top_100_extended.describe(include="all").T, "\n")
 
     # Machine Learning
-    # Define feature matrix X, and target (labels) y, for training the model.
+    # Define feature matrix X, and target (labels) y.
     target = "S%"
 
     # Drop target from X.
-    X = df_nhl.drop(target, axis=1)
+    X_all_features = df_nhl.drop(target, axis=1)
 
     # Drop non-numeric features from X.
-    X = X.drop(["Player", "S/C", "Pos"], axis=1)
+    X_all_features = X_all_features.drop(["Player", "S/C", "Pos"], axis=1)
 
     # Convert DataFrame X, and Series y to numpy arrays.
-    X = X.values
+    X_all_features = X_all_features.values
     y = df_nhl[target].values
 
-    # Craete single-feature array for preliminary use.
-    X_feature = X[:, 4]
+    # Create single-feature array for preliminary use.
+    X_single_feature = X_all_features[:, 4]
 
-    print("Getting type(X_feature), type(y)...\n", type(X_feature), type(y), "\n")
+    print("Getting type(X_single_feature)...\n", type(X_single_feature), "\n")
+    print("Getting type(X_all_features)...\n", type(X_all_features), "\n")
+    print("Getting type(y)...\n", type(y), "\n")
 
     # Reshape numpy arrays to unknown number of rows, 1 column.
     y = y.reshape(-1, 1)
-    X_feature = X_feature.reshape(-1, 1)
+    X_single_feature = X_single_feature.reshape(-1, 1)
 
-    # Define test and training data for DecisionTreeRegressor on single feature.
-    X_train, X_test, y_train, y_test = train_test_split(X_feature, y, test_size=0.3, random_state=SEED)
-
-    # Instantiate machine learning model - DecisionTreeRegressor.
-    dt_X_feature = DecisionTreeRegressor(max_depth=4, min_samples_leaf=0.14, random_state=SEED)
-
-    # Perform k-fold cross-validation to determine bias and variance.
-    MSE_CV = - cross_val_score(dt_X_feature, X_train, y_train, cv=10,
-                               scoring="neg_mean_squared_error",
-                               n_jobs=-1)
-
-    # Fit model to training data
-    dt_X_feature.fit(X_train, y_train)
-
-    # Predict the labels of the test and training sets.
-    y_pred_train = dt_X_feature.predict(X_train)
-    y_pred_test = dt_X_feature.predict(X_test)
-
-    print(f"CV MSE: {MSE_CV.mean()}")
-    print(f"Train MSE: {MSE(y_train, y_pred_train)}")
-    print(f"Test MSE: {MSE(y_test, y_pred_test)}")
-
-    RMSE_CV = (MSE_CV.mean()) ** (1 / 2)
-    print(f"RMSE_CV: {RMSE_CV}")
-
-    RMSE_train = (MSE(y_train, y_pred_train) ** (1 / 2))
-    print(f"RMSE_train: {RMSE_train}")
-
-    RMSE_test = (MSE(y_test, y_pred_test) ** (1 / 2))
-    print(f"RMSE_test_single_feature: {RMSE_test}\n")
-
-
-    # Define test and training data for DecisionTreeRegressor on full feature set.
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=SEED)
-
-    dt_X = DecisionTreeRegressor(max_depth=4, min_samples_leaf=0.14, random_state=SEED)
-
-    MSE_CV = - cross_val_score(dt_X, X_train, y_train, cv=10,
-                               scoring="neg_mean_squared_error",
-                               n_jobs=-1)
-
-    dt_X.fit(X_train, y_train)
-
-    y_pred_train = dt_X.predict(X_train)
-    y_pred_test = dt_X.predict(X_test)
-
-    print(f"CV MSE: {MSE_CV.mean()}")
-    print(f"Train MSE: {MSE(y_train, y_pred_train)}")
-    print(f"Test MSE: {MSE(y_test, y_pred_test)}")
-
-    RMSE_CV = (MSE_CV.mean()) ** (1 / 2)
-    print(f"RMSE_CV: {RMSE_CV}")
-
-    RMSE_train = (MSE(y_train, y_pred_train) ** (1 / 2))
-    print(f"RMSE_train: {RMSE_train}")
-
-    RMSE_test = (MSE(y_test, y_pred_test) ** (1 / 2))
-    print(f"RMSE_test_all_features: {RMSE_test}\n")
+    # Implement decision tree with single featur, and all features.
+    implement_decision_tree(X_single_feature, y, SEED)
+    implement_decision_tree(X_all_features, y, SEED)
 
     # Implement ensembling with RandomForestRegressor.
+    X_train, X_test, y_train, y_test = train_test_split(X_all_features, y, test_size=0.3, random_state=SEED)
+
     rf = RandomForestRegressor(n_estimators=400, min_samples_leaf=0.12, random_state=SEED)
 
     rf.fit(X_train, np.ravel(y_train))      # Using np.ravel() to convert from column-vector to 1d array, as promted by DataConversionWarning.

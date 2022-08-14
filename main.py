@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from get_pga_scatterplot import get_pga_scatterplot
 from get_p_pos_boxplot import get_p_pos_boxplot
+from get_p_histogram import get_p_histogram
 import numpy as np
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import train_test_split
@@ -150,21 +151,23 @@ if __name__ == '__main__':
 
     get_pga_scatterplot(df_nhl)
     get_p_pos_boxplot(df_nhl)
+    get_p_histogram(df_nhl)
 
-    # Plot histogram of P.
-    f, axs = plt.subplots(1, 2)
-    f.suptitle('Points Histogram')
-    sns.histplot(data=df_nhl, x=df_nhl["P"], ax=axs[0])
-    axs[0].set(xlabel="Points")
-    axs[0].set(ylabel="Player Count")
 
-    # Zoom in on high-end.
-    sns.histplot(data=df_nhl, x=df_nhl["P"], ax=axs[1])
-    axs[1].set(xlim=(1200, 3001), ylim=(0, 20))
-    axs[1].set(xlabel="Points")
-    axs[1].set(ylabel="Player Count")
-
-    plt.show()
+    # # Plot histogram of P.
+    # f, axs = plt.subplots(1, 2)
+    # f.suptitle('Points Histogram')
+    # sns.histplot(data=df_nhl, x=df_nhl["P"], ax=axs[0])
+    # axs[0].set(xlabel="Points")
+    # axs[0].set(ylabel="Player Count")
+    #
+    # # Zoom in on high-end.
+    # sns.histplot(data=df_nhl, x=df_nhl["P"], ax=axs[1])
+    # axs[1].set(xlim=(1200, 3001), ylim=(0, 20))
+    # axs[1].set(xlabel="Points")
+    # axs[1].set(ylabel="Player Count")
+    #
+    # plt.show()
 
     # Merging Dataframes
     # Generating second data frame based on the 'Bio Info' report from NHL.com. Only the fist page is taken, sorted by

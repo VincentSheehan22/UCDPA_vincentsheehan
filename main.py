@@ -20,6 +20,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.ensemble import RandomForestRegressor
 from implement_decision_tree import implement_decision_tree
 from implement_random_forest import implement_random_forest
+from sklearn.model_selection import GridSearchCV
 
 SEED = 1
 
@@ -214,3 +215,35 @@ if __name__ == '__main__':
 
     # Hyperparameter tuning
     print("Getting RandomForestRegressor hyperparamters...\n", rf.get_params(), "\n")
+
+    params_rf = {'n_estimators': [300, 400, 500],
+                 'max_depth': [4, 6, 8],
+                 'min_samples_leaf': [0.1, 0.2],
+                 'max_features': ['log2', 'sqrt']}
+
+    grid_rf = GridSearchCV(estimator=rf,
+                           param_grid=params_rf,
+                           cv=3,
+                           scoring='neg_mean_squared_error',
+                           verbose=1,
+                           n_jobs=-1)
+
+    X_train, X_test, y_train, y_test = train_test_split(X_all_features, y, test_size=0.3, random_state=SEED)
+
+    grid_rf.fit(X_train, np.ravel(y_train))
+
+    best_hyperparams = grid_rf.best_params_
+    print('Best hyperparameters:\n', best_hyperparams)
+
+    # Extract the best model from 'grid_rf'
+    best_model = grid_rf.best_estimator_
+    print('Best model:\n', best_model)
+    
+    # Predict the test set labels
+    y_pred = best_model.predict(X_test)
+
+    # Evaluate the test set RMSE
+    rmse_test = MSE(y_test, y_pred)**(1/2)
+
+    # Print the test set RMSE
+    print('Test set RMSE of rf: {:.2f}'.format(rmse_test))

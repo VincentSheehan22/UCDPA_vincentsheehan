@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def implement_random_forest(X, y, SEED, target):
+def implement_random_forest(X, y, SEED, df_X, target):
     # Implement ensembling with RandomForestRegressor.
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=SEED)
 
@@ -22,8 +22,7 @@ def implement_random_forest(X, y, SEED, target):
 
     # Plot feature importances.
     importances = pd.Series(data=rf.feature_importances_,
-                            index=pd.Series(["GP", "G", "A", "P", "+/-", "PIM", "P/GP", "EVG", "EVP", "PPG", "PPP",
-                                             "SHG", "SHP", "OTG", "GWG", "S", "S%"]))
+                            index=df_X.columns)
 
     importances_sorted = importances.sort_values()
 

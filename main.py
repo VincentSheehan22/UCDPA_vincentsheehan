@@ -183,16 +183,16 @@ if __name__ == '__main__':
 
     # Machine Learning
     # Define feature matrix X, and target (labels) y.
-    target = "G"
+    target = "P"
 
     # Drop target from X.
     X_all_features = df_nhl.drop(target, axis=1)
 
     # Drop non-numeric features from X.
-    X_all_features = X_all_features.drop(["Player", "S/C", "Pos"], axis=1)
+    df_X_all_features = X_all_features.drop(["Player", "S/C", "Pos"], axis=1)
 
     # Convert DataFrame X, and Series y to numpy arrays.
-    X_all_features = X_all_features.values
+    X_all_features = df_X_all_features.values
     y = df_nhl[target].values
 
     # Create single-feature array for preliminary use.
@@ -210,8 +210,9 @@ if __name__ == '__main__':
     implement_decision_tree(X_single_feature, y, SEED)
     implement_decision_tree(X_all_features, y, SEED)
 
-    # Implement ensembling with RandomForestRegressor. Target string is specified as argument for plotting purposes.
-    rf = implement_random_forest(X_all_features, y, SEED, target)
+    # Implement ensembling with RandomForestRegressor. Dataframe Version of X, and target string are specified as
+    # arguments for plotting purposes.
+    rf = implement_random_forest(X_all_features, y, SEED, df_X_all_features, target)
 
     # Hyperparameter tuning
     print("Getting RandomForestRegressor hyperparamters...\n", rf.get_params(), "\n")
@@ -252,8 +253,8 @@ if __name__ == '__main__':
 
     # Plot feature importances.
     importances = pd.Series(data=best_model.feature_importances_,
-                            index=pd.Series(["GP", "G", "A", "P", "+/-", "PIM", "P/GP", "EVG", "EVP", "PPG", "PPP",
-                                             "SHG", "SHP", "OTG", "GWG", "S", "S%"]))
+                            index=df_X_all_features.columns)#pd.Series(["GP", "G", "A", "P", "+/-", "PIM", "P/GP", "EVG", "EVP", "PPG", "PPP",
+                                             #"SHG", "SHP", "OTG", "GWG", "S", "S%"]))
 
     importances_sorted = importances.sort_values()
 

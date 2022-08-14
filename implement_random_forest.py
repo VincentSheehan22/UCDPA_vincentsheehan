@@ -18,7 +18,7 @@ def implement_random_forest(X, y, SEED, target):
     y_pred = rf.predict(X_test)
 
     RMSE_rf_test = (MSE(y_test, y_pred) ** (1 / 2))
-    print(f"RMSE_test_rf: {RMSE_rf_test}")
+    print(f"RMSE_test_rf: {RMSE_rf_test}", "\n")
 
     # Plot feature importances.
     importances = pd.Series(data=rf.feature_importances_,

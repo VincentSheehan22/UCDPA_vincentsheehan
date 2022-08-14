@@ -213,3 +213,4 @@ if __name__ == '__main__':
     rf = implement_random_forest(X_all_features, y, SEED, target)
 
     # Hyperparameter tuning
+    print("Getting RandomForestRegressor hyperparamters...\n", rf.get_params(), "\n")

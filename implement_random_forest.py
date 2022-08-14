@@ -30,3 +30,5 @@ def implement_random_forest(X, y, SEED, target):
     importances_sorted.plot(kind='barh', color='lightgreen')
     plt.title(f'Feature Importance in Prediction of {target}')
     plt.show()
+
+    return rf

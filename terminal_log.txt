@@ -1,0 +1,630 @@
+Compiling dataframe from Summary report...
+./Raw Data Files/Summary-37.xlsx
+./Raw Data Files/Summary-60.xlsx
+./Raw Data Files/Summary-21.xlsx
+./Raw Data Files/Summary-56.xlsx
+./Raw Data Files/Summary-01.xlsx
+./Raw Data Files/Summary-17.xlsx
+./Raw Data Files/Summary-40.xlsx
+./Raw Data Files/Summary-41.xlsx
+./Raw Data Files/Summary-16.xlsx
+./Raw Data Files/Summary-57.xlsx
+./Raw Data Files/Summary-20.xlsx
+./Raw Data Files/Summary-61.xlsx
+./Raw Data Files/Summary-36.xlsx
+./Raw Data Files/Summary-50.xlsx
+./Raw Data Files/Summary-07.xlsx
+./Raw Data Files/Summary-11.xlsx
+./Raw Data Files/Summary-46.xlsx
+./Raw Data Files/Summary-31.xlsx
+./Raw Data Files/Summary-66.xlsx
+./Raw Data Files/Summary-70.xlsx
+./Raw Data Files/Summary-27.xlsx
+./Raw Data Files/Summary-26.xlsx
+./Raw Data Files/Summary-71.xlsx
+./Raw Data Files/Summary-67.xlsx
+./Raw Data Files/Summary-30.xlsx
+./Raw Data Files/Summary-47.xlsx
+./Raw Data Files/Summary-10.xlsx
+./Raw Data Files/Summary-06.xlsx
+./Raw Data Files/Summary-51.xlsx
+./Raw Data Files/Summary-44.xlsx
+./Raw Data Files/Summary-13.xlsx
+./Raw Data Files/Summary-05.xlsx
+./Raw Data Files/Summary-52.xlsx
+./Raw Data Files/Summary-29.xlsx
+./Raw Data Files/Summary-68.xlsx
+./Raw Data Files/Summary-48.xlsx
+./Raw Data Files/Summary-09.xlsx
+./Raw Data Files/Summary-25.xlsx
+./Raw Data Files/Summary-72.xlsx
+./Raw Data Files/Summary-64.xlsx
+./Raw Data Files/Summary-33.xlsx
+./Raw Data Files/Summary-32.xlsx
+./Raw Data Files/Summary-65.xlsx
+./Raw Data Files/Summary-73.xlsx
+./Raw Data Files/Summary-24.xlsx
+./Raw Data Files/Summary-08.xlsx
+./Raw Data Files/Summary-49.xlsx
+./Raw Data Files/Summary-69.xlsx
+./Raw Data Files/Summary-28.xlsx
+./Raw Data Files/Summary-53.xlsx
+./Raw Data Files/Summary-04.xlsx
+./Raw Data Files/Summary-12.xlsx
+./Raw Data Files/Summary-45.xlsx
+./Raw Data Files/Summary-19.xlsx
+./Raw Data Files/Summary-58.xlsx
+./Raw Data Files/Summary-23.xlsx
+./Raw Data Files/Summary-74.xlsx
+./Raw Data Files/Summary-62.xlsx
+./Raw Data Files/Summary-35.xlsx
+./Raw Data Files/Summary-42.xlsx
+./Raw Data Files/Summary-15.xlsx
+./Raw Data Files/Summary-03.xlsx
+./Raw Data Files/Summary-54.xlsx
+./Raw Data Files/Summary-39.xlsx
+./Raw Data Files/Summary-38.xlsx
+./Raw Data Files/Summary-55.xlsx
+./Raw Data Files/Summary-02.xlsx
+./Raw Data Files/Summary-14.xlsx
+./Raw Data Files/Summary-43.xlsx
+./Raw Data Files/Summary-34.xlsx
+./Raw Data Files/Summary-63.xlsx
+./Raw Data Files/Summary-75.xlsx
+./Raw Data Files/Summary-22.xlsx
+./Raw Data Files/Summary-59.xlsx
+./Raw Data Files/Summary-18.xlsx
+
+Files parsed: 75
+
+Getting .shape...
+ (7461, 22)
+
+Getting .head()...
+                Player S/C Pos   GP   G   A   P  +/-  PIM  P/GP EVG EVP PPG PPP SHG SHP  OTG  GWG    S    S% TOI/GP FOW%
+0           Joe Matte   R   D   68  17  15  32    0   52  0.47  --  --  --  --  --  --    0    2   --    --     --   --
+1         Rob Cimetta   L   L  103  16  16  32    0   66  0.31  14  27   2   5   0   0    0    2   81  19.8     --   --
+2  Jean-Marc Lanthier   R   R  105  16  16  32  -36   29  0.30  11  26   5   6   0   0    1    2   86  18.6     --   --
+3       Alex Faulkner   L   C  101  15  17  32  -17   15  0.32  15  30   0   2   0   0    0    4  143  10.5     --   --
+4      John Gallagher   L   D  203  14  18  32    0  151  0.16   5  16   0   0   0   0    0    2   --    --     --   --
+
+Getting .tail()...
+                 Player S/C Pos   GP   G    A    P  +/-    PIM  P/GP EVG  EVP PPG PPP SHG SHP  OTG  GWG    S    S% TOI/GP  FOW%
+95      Marc Habscheid   R   C  345  72   91  163  -16    171  0.47  48  104  17  47   7  12    0    6  538  13.4     --    --
+96       Craig Patrick   L   R  401  72   91  163 -133     61  0.41  61  134   9  27   2   2    0    3  630  11.4     --    --
+97    Erik Christensen   L   C  387  68   95  163  -24    162  0.42  48  117  20  46   0   0    0    4  688   9.9  12:58  52.9
+98  Darius Kasparaitis   L   D  863  27  136  163   39  1,379  0.19  23  143   2   9   2  11    1    2  784   3.4     --    50
+99            Adam Fox   R   D  203  24  139  163   59     72  0.80  19   90   3  69   2   4    1    7  385   6.2  22:24     0
+
+Getting .describe()...
+                  G          +/-         P/GP          OTG          GWG
+count  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000
+mean     48.807935    -2.009382     0.300495     0.593486     6.973596
+std      90.376002    50.052797     0.240286     1.702940    13.465574
+min       0.000000  -257.000000     0.000000     0.000000     0.000000
+25%       1.000000   -14.000000     0.130000     0.000000     0.000000
+50%      10.000000    -1.000000     0.250000     0.000000     1.000000
+75%      53.000000     0.000000     0.430000     0.000000     7.000000
+max     894.000000   722.000000     1.920000    24.000000   135.000000
+
+Getting .info()...
+<class 'pandas.core.frame.DataFrame'>
+Int64Index: 7461 entries, 0 to 99
+Data columns (total 22 columns):
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   Player  7461 non-null   object
+ 1   S/C     7461 non-null   object
+ 2   Pos     7461 non-null   object
+ 3   GP      7461 non-null   object
+ 4   G       7461 non-null   int64
+ 5   A       7461 non-null   object
+ 6   P       7461 non-null   object
+ 7   +/-     7461 non-null   int64
+ 8   PIM     7461 non-null   object
+ 9   P/GP    7461 non-null   float64
+ 10  EVG     7461 non-null   object
+ 11  EVP     7461 non-null   object
+ 12  PPG     7461 non-null   object
+ 13  PPP     7461 non-null   object
+ 14  SHG     7461 non-null   object
+ 15  SHP     7461 non-null   object
+ 16  OTG     7461 non-null   int64
+ 17  GWG     7461 non-null   int64
+ 18  S       7461 non-null   object
+ 19  S%      7461 non-null   object
+ 20  TOI/GP  7461 non-null   object
+ 21  FOW%    7461 non-null   object
+dtypes: float64(1), int64(4), object(17)
+memory usage: 1.3+ MB
+None
+
+Checking format of 4-digit values...
+           Player S/C Pos     GP    G      A      P  +/-  PIM  P/GP  EVG    EVP  PPG  PPP SHG  SHP  OTG  GWG      S    S% TOI/GP FOW%
+0  Wayne Gretzky   L   C  1,487  894  1,963  2,857  520  577  1.92  617  1,818  204  890  73  149    2   91  5,088  17.6     --   49
+
+Replacing (\d),(\d)(\d)(\d) with \1\2\3\4...
+
+Checking format of 4-digit values...
+           Player S/C Pos    GP    G     A     P  +/-  PIM  P/GP  EVG   EVP  PPG  PPP SHG  SHP  OTG  GWG     S    S% TOI/GP FOW%
+0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890  73  149    2   91  5088  17.6     --   49
+
+Sorting by P, G, A...
+
+Getting .shape...
+ (7461, 23)
+
+Getting .head()...
+    index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP  EVG   EVP  PPG  PPP SHG  SHP  OTG  GWG     S    S% TOI/GP  FOW%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520   577  1.92  617  1818  204  890  73  149    2   91  5088  17.6     --    49
+1      1   Jaromir Jagr   L   R  1733  766  1155  1921  322  1167  1.11  538  1296  217  610  11   15   19  135  5637  13.6     --  24.5
+2      2   Mark Messier   L   C  1756  694  1193  1887  211  1912  1.07  452  1162  179  581  63  144    8   92  4221  16.4     --  54.7
+3      3    Gordie Howe   R   R  1767  801  1049  1850  160  1685  1.05  566  1250  211  564  24   36    0  121  3803    --     --    --
+4      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349  1040  188  727  12   31    4   79  3756  14.6     --  54.8
+
+Getting .tail()...
+       index             Player S/C Pos GP  G  A  P  +/- PIM  P/GP EVG EVP PPG PPP SHG SHP  OTG  GWG  S  S% TOI/GP  FOW%
+7456     56  Brinson Pasichnuk   L   D  4  0  0  0   -1   2   0.0   0   0   0   0   0   0    0    0  3   0  11:37    --
+7457     57        Jeff Malott   L   L  1  0  0  0    0   2   0.0   0   0   0   0   0   0    0    0  0  --   4:06    --
+7458     58         Josh Dunne   L   C  6  0  0  0   -1   4   0.0   0   0   0   0   0   0    0    0  7   0  10:23  17.7
+7459     59       Walker Duehr   R   R  1  0  0  0    0   0   0.0   0   0   0   0   0   0    0    0  0  --   8:47    --
+7460     60    Kirill Semyonov   L   C  3  0  0  0   -2   0   0.0   0   0   0   0   0   0    0    0  1   0  10:02    50
+
+Getting .describe()...
+              index            G          +/-         P/GP          OTG          GWG
+count  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000
+mean     49.340571    48.807935    -2.009382     0.300495     0.593486     6.973596
+std      28.847304    90.376002    50.052797     0.240286     1.702940    13.465574
+min       0.000000     0.000000  -257.000000     0.000000     0.000000     0.000000
+25%      24.000000     1.000000   -14.000000     0.130000     0.000000     0.000000
+50%      49.000000    10.000000    -1.000000     0.250000     0.000000     1.000000
+75%      74.000000    53.000000     0.000000     0.430000     0.000000     7.000000
+max      99.000000   894.000000   722.000000     1.920000    24.000000   135.000000
+
+Getting .info()...
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 7461 entries, 0 to 7460
+Data columns (total 23 columns):
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   index   7461 non-null   int64
+ 1   Player  7461 non-null   object
+ 2   S/C     7461 non-null   object
+ 3   Pos     7461 non-null   object
+ 4   GP      7461 non-null   object
+ 5   G       7461 non-null   int64
+ 6   A       7461 non-null   object
+ 7   P       7461 non-null   object
+ 8   +/-     7461 non-null   int64
+ 9   PIM     7461 non-null   object
+ 10  P/GP    7461 non-null   float64
+ 11  EVG     7461 non-null   object
+ 12  EVP     7461 non-null   object
+ 13  PPG     7461 non-null   object
+ 14  PPP     7461 non-null   object
+ 15  SHG     7461 non-null   object
+ 16  SHP     7461 non-null   object
+ 17  OTG     7461 non-null   int64
+ 18  GWG     7461 non-null   int64
+ 19  S       7461 non-null   object
+ 20  S%      7461 non-null   object
+ 21  TOI/GP  7461 non-null   object
+ 22  FOW%    7461 non-null   object
+dtypes: float64(1), int64(5), object(17)
+memory usage: 1.3+ MB
+None
+
+Checking for duplicates...
+
+Getting duplicates...
+ Empty DataFrame
+Columns: [index, Player, S/C, Pos, GP, G, A, P, +/-, PIM, P/GP, EVG, EVP, PPG, PPP, SHG, SHP, OTG, GWG, S, S%, TOI/GP, FOW%]
+Index: []
+
+Replacing missing entries (--) with NaN...
+
+Getting df_nhl.head()...
+    index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP    EVG   EVP    PPG    PPP   SHG    SHP  OTG  GWG     S    S% TOI/GP  FOW%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520   577  1.92  617.0  1818  204.0  890.0  73.0  149.0    2   91  5088  17.6    NaN  49.0
+1      1   Jaromir Jagr   L   R  1733  766  1155  1921  322  1167  1.11  538.0  1296  217.0  610.0  11.0   15.0   19  135  5637  13.6    NaN  24.5
+2      2   Mark Messier   L   C  1756  694  1193  1887  211  1912  1.07  452.0  1162  179.0  581.0  63.0  144.0    8   92  4221  16.4    NaN  54.7
+3      3    Gordie Howe   R   R  1767  801  1049  1850  160  1685  1.05  566.0  1250  211.0  564.0  24.0   36.0    0  121  3803   NaN    NaN   NaN
+4      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349.0  1040  188.0  727.0  12.0   31.0    4   79  3756  14.6    NaN  54.8
+
+Getting missing_count...
+ index        0
+Player       0
+S/C         74
+Pos          0
+GP           0
+G            0
+A            0
+P            0
++/-          0
+PIM          0
+P/GP         0
+EVG        272
+EVP        272
+PPG        272
+PPP        272
+SHG        272
+SHP        272
+OTG          0
+GWG          0
+S         1057
+S%        1461
+TOI/GP    4321
+FOW%      4680
+dtype: int64
+
+Imputing S/C with mode: 'L'...
+
+Imputing EVG with mean: '36.007372374460985'...
+
+Imputing EVP with mean: '94.09514536096815'...
+
+Imputing PPG with mean: '11.648629851161497'...
+
+Imputing PPP with mean: '33.25441646960634'...
+
+Imputing SHG with mean: '1.598970649603561'...
+
+Imputing SHP with mean: '3.24634858812074'...
+
+Imputing S with mean: '497.60805746408494'...
+
+Imputing S% with mean: '8.098416666666697'...
+
+Dropping TOI/GP and FOW% columns...
+
+Getting .shape...
+ (7461, 21)
+
+Getting .head()...
+    index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP    EVG     EVP    PPG    PPP   SHG    SHP  OTG  GWG       S         S%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520   577  1.92  617.0  1818.0  204.0  890.0  73.0  149.0    2   91  5088.0  17.600000
+1      1   Jaromir Jagr   L   R  1733  766  1155  1921  322  1167  1.11  538.0  1296.0  217.0  610.0  11.0   15.0   19  135  5637.0  13.600000
+2      2   Mark Messier   L   C  1756  694  1193  1887  211  1912  1.07  452.0  1162.0  179.0  581.0  63.0  144.0    8   92  4221.0  16.400000
+3      3    Gordie Howe   R   R  1767  801  1049  1850  160  1685  1.05  566.0  1250.0  211.0  564.0  24.0   36.0    0  121  3803.0   8.098417
+4      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349.0  1040.0  188.0  727.0  12.0   31.0    4   79  3756.0  14.600000
+
+Getting .tail()...
+       index             Player S/C Pos GP  G  A  P  +/- PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG    S        S%
+7456     56  Brinson Pasichnuk   L   D  4  0  0  0   -1   2   0.0  0.0  0.0  0.0  0.0  0.0  0.0    0    0  3.0  0.000000
+7457     57        Jeff Malott   L   L  1  0  0  0    0   2   0.0  0.0  0.0  0.0  0.0  0.0  0.0    0    0  0.0  8.098417
+7458     58         Josh Dunne   L   C  6  0  0  0   -1   4   0.0  0.0  0.0  0.0  0.0  0.0  0.0    0    0  7.0  0.000000
+7459     59       Walker Duehr   R   R  1  0  0  0    0   0   0.0  0.0  0.0  0.0  0.0  0.0  0.0    0    0  0.0  8.098417
+7460     60    Kirill Semyonov   L   C  3  0  0  0   -2   0   0.0  0.0  0.0  0.0  0.0  0.0  0.0    0    0  1.0  0.000000
+
+Getting .describe()...
+              index            G          +/-         P/GP          EVG          EVP          PPG          PPP          SHG          SHP          OTG          GWG            S           S%
+count  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000
+mean     49.340571    48.807935    -2.009382     0.300495    36.007372    94.095145    11.648630    33.254416     1.598971     3.246349     0.593486     6.973596   497.608057     8.098417
+std      28.847304    90.376002    50.052797     0.240286    61.805525   147.620471    26.892534    74.652991     4.122534     7.390476     1.702940    13.465574   698.925321     6.877763
+min       0.000000     0.000000  -257.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000
+25%      24.000000     1.000000   -14.000000     0.130000     1.000000     3.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000    28.000000     4.400000
+50%      49.000000    10.000000    -1.000000     0.250000     9.000000    29.000000     1.000000     3.000000     0.000000     0.000000     0.000000     1.000000   256.000000     8.098417
+75%      74.000000    53.000000     0.000000     0.430000    39.000000   118.000000    11.000000    33.000000     1.000000     3.246349     0.000000     7.000000   554.000000    10.700000
+max      99.000000   894.000000   722.000000     1.920000   617.000000  1818.000000   285.000000   890.000000    73.000000   149.000000    24.000000   135.000000  6209.000000   100.000000
+
+Getting .info()...
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 7461 entries, 0 to 7460
+Data columns (total 21 columns):
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   index   7461 non-null   int64
+ 1   Player  7461 non-null   object
+ 2   S/C     7461 non-null   object
+ 3   Pos     7461 non-null   object
+ 4   GP      7461 non-null   object
+ 5   G       7461 non-null   int64
+ 6   A       7461 non-null   object
+ 7   P       7461 non-null   object
+ 8   +/-     7461 non-null   int64
+ 9   PIM     7461 non-null   object
+ 10  P/GP    7461 non-null   float64
+ 11  EVG     7461 non-null   float64
+ 12  EVP     7461 non-null   float64
+ 13  PPG     7461 non-null   float64
+ 14  PPP     7461 non-null   float64
+ 15  SHG     7461 non-null   float64
+ 16  SHP     7461 non-null   float64
+ 17  OTG     7461 non-null   int64
+ 18  GWG     7461 non-null   int64
+ 19  S       7461 non-null   float64
+ 20  S%      7461 non-null   float64
+dtypes: float64(9), int64(5), object(7)
+memory usage: 1.2+ MB
+None
+
+Converting data types...
+
+Getting .shape...
+ (7461, 21)
+
+Getting .head()...
+    index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520   577  1.92  617  1818  204  890   73  149    2   91  5088  17.6
+1      1   Jaromir Jagr   L   R  1733  766  1155  1921  322  1167  1.11  538  1296  217  610   11   15   19  135  5637  13.6
+2      2   Mark Messier   L   C  1756  694  1193  1887  211  1912  1.07  452  1162  179  581   63  144    8   92  4221  16.4
+3      3    Gordie Howe   R   R  1767  801  1049  1850  160  1685  1.05  566  1250  211  564   24   36    0  121  3803   8.1
+4      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349  1040  188  727   12   31    4   79  3756  14.6
+
+Getting .tail()...
+       index             Player S/C Pos  GP  G  A  P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG  S   S%
+7456     56  Brinson Pasichnuk   L   D   4  0  0  0   -1    2   0.0    0    0    0    0    0    0    0    0  3  0.0
+7457     57        Jeff Malott   L   L   1  0  0  0    0    2   0.0    0    0    0    0    0    0    0    0  0  8.1
+7458     58         Josh Dunne   L   C   6  0  0  0   -1    4   0.0    0    0    0    0    0    0    0    0  7  0.0
+7459     59       Walker Duehr   R   R   1  0  0  0    0    0   0.0    0    0    0    0    0    0    0    0  0  8.1
+7460     60    Kirill Semyonov   L   C   3  0  0  0   -2    0   0.0    0    0    0    0    0    0    0    0  1  0.0
+
+Getting .describe()...
+              index           GP            G            A            P          +/-          PIM         P/GP          EVG          EVP          PPG          PPP          SHG          SHP          OTG          GWG            S           S%
+count  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000
+mean     49.340571   275.735692    48.807935    79.347675   128.155609    -2.009382   226.903096     0.300495    36.007104    94.091677    11.624983    33.245141     1.577134     3.237368     0.593486     6.973596   497.521914     8.098727
+std      28.847304   333.120972    90.376002   137.938019   223.013756    50.052797   385.208034     0.240286    61.805525   147.620472    26.892809    74.653007     4.124062     7.390620     1.702940    13.465574   698.925353     6.877763
+min       0.000000     1.000000     0.000000     0.000000     0.000000  -257.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000
+25%      24.000000    20.000000     1.000000     2.000000     3.000000   -14.000000     8.000000     0.130000     1.000000     3.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000    28.000000     4.400000
+50%      49.000000   119.000000    10.000000    18.000000    29.000000    -1.000000    60.000000     0.250000     9.000000    29.000000     1.000000     3.000000     0.000000     0.000000     0.000000     1.000000   256.000000     8.100000
+75%      74.000000   453.000000    53.000000    97.000000   156.000000     0.000000   276.000000     0.430000    39.000000   118.000000    11.000000    33.000000     1.000000     3.000000     0.000000     7.000000   554.000000    10.700000
+max      99.000000  1779.000000   894.000000  1963.000000  2857.000000   722.000000  3971.000000     1.920000   617.000000  1818.000000   285.000000   890.000000    73.000000   149.000000    24.000000   135.000000  6209.000000   100.000000
+
+Getting .info()...
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 7461 entries, 0 to 7460
+Data columns (total 21 columns):
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   index   7461 non-null   int64
+ 1   Player  7461 non-null   string
+ 2   S/C     7461 non-null   string
+ 3   Pos     7461 non-null   string
+ 4   GP      7461 non-null   int64
+ 5   G       7461 non-null   int64
+ 6   A       7461 non-null   int64
+ 7   P       7461 non-null   int64
+ 8   +/-     7461 non-null   int64
+ 9   PIM     7461 non-null   int64
+ 10  P/GP    7461 non-null   float64
+ 11  EVG     7461 non-null   int64
+ 12  EVP     7461 non-null   int64
+ 13  PPG     7461 non-null   int64
+ 14  PPP     7461 non-null   int64
+ 15  SHG     7461 non-null   int64
+ 16  SHP     7461 non-null   int64
+ 17  OTG     7461 non-null   int64
+ 18  GWG     7461 non-null   int64
+ 19  S       7461 non-null   int64
+ 20  S%      7461 non-null   float64
+dtypes: float64(2), int64(16), string(3)
+memory usage: 1.2 MB
+None
+
+Getting df_nhl.describe(include='all')...
+               index          Player   S/C   Pos           GP            G            A            P          +/-          PIM         P/GP          EVG          EVP          PPG          PPP          SHG          SHP          OTG          GWG            S           S%
+count   7461.000000            7461  7461  7461  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000  7461.000000
+unique          NaN            7413     2     4          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN
+top             NaN  Mikko Lehtonen     L     D          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN
+freq            NaN               3  4746  2434          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN
+mean      49.340571             NaN   NaN   NaN   275.735692    48.807935    79.347675   128.155609    -2.009382   226.903096     0.300495    36.007104    94.091677    11.624983    33.245141     1.577134     3.237368     0.593486     6.973596   497.521914     8.098727
+std       28.847304             NaN   NaN   NaN   333.120972    90.376002   137.938019   223.013756    50.052797   385.208034     0.240286    61.805525   147.620472    26.892809    74.653007     4.124062     7.390620     1.702940    13.465574   698.925353     6.877763
+min        0.000000             NaN   NaN   NaN     1.000000     0.000000     0.000000     0.000000  -257.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000
+25%       24.000000             NaN   NaN   NaN    20.000000     1.000000     2.000000     3.000000   -14.000000     8.000000     0.130000     1.000000     3.000000     0.000000     0.000000     0.000000     0.000000     0.000000     0.000000    28.000000     4.400000
+50%       49.000000             NaN   NaN   NaN   119.000000    10.000000    18.000000    29.000000    -1.000000    60.000000     0.250000     9.000000    29.000000     1.000000     3.000000     0.000000     0.000000     0.000000     1.000000   256.000000     8.100000
+75%       74.000000             NaN   NaN   NaN   453.000000    53.000000    97.000000   156.000000     0.000000   276.000000     0.430000    39.000000   118.000000    11.000000    33.000000     1.000000     3.000000     0.000000     7.000000   554.000000    10.700000
+max       99.000000             NaN   NaN   NaN  1779.000000   894.000000  1963.000000  2857.000000   722.000000  3971.000000     1.920000   617.000000  1818.000000   285.000000   890.000000    73.000000   149.000000    24.000000   135.000000  6209.000000   100.000000
+
+Getting player with most GP...
+     index           Player S/C Pos    GP    G    A     P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+49     49  Patrick Marleau   L   C  1779  566  631  1197  -27  527  0.67  377  761  172  415   17   21   11  109  4333  13.1
+
+Getting player with most G...
+    index         Player S/C Pos    GP    G     A     P  +/-  PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890   73  149    2   91  5088  17.6
+
+Getting player with most A...
+    index         Player S/C Pos    GP    G     A     P  +/-  PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890   73  149    2   91  5088  17.6
+
+Getting player with most P...
+    index         Player S/C Pos    GP    G     A     P  +/-  PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890   73  149    2   91  5088  17.6
+
+Getting player with most PIM...
+      index         Player S/C Pos   GP    G    A    P  +/-   PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+497     97  Dave Williams   L   L  962  241  272  513  -41  3971  0.53  190  406   49  103    2    4    1   25  1740  13.9
+
+Getting player with most P/GP...
+    index         Player S/C Pos    GP    G     A     P  +/-  PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890   73  149    2   91  5088  17.6
+
+Getting player with most EVG...
+    index         Player S/C Pos    GP    G     A     P  +/-  PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890   73  149    2   91  5088  17.6
+
+Getting player with most EVP...
+    index         Player S/C Pos    GP    G     A     P  +/-  PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890   73  149    2   91  5088  17.6
+
+Getting player with most PPG...
+     index         Player S/C Pos    GP    G    A     P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+19     19  Alex Ovechkin   R   L  1274  780  630  1410   83  749  1.11  490  876  285  528    5    6   24  121  6061  12.9
+
+Getting player with most PPP...
+    index         Player S/C Pos    GP    G     A     P  +/-  PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890   73  149    2   91  5088  17.6
+
+Getting player with most SHG...
+    index         Player S/C Pos    GP    G     A     P  +/-  PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890   73  149    2   91  5088  17.6
+
+Getting player with most SHP...
+    index         Player S/C Pos    GP    G     A     P  +/-  PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520  577  1.92  617  1818  204  890   73  149    2   91  5088  17.6
+
+Getting player with most OTG...
+     index         Player S/C Pos    GP    G    A     P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+19     19  Alex Ovechkin   R   L  1274  780  630  1410   83  749  1.11  490  876  285  528    5    6   24  121  6061  12.9
+
+Getting player with most GWG...
+    index        Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+1      1  Jaromir Jagr   L   R  1733  766  1155  1921  322  1167  1.11  538  1296  217  610   11   15   19  135  5637  13.6
+
+Getting player with most S...
+     index       Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S   S%
+10     10  Ray Bourque   L   D  1612  410  1169  1579  527  1141  0.98  221  774  173  761   16   44    5   60  6209  6.6
+
+Getting player with highest S% (min. 100 shots)...
+       index     Player S/C Pos   GP   G   A   P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG    S    S%
+3073     73  Mal Davis   L   L  100  31  22  53   -5   34  0.53   20   30   11   23    0    0    0    8  125  24.8
+
+Getting player with highest +/-...
+      index          Player S/C Pos    GP    G    A    P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S   S%
+104      4  Larry Robinson   L   D  1384  208  750  958  722  793  0.69  139  639   66  309    3   10    0   29  2332  8.9
+
+Getting player with lowest +/-...
+       index       Player S/C Pos   GP   G    A    P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG    S   S%
+2089     89  Bob Stewart   L   D  575  27  101  128 -257  809  0.22   23  113    4   10    0    5    0    1  552  4.9
+
+Getting player Mario Lemieux...
+    index         Player S/C Pos   GP    G     A     P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+7      7  Mario Lemieux   R   C  915  690  1033  1723  114  834  1.88  405  951  236  701   49   71   11   74  3633  19.0
+
+Getting player Mike Bossy...
+     index      Player S/C Pos   GP    G    A     P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+60     60  Mike Bossy   R   R  752  573  553  1126  380  210   1.5  385  739  180  378    8    9    4   80  2707  21.2
+
+Getting player Gordie Howe...
+    index       Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S   S%
+3      3  Gordie Howe   R   R  1767  801  1049  1850  160  1685  1.05  566  1250  211  564   24   36    0  121  3803  8.1
+
+Getting player Sidney Crosby...
+     index         Player S/C Pos    GP    G    A     P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+21     21  Sidney Crosby   L   C  1108  517  892  1409  202  731  1.27  360  888  153  510    4   11   19   78  3539  14.6
+
+Getting player Evgeni Malkin...
+     index         Player S/C Pos   GP    G    A     P  +/-   PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+56     56  Evgeni Malkin   L   C  981  444  702  1146   59  1008  1.17  278  703  162  438    4    5   13   78  3246  13.7
+
+Getting player Nicklas Lidstrom...
+     index            Player S/C Pos    GP    G    A     P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S   S%
+57     57  Nicklas Lidstrom   L   D  1564  264  878  1142  450  514  0.73  122  512  132  590   10   40    4   35  3875  6.8
+
+Getting player Erik Karlsson...
+      index         Player S/C Pos   GP    G    A    P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S   S%
+282     82  Erik Karlsson   R   D  838  153  507  660  -77  386  0.79  116  407   35  246    2    7    7   29  2361  6.5
+
+Getting player Cale Makar...
+       index      Player S/C Pos   GP   G    A    P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG    S    S%
+1680     80  Cale Makar   R   D  178  48  132  180   77   50  1.01   31  105   17   75    0    0    3   13  465  10.3
+
+Getting player Connor McDavid...
+      index          Player S/C Pos   GP    G    A    P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+253     53  Connor McDavid   L   C  487  239  458  697   92  183  1.43  186  470   50  218    3    9   13   53  1596  15.0
+
+Getting player Auston Matthews...
+      index           Player S/C Pos   GP    G    A    P  +/-  PIM  P/GP  EVG  EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%
+599     99  Auston Matthews   L   C  407  259  198  457   78   74  1.12  196  336   63  121    0    0    9   45  1577  16.4
+
+Compiling dataframe from Bio Info report...
+./Raw Data Files/Bio Info-01.xlsx
+
+Files parsed: 1
+
+Getting df_bio_top_100.head()...
+           Player S/C Pos         DOB        Birth City S/P Ctry Ntnlty  Ht   Wt Draft Yr Round Overall  1st Season HOF     GP    G      A      P
+0  Wayne Gretzky   L   C  1961-01-26         Brantford  ON  CAN    CAN  72  185       --    --      --    19791980   Y  1,487  894  1,963  2,857
+1   Jaromir Jagr   L   R  1972-02-15            Kladno  --  CZE    CZE  75  230     1990     1       5    19901991   N  1,733  766  1,155  1,921
+2   Mark Messier   L   C  1961-01-18          Edmonton  AB  CAN    CAN  74  211     1979     3      48    19791980   Y  1,756  694  1,193  1,887
+3    Gordie Howe   R   R  1928-03-31            Floral  SK  CAN    CAN  72  205       --    --      --    19461947   Y  1,767  801  1,049  1,850
+4    Ron Francis   L   C  1963-03-01  Sault Ste. Marie  ON  CAN    CAN  75  200     1981     1       4    19811982   Y  1,731  549  1,249  1,798
+
+Getting df_nhl_top_100_extended.head()...
+            key_0  index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%         DOB        Birth City S/P Ctry Ntnlty  Ht   Wt Draft Yr Round Overall  1st Season HOF
+0  Wayne Gretzky      0  Wayne Gretzky   L   C  1487  894  1963  2857  520   577  1.92  617  1818  204  890   73  149    2   91  5088  17.6  1961-01-26         Brantford  ON  CAN    CAN  72  185       --    --      --    19791980   Y
+1   Jaromir Jagr      1   Jaromir Jagr   L   R  1733  766  1155  1921  322  1167  1.11  538  1296  217  610   11   15   19  135  5637  13.6  1972-02-15            Kladno  --  CZE    CZE  75  230     1990     1       5    19901991   N
+2   Mark Messier      2   Mark Messier   L   C  1756  694  1193  1887  211  1912  1.07  452  1162  179  581   63  144    8   92  4221  16.4  1961-01-18          Edmonton  AB  CAN    CAN  74  211     1979     3      48    19791980   Y
+3    Gordie Howe      3    Gordie Howe   R   R  1767  801  1049  1850  160  1685  1.05  566  1250  211  564   24   36    0  121  3803   8.1  1928-03-31            Floral  SK  CAN    CAN  72  205       --    --      --    19461947   Y
+4    Ron Francis      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349  1040  188  727   12   31    4   79  3756  14.6  1963-03-01  Sault Ste. Marie  ON  CAN    CAN  75  200     1981     1       4    19811982   Y
+
+Getting df_nhl_top_100_extended.describe(include='all'').T...
+             count unique            top  freq         mean           std         min         25%         50%         75%         max
+index       100.0    NaN            NaN   NaN         49.5     29.011492         0.0       24.75        49.5       74.25        99.0
+Player        100    100  Wayne Gretzky     1          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+S/C           100      2              L    60          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+Pos           100      4              C    51          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+GP          100.0    NaN            NaN   NaN      1279.81    219.817909       752.0      1111.0      1257.5      1418.0      1779.0
+G           100.0    NaN            NaN   NaN       491.97    132.946747       240.0       401.5       482.0      561.75       894.0
+A           100.0    NaN            NaN   NaN        764.3    212.514836       491.0       616.5       719.5      855.25      1963.0
+P           100.0    NaN            NaN   NaN      1256.27    281.480532       972.0     1044.75      1190.5     1378.25      2857.0
++/-         100.0    NaN            NaN   NaN       124.75    148.589352      -131.0       24.75       100.0      201.25       527.0
+PIM         100.0    NaN            NaN   NaN        913.1    556.876235       117.0      530.75       825.0      1126.0      3565.0
+P/GP        100.0    NaN            NaN   NaN       0.9919      0.195002        0.67        0.87        0.97        1.07        1.92
+EVG         100.0    NaN            NaN   NaN       321.39     90.481528       122.0      267.25       311.5       375.0       617.0
+EVP         100.0    NaN            NaN   NaN       786.35    184.790429       464.0      665.75       758.5      877.25      1818.0
+PPG         100.0    NaN            NaN   NaN        154.9     48.411848        47.0       122.0       150.0       182.5       285.0
+PPP         100.0    NaN            NaN   NaN       441.22     123.79876       162.0       365.5       419.5      510.75       890.0
+SHG         100.0    NaN            NaN   NaN        15.68     13.173957         0.0         7.0        12.0        20.5        73.0
+SHP         100.0    NaN            NaN   NaN         28.7     25.357046         0.0        10.0        23.0       40.75       149.0
+OTG         100.0    NaN            NaN   NaN         5.62      5.096602         0.0         1.0         5.0         9.0        24.0
+GWG         100.0    NaN            NaN   NaN        71.09     22.179295        34.0       55.75        70.5        86.0       135.0
+S           100.0    NaN            NaN   NaN      3550.64    880.071181      1856.0      2956.5      3457.5     3949.75      6209.0
+S%          100.0    NaN            NaN   NaN       13.382      3.330374         6.6       11.65        13.6      15.825        21.2
+DOB           100     99     1980-09-26     2          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+Birth City    100     82       Montréal     7          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+S/P           100     14             ON    31          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+Ctry          100      8            CAN    72          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+Ntnlty        100      8            CAN    71          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+Ht          100.0    NaN            NaN   NaN        72.18      2.133807        66.0        71.0        72.0        73.0        77.0
+Wt          100.0    NaN            NaN   NaN       197.84     16.140619       160.0       185.0       195.0       207.5       238.0
+Draft Yr      100     35             --    20          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+Round       100.0   11.0            1.0  56.0          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+Overall       100     41             --    20          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+1st Season  100.0    NaN            NaN   NaN  19826383.44  144399.72556  19461947.0  19771978.0  19821983.0  19911992.0  20082009.0
+HOF           100      2              Y    63          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+
+Getting type(X_single_feature)...
+ <class 'numpy.ndarray'>
+
+Getting type(X_all_features)...
+ <class 'numpy.ndarray'>
+
+Getting type(y)...
+ <class 'numpy.ndarray'>
+
+CV MSE: 6590.631737662596
+Train MSE: 6541.544892502052
+Test MSE: 5053.990206303157
+RMSE_CV: 81.18270590256644
+RMSE_train: 80.87981758450034
+RMSE_test: 71.09142146773517
+
+CV MSE: 2465.5218260945253
+Train MSE: 2446.7869807578286
+Test MSE: 1687.7888702068253
+RMSE_CV: 49.654021247976736
+RMSE_train: 49.46500763931841
+RMSE_test: 41.08270767861857
+
+RMSE_test_rf: 46.084444631038274
+
+Getting RandomForestRegressor hyperparamters...
+ {'bootstrap': True, 'ccp_alpha': 0.0, 'criterion': 'squared_error', 'max_depth': None, 'max_features': 1.0, 'max_leaf_nodes': None, 'max_samples': None, 'min_impurity_decrease': 0.0, 'min_samples_leaf': 0.12, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'n_estimators': 400, 'n_jobs': None, 'oob_score': False, 'random_state': 1, 'verbose': 0, 'warm_start': False}
+
+Tuning hyperparameters with GridSearchCV...
+
+Fitting 3 folds for each of 36 candidates, totalling 108 fits
+Getting best hyperparameters...
+ {'max_depth': 4, 'max_features': 'log2', 'min_samples_leaf': 0.1, 'n_estimators': 500}
+
+Getting best model...
+ RandomForestRegressor(max_depth=4, max_features='log2', min_samples_leaf=0.1,
+                      n_estimators=500, random_state=1)
+
+Predicting test set labels with best model...
+
+RMSE_test_rf_tuned: 38.69701056342926
+
+
+Process finished with exit code 0

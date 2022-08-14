@@ -528,11 +528,41 @@ the EDA scatter plots which follow.
 
 
 #### Scatter Plot of Points-Goals-Assists vs. Games Played
+A scatter plot of Points-Goals-Assist vs Games Played is generated using the Seaborn plotting library.
+
+```Python
+# Set plot theme.
+sns.set()
+
+# Generate figure for subplotsScatter plots of points/goals/assists vs. games played, using plt.
+fig1, axs = plt.subplots(3, 1)
+fig1.suptitle('Career Points/Goals/Assists vs. Games Played - Regular Season')
+
+# Plot Points vs. Games Played.
+sns.scatterplot(x=df_nhl['GP'], y=df_nhl['P'], color='b', alpha=0.5, label='Points', ax=axs[0])
+axs[0].set(xlabel='Games Played')
+axs[0].set(ylabel='Count')
+axs[0].set_yticks(range(0, 3500, 500))
+axs[0].legend(loc='upper left')
+axs[0].text(1487, 2857, "Wayne Gretzky")
+axs[0].text(1779, 1197, "Patrick Marleau")
+axs[0].text(915, 1723, "Mario Lemieux")
+axs[0].text(752, 1126, "Mike Bossy")
+axs[0].text(1274, 1410, "Alex Ovechkin")
+axs[0].text(1108, 1409, "Sidney Crosby")
+```
+
 ![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P-G-A%20vs%20GP_scatterplot_sns_annotated.png)
-* Annotate for stand-out players defined above.
-  * List of tuples with players' (GP, P) for annotation.
-* Show retired vs. active, using marker type. Left as exercise. Requires supplemental date such Bio report available
-on NHL.com.
+* The top plot shows points vs. games played.
+* The middle plot shows goals vs. games played.
+* The bottom plot shows assists vs. games played.
+* Plots are annotated with outstanding players in each field.
+* The player Wayne Gretzky (retired) can be seen to hold a clear lead in all three categories. With lead in points 
+likely to remain unsurpassed by any player in the dataset.
+* Patrick Marleau (retired) holds the most games played.
+* The lead in goals is within reach by still active player Alex Ovechkin, having a 114 goal deficit to Wayne Gretzky in
+213 fewer games played, requiring 186 games (2.26 full seasons) at current goal scoring pace of 0.61 goals per game
+played. Wayne Gretzky's career goals per game pace is calculated to be 0.60.
 
 #### Box Plot of Points vs. Player Position
 ![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P%20vs%20Pos_boxplot.png)

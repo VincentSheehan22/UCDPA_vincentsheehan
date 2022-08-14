@@ -142,19 +142,16 @@ if __name__ == '__main__':
     print(f"Getting player {next(notable_players_2_iter)}...\n",
           df_nhl.loc[df_nhl["Player"] == next(notable_players_2_iter)], "\n")
 
-    # Plot Data for EDA.
+    # Plot data for EDA.
     # Set plot theme.
     sns.set()
 
-    # Define features of interest.
-    games_played = df_nhl['GP']
-    points = df_nhl['P']
-
-    # Scatter plots of points/goals/assists vs. games played, using plt.
+    # Generate figure for subplots.
     fig1, axs = plt.subplots(3, 1)
     fig1.suptitle('Career Points/Goals/Assists vs. Games Played - Regular Season')
 
-    sns.scatterplot(x=games_played, y=points, color='b', alpha=0.5, label='Points', ax=axs[0])
+    # Plot Points vs. Games Played on subplot 0.
+    sns.scatterplot(x=df_nhl['GP'], y=df_nhl['P'], color='b', alpha=0.5, label='Points', ax=axs[0])
     axs[0].set(xlabel='Games Played')
     axs[0].set(ylabel='Count')
     axs[0].set_yticks(range(0, 3500, 500))
@@ -166,7 +163,8 @@ if __name__ == '__main__':
     axs[0].text(1274, 1410, "Alex Ovechkin")
     axs[0].text(1108, 1409, "Sidney Crosby")
 
-    sns.scatterplot(x=games_played, y=df_nhl['G'], color='r', alpha=0.5, label='Goals', ax=axs[1])
+    # Plot Goals vs. Games Played on subplot 1.
+    sns.scatterplot(x=df_nhl['GP'], y=df_nhl['G'], color='r', alpha=0.5, label='Goals', ax=axs[1])
     axs[1].set(xlabel='Games Played')
     axs[1].set(ylabel='Count')
     axs[1].set_yticks(range(0, 3500, 500))
@@ -175,7 +173,8 @@ if __name__ == '__main__':
     axs[1].text(1767, 801, "Gordie Howe")
     axs[1].text(1274, 780, "Alex Ovechkin")
 
-    sns.scatterplot(x=games_played, y=df_nhl['A'], color='g', alpha=0.5, label='Assists', ax=axs[2])
+    # Plot Assists vs. Games Played on subplot 2.
+    sns.scatterplot(x=df_nhl['GP'], y=df_nhl['A'], color='g', alpha=0.5, label='Assists', ax=axs[2])
     axs[2].set(xlabel='Games Played')
     axs[2].set(ylabel='Count')
     axs[2].set_yticks(range(0, 3500, 500))

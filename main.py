@@ -186,7 +186,7 @@ if __name__ == '__main__':
 
     # Drop target from X.
     X_all_features = df_nhl.drop(target, axis=1)
-    
+
     # Drop non-numeric features from X.
     X_all_features = X_all_features.drop(["Player", "S/C", "Pos"], axis=1)
 

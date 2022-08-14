@@ -210,6 +210,6 @@ if __name__ == '__main__':
     implement_decision_tree(X_all_features, y, SEED)
 
     # Implement ensembling with RandomForestRegressor. Target string is specified as argument for plotting purposes.
-    implement_random_forest(X_all_features, y, SEED, target)
+    rf = implement_random_forest(X_all_features, y, SEED, target)
 
     # Hyperparameter tuning

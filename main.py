@@ -199,7 +199,7 @@ if __name__ == '__main__':
     y = y.reshape(-1, 1)
     X_single_feature = X_single_feature.reshape(-1, 1)
 
-    # Implement decision tree with single featur, and all features.
+    # Implement decision tree with single feature, and all features in feature matrix X.
     implement_decision_tree(X_single_feature, y, SEED)
     implement_decision_tree(X_all_features, y, SEED)
 

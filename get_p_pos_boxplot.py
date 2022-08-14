@@ -26,4 +26,5 @@ def get_p_pos_boxplot(df_nhl):
     axs[2].set(xlabel="Position")
     axs[2].set(ylabel="Points")
 
+    plt.savefig("P vs. Pos Box Plot.png")
     plt.show()

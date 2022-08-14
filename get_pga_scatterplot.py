@@ -40,4 +40,5 @@ def get_pga_scatterplot(df_nhl):
     axs[2].text(1731, 1249, "Ron Francis")
     axs[2].text(1756, 1193, "Mark Messier")
 
+    plt.savefig("P-G-A vs. Games Played Scatter Plot.png")
     plt.show()

@@ -148,7 +148,7 @@ if __name__ == '__main__':
 
     # Plot data for EDA.
     # Set seaborn plot theme.
-    sns.set()
+    sns.set(rc={'figure.figsize': (16, 9)})
 
     # Run custom plotting functions.
     get_pga_scatterplot(df_nhl)

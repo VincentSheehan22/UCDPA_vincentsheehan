@@ -19,6 +19,7 @@ from sklearn.metrics import mean_squared_error as MSE
 from sklearn.model_selection import cross_val_score
 from sklearn.ensemble import RandomForestRegressor
 from implement_decision_tree import implement_decision_tree
+from implement_random_forest import implement_random_forest
 
 SEED = 1
 
@@ -64,9 +65,12 @@ if __name__ == '__main__':
 
     # EVG, EVP, PPG, PPP, SHG, SHP - Impute with mean.
     df_nhl["EVG"] = handle_missing_data.impute_with_mean(df_nhl["EVG"])
-    df_nhl["EVP"] = df_nhl["EVP"].astype("float64")                        # Intermediate type coversion to resolve TypeError on impute_with_mean().
-                                                                           # Include conversion in impute_with_mean() function definition?
-    df_nhl["EVP"] = handle_missing_data.impute_with_mean(df_nhl["EVP"])    # TypeError: can only concatenate str (not "int") to str
+    df_nhl["EVP"] = df_nhl["EVP"].astype("float64")                        # Intermediate type coversion to resolve
+                                                                           # TypeError on impute_with_mean().
+                                                                           # Include conversion in impute_with_mean()
+                                                                           # function definition?
+    df_nhl["EVP"] = handle_missing_data.impute_with_mean(df_nhl["EVP"])    # TypeError: can only concatenate str (not
+                                                                           # "int") to str
     df_nhl["PPG"] = handle_missing_data.impute_with_mean(df_nhl["PPG"])
     df_nhl["PPP"] = handle_missing_data.impute_with_mean(df_nhl["PPP"])
     df_nhl["SHG"] = handle_missing_data.impute_with_mean(df_nhl["SHG"])
@@ -74,9 +78,11 @@ if __name__ == '__main__':
 
     # S, S% - Impute with mean.
     df_nhl["S"] = df_nhl["S"].astype("float64")
-    df_nhl["S"] = handle_missing_data.impute_with_mean(df_nhl["S"])        # TypeError: can only concatenate str (not "int") to str
+    df_nhl["S"] = handle_missing_data.impute_with_mean(df_nhl["S"])        # TypeError: can only concatenate str (not
+                                                                           # "int") to str
     df_nhl["S%"] = df_nhl["S%"].astype("float64")
-    df_nhl["S%"] = handle_missing_data.impute_with_mean(df_nhl["S%"])      # TypeError: can only concatenate str (not "int") to str
+    df_nhl["S%"] = handle_missing_data.impute_with_mean(df_nhl["S%"])      # TypeError: can only concatenate str (not
+                                                                           # "int") to str
 
     # TOI/GP, FOW % - Drop columns.
     print("Dropping TOI/GP and FOW% columns...\n")
@@ -203,26 +209,7 @@ if __name__ == '__main__':
     implement_decision_tree(X_single_feature, y, SEED)
     implement_decision_tree(X_all_features, y, SEED)
 
-    # Implement ensembling with RandomForestRegressor.
-    X_train, X_test, y_train, y_test = train_test_split(X_all_features, y, test_size=0.3, random_state=SEED)
-
-    rf = RandomForestRegressor(n_estimators=400, min_samples_leaf=0.12, random_state=SEED)
-
-    rf.fit(X_train, np.ravel(y_train))      # Using np.ravel() to convert from column-vector to 1d array, as promted by DataConversionWarning.
-    y_pred = rf.predict(X_test)
-
-    RMSE_rf_test = (MSE(y_test, y_pred) ** (1 / 2))
-    print(f"RMSE_test_all_features_rf: {RMSE_rf_test}")
-
-    # Plot feature importances.
-    importances = pd.Series(data=rf.feature_importances_,
-                            index=pd.Series(["GP", "G", "A", "P", "+/-", "PIM", "P/GP", "EVG", "EVP", "PPG", "PPP", "SHG",
-                                          "SHP", "OTG", "GWG", "S", "S%"]))
-
-    importances_sorted = importances.sort_values()
-
-    importances_sorted.plot(kind='barh', color='lightgreen')
-    plt.title(f'Feature Importance in Prediction of {target}')
-    plt.show()
+    # Implement ensembling with RandomForestRegressor. Target string is specified as argument for plotting purposes.
+    implement_random_forest(X_all_features, y, SEED, target)
 
     # Hyperparameter tuning

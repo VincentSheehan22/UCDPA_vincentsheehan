@@ -26,7 +26,7 @@ def implement_random_forest(X, y, SEED, df_X, target):
 
     importances_sorted = importances.sort_values()
 
-    importances_sorted.plot(kind='barh', color='lightgreen')
+    importances_sorted.plot(kind='barh')
     plt.title(f'Feature Importance in Prediction of {target}')
     plt.show()
 

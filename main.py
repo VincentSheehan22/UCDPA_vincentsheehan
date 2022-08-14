@@ -183,7 +183,7 @@ if __name__ == '__main__':
 
     # Machine Learning
     # Define feature matrix X, and target (labels) y.
-    target = "P"
+    target = "G"
 
     # Drop target from X.
     X_all_features = df_nhl.drop(target, axis=1)
@@ -258,6 +258,6 @@ if __name__ == '__main__':
 
     importances_sorted = importances.sort_values()
 
-    importances_sorted.plot(kind='barh')#, color='lightgreen')
+    importances_sorted.plot(kind='barh')
     plt.title(f'Feature Importance in Prediction of {target}')
     plt.show()

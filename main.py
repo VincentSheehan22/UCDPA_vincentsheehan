@@ -13,6 +13,8 @@ from get_p_histogram import get_p_histogram
 from implement_decision_tree import implement_decision_tree
 from implement_random_forest import implement_random_forest
 from tune_random_forest import tune_random_forest
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
 
 
 SEED = 1
@@ -208,5 +210,4 @@ if __name__ == '__main__':
     rf = implement_random_forest(X_all_features, y, SEED, df_X_all_features, target)
 
     # Tune random forest hyperparameters.
-    tune_random_forest(rf, X_all_features, y, SEED, df_X_all_features, target)
-
+    rf_tuned = tune_random_forest(rf, X_all_features, y, SEED, df_X_all_features, target)

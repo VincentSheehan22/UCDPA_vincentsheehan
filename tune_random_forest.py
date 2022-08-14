@@ -32,7 +32,7 @@ def tune_random_forest(rf, X, y, SEED, df_X, target):
 
     # Extract the best model from 'grid_rf'
     best_model = grid_rf.best_estimator_
-    print('Getting best model:\n', best_model, "\n")
+    print('Getting best model...\n', best_model, "\n")
 
     # Predict the test set labels.
     print("Predicting test set labels with best model...\n")
@@ -53,3 +53,5 @@ def tune_random_forest(rf, X, y, SEED, df_X, target):
     importances_sorted.plot(kind='barh')
     plt.title(f'Feature Importance in Prediction of {target}')
     plt.show()
+
+    return best_model

@@ -7,6 +7,19 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def tune_random_forest(rf, X, y, SEED, df_X, target):
+    """Perform hyperparameter tuning on a RnadomForestRegreesor model.
+
+    Takes below parameters as input. Tunes hyperparameters of model per GridSearchCV. Prints best parameters, and best
+    model. Predicts with the best model, and prints RMSE of prediction. Bar chart of feature importances is saved to
+    file and displayed on screen. Returns best model as determined by hyperparameter tuning woth GridSearchCV.
+    :param rf: RandomForest Regressor model
+    :param X: feature matrix, numpy ndarray
+    :param y: target, numpy ndarray
+    :param SEED: seed for random number generation
+    :param df_X: X as pandas DataFrame object
+    :param target: taget name, string
+    :return: best RF Regressor model determined by hyperparameter tuning
+    """
     # Hyperparameter tuning
     print("Getting RandomForestRegressor hyperparamters...\n", rf.get_params(), "\n")
 
@@ -51,7 +64,8 @@ def tune_random_forest(rf, X, y, SEED, df_X, target):
     importances_sorted = importances.sort_values()
 
     importances_sorted.plot(kind='barh')
-    plt.title(f'Feature Importance in Prediction of {target}')
+    plt.title(f"Feature Importance in Prediction of {target} - Tuned Random Forest")
+    plt.savefig(f"Feature Importance in Prediction of {target} - Tuned Random Forest")
     plt.show()
 
     return best_model

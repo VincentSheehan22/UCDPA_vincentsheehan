@@ -3,6 +3,10 @@ import seaborn as sns
 
 
 def get_p_pos_boxplot(df_nhl):
+    """Generate a 1 x 3 figure of box plots for Points by Position.
+
+    Takes DataFrame object as argument, and plots for all rows. Output is saved to file and displayed on screen.
+    """
     # Set up figure for multiple plots.
     fig, axs = plt.subplots(1, 3)
     fig.suptitle('Points per Position')

@@ -3,6 +3,11 @@ import seaborn as sns
 
 
 def get_pga_scatterplot(df_nhl):
+    """Generate a 3 x 1 figure of scatter plots for Points, Goals, and Assists vs. Games Played.
+
+    Takes DataFrame object as argument, plots features for all rows, and annotates with player names. Output is saved
+    to file and displayed on screen.
+    """
     # Generate figure for subplots.
     fig, axs = plt.subplots(3, 1)
     fig.suptitle('Career Points/Goals/Assists vs. Games Played - Regular Season')

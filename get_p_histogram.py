@@ -3,6 +3,10 @@ import seaborn as sns
 
 
 def get_p_histogram(df_nhl):
+    """Genarate o 1 x 2 figure of histogram plots for Points by all players in the dataset.
+
+    Takes DataFrame object as input, and plots histogram. The second plots zooms the first.
+    """
     # Plot histogram of P.
     f, axs = plt.subplots(1, 2)
     f.suptitle('Points Histogram')

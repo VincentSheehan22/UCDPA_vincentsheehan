@@ -13,8 +13,6 @@ from get_p_histogram import get_p_histogram
 from implement_decision_tree import implement_decision_tree
 from implement_random_forest import implement_random_forest
 from tune_random_forest import tune_random_forest
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
 
 
 SEED = 1

@@ -11,7 +11,7 @@ def tune_random_forest(rf, X, y, SEED, df_X, target):
 
     Takes below parameters as input. Tunes hyperparameters of model per GridSearchCV. Prints best parameters, and best
     model. Predicts with the best model, and prints RMSE of prediction. Bar chart of feature importances is saved to
-    file and displayed on screen. Returns best model as determined by hyperparameter tuning woth GridSearchCV.
+    file and displayed on screen. Returns best model as determined by hyperparameter tuning with GridSearchCV.
     :param rf: RandomForest Regressor model
     :param X: feature matrix, numpy ndarray
     :param y: target, numpy ndarray

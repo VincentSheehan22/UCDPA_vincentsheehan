@@ -659,20 +659,20 @@ From this, it is clear that tha data contains many outliers, with point totals s
 
 #### Merging Dataframes for Further Analysis on Top 100
 In addition to the Summary report described earlier, a supplemental Bio Info report is available on NHL.com [4]. This
-inlcudes biographical information of players, such as first season, height, weight, nationality. This provides
-opportunities categorical classification, more so than the mostly numeric data in the Summary report.
+includes biographical information of players, such as first season, height, weight, and nationality. This provides
+opportunities for categorical classification, more so than the mostly numeric data in the Summary report.
 
-For the purpose of further analysis on highest performing player (as sorted by P, G, A), the first 100 entries of the
-Bio Info report is to be merged with the top 100 entries in df_nhl (representing the same group of players). It is left
-as an exercise, beyond the scope of this project, to expand this merge to all 7461 players int df_nhl dataset. Bio Info
+For the purpose of further analysis on highest performing players (as sorted by P, G, A), the first 100 entries of the
+Bio Info report is merged with the top 100 entries in df_nhl (representing the same group of players). It is left as an
+exercise, beyond the scope of this project, to expand this merge to all 7461 players in the df_nhl dataset. Bio Info
 is collected in the same manner as the summary report, from the below URL, with particular attention payed to sorting
 method:
 https://www.nhl.com/stats/skaters?report=bios&reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points,goals,assists&page=0&pageSize=100
 
 The Bio Info report (first page, containing top 100 players ranked by P, G, A) is stored in the 'Raw Data Files'
 directory as 'Bio Info-01.xlsx'. the dataframe df_bio_top_100 is compiled from this with a call to the
-`get_dataset_excel()` from the `get_dataset.py` module. The first argument, `directory`, is the path name
-"./Raw Data Files/" as for the first call to generate df_nhl. However, in this case the second argument, 'report', is
+`get_dataset_excel()` function from the `get_dataset.py` module. The first argument, `directory`, is the path name
+`"./Raw Data Files/"` as for the first call to generate df_nhl. However, in this case the second argument, 'report', is
 set to 'Bio Info' to differentiate between report types. The default value of `report` is defined as 'Summary'.
 
 The new dataframe, `df_bio_top_100` is cleaned as per `df_nhl` earlier, with some notable differences:
@@ -684,9 +684,37 @@ The new dataframe, `df_bio_top_100` is cleaned as per `df_nhl` earlier, with som
 * Not all players have a draft year. Notably, the data indicates that Wayne Gretzky was not drafted to the NHL.
   * Not logical to impute values for these.
 * 1st Season column contains values that are represented as YYYYYYYY (e.g., 19791980).
-  * To use regex to insert '-' between years. Replace '(\d\d\d\d)(\d\d\d\d)' with '\1-\2'.
-* Some columns duplicate data found in df_nhl. These are to be dropped, with the exception of the Player column, on
-which the merge will be performed.
+  * To use regex to insert `-` between years. Replace `(\d\d\d\d)(\d\d\d\d)` with `\1-\2`.
+* Some columns duplicate data found in df_nhl. These are dropped, with the exception of the Player column, on which the
+merge is performed.
+
+The merge is performed in `main.py`, merging on the shared Player column. The new merged DataFrame
+`df_nhl_top_100_extended` is summarised with `.head()` and `.describe()`. Output of `.describe()` is transposed for
+readability.
+
+```Python
+# Merging Dataframes
+# Generating second data frame based on the 'Bio Info' report from NHL.com. Only the fist page is taken, sorted by
+# P, G, A, for additional analysis on top 100 players in the df_nhl dataset.
+df_bio_top_100 = get_dataset_excel("./Raw Data Files/", report="Bio Info")
+print("Getting df_bio_top_100.head()...\n", df_bio_top_100.head(), "\n")
+
+# Copy top 100 players (based on earlier sorting by P, G, A) from df_nhl into df_nhl_top_100.
+df_nhl_top_100 = df_nhl.head(100)
+
+df_nhl_top_100_extended = pd.merge(df_nhl_top_100,
+                                   df_bio_top_100[["DOB", "Birth City", "S/P", "Ctry", "Ntnlty", "Ht", "Wt",
+                                                   "Draft Yr", "Round", "Overall", "1st Season", "HOF"]],
+                                   left_on=df_nhl_top_100["Player"],
+                                   right_on=df_bio_top_100["Player"])
+
+print("Getting df_nhl_top_100_extended.head()...\n", df_nhl_top_100_extended.head(), "\n")
+
+df_nhl_top_100_extended = df_nhl_top_100_extended.drop("key_0", axis=1)
+
+print("Getting df_nhl_top_100_extended.describe(include='all'').T...\n",
+      df_nhl_top_100_extended.describe(include="all").T, "\n")
+```
 
 ### Machine Learning
 #### Decision Tree

@@ -169,8 +169,11 @@ if __name__ == '__main__':
                                                       "Draft Yr", "Round", "Overall", "1st Season", "HOF"]],
                                        left_on=df_nhl_top_100["Player"],
                                        right_on=df_bio_top_100["Player"])
+
     print("Getting df_nhl_top_100_extended.head()...\n", df_nhl_top_100_extended.head(), "\n")
+
     df_nhl_top_100_extended = df_nhl_top_100_extended.drop("key_0", axis=1)
+
     print("Getting df_nhl_top_100_extended.describe(include='all'').T...\n",
           df_nhl_top_100_extended.describe(include="all").T, "\n")
 

@@ -878,6 +878,8 @@ parameters for use with the model. This is done with the `tune_random_froest()` 
 `tune_random_forest.py`. The best model, with optimal parameters obtained from GridSearchCV, are used to fit and predict
 on the test set.
 
+![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Feature%20Importance%20in%20Prediction%20of%20G%20-%20Untuned%20Random%20Forest.png)
+
 ```Python
 rf_tuned = tune_random_forest(rf, X_all_features, y, SEED, df_X_all_features, target)
 ```
@@ -902,6 +904,8 @@ RMSE_test_rf_tuned: 38.69701056342926
 ```
 
 A bar plot of the feature importances is saved to file and displayed on screen.
+
+![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Feature%20Importance%20in%20Prediction%20of%20G%20-%20Tuned%20Random%20Forest.png)
 
 ## Results
 

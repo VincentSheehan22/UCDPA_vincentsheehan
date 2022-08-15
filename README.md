@@ -908,8 +908,52 @@ A bar plot of the feature importances is saved to file and displayed on screen.
 ![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Feature%20Importance%20in%20Prediction%20of%20G%20-%20Tuned%20Random%20Forest.png)
 
 ## Results
+The plots provided above are included in the project directory, along with `terminal_log.txt` - a log of terminal output
+for a successful execution of `main.py`.
+
+The three plots generated during exploratory data analysis, reproduced below, give an understanding of how the player
+data is distributed.
+
+As shown by the scatter plot, there is a general trend toward higher points totals with career longevity. However, some
+outliers show high points totals for relatively few games played - see Mario Lemieux, Mike Bossy annotations.
+
+![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P-G-A%20vs.%20Games%20Played%20Scatter%20Plot.png)
+
+The box plot of points for all positions shows maximum points (100th percentile) lower than 500, and with outliers
+representing a large group of elite players far exceeding the rest of the dataset. This distribution of outstanding
+players is observed across all four outfield positions.
+
+![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P%20vs.%20Pos%20Box%20Plot.png)
+
+From the histogram, it can be seen that there is an exponential distribution in points, with points totals over 500
+sparsely represented. This give some context to the career of Wayne Gretzky, holding the lead in points at 2857.
+
+![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Points%20Histogram.png)
+
+The plots generated to compare operation of a non-tuned and tuned Random Forest Regression algorithm are provided
+below. It can be seen that the tuned model takes into account more features in its prediction than the non-tuned model.
+
+![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Feature%20Importance%20in%20Prediction%20of%20G%20-%20Untuned%20Random%20Forest.png)
+
+
+![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Feature%20Importance%20in%20Prediction%20of%20G%20-%20Tuned%20Random%20Forest.png)
 
 ## Insights
+* The record in points, held by Wayne Gretzky (retired) far exceeds the nearest value, and is likely to stand 
+unchallenged by currently active players. Points per games played (P/GP) for Wayne Gretzky is 1.92. Mario Lemieux (1.88)
+and Mike Bossy (1.50) may have come closest if career durations had been equivalent. Of active players, Connor McDavid
+(1.43) has the highest point scoring pace.
+* The record in goals, also held by Wayne Gretzky, is less secure, with active player Alex Ovechkin on pace to surpass
+within three seasons.
+* As determined by earlier analysis of +/- for Bob Stewart, the obvious metrics of points/goals/assists are not the only
+determining factors of a player's success in the NHL. This is confirmed by 75th percentiles in games played (453) and
+points (156).
+* The presence of extreme outliers - though occurring naturally and not warranting removal - in the dataset leads to 
+high variance which impacts the supervised learning model's ability to fit all data points. This can be seen in the RMSE
+values of the DecisionTreeRegressor with the prediction error on test set being lower than prediction error on train
+set. Methods for normalising the dataset are to be explored further, to improve the fit of the model to such a dataset.
+* Hyperparmateer tuning improves performance of Random Forest regression, in this case lowering the RMSE of the
+prediction on the test set, and using more features in prediction, than non-tuned Random Forest regression.
 
 ## References
 [1] NHL Stats page - Skaters/All-Time/Regular Season/Summary - https://www.nhl.com/stats/skaters?reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points&page=0&pageSize=100  

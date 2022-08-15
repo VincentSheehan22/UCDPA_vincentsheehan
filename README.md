@@ -716,10 +716,192 @@ print("Getting df_nhl_top_100_extended.describe(include='all'').T...\n",
       df_nhl_top_100_extended.describe(include="all").T, "\n")
 ```
 
+```
+Compiling dataframe from Bio Info report...
+./Raw Data Files/Bio Info-01.xlsx
+
+Files parsed: 1
+
+Getting df_bio_top_100.head()...
+           Player S/C Pos         DOB        Birth City S/P Ctry Ntnlty  Ht   Wt Draft Yr Round Overall  1st Season HOF     GP    G      A      P
+0  Wayne Gretzky   L   C  1961-01-26         Brantford  ON  CAN    CAN  72  185       --    --      --    19791980   Y  1,487  894  1,963  2,857
+1   Jaromir Jagr   L   R  1972-02-15            Kladno  --  CZE    CZE  75  230     1990     1       5    19901991   N  1,733  766  1,155  1,921
+2   Mark Messier   L   C  1961-01-18          Edmonton  AB  CAN    CAN  74  211     1979     3      48    19791980   Y  1,756  694  1,193  1,887
+3    Gordie Howe   R   R  1928-03-31            Floral  SK  CAN    CAN  72  205       --    --      --    19461947   Y  1,767  801  1,049  1,850
+4    Ron Francis   L   C  1963-03-01  Sault Ste. Marie  ON  CAN    CAN  75  200     1981     1       4    19811982   Y  1,731  549  1,249  1,798
+
+Getting df_nhl_top_100_extended.head()...
+            key_0  index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP  EVG   EVP  PPG  PPP  SHG  SHP  OTG  GWG     S    S%         DOB        Birth City S/P Ctry Ntnlty  Ht   Wt Draft Yr Round Overall  1st Season HOF
+0  Wayne Gretzky      0  Wayne Gretzky   L   C  1487  894  1963  2857  520   577  1.92  617  1818  204  890   73  149    2   91  5088  17.6  1961-01-26         Brantford  ON  CAN    CAN  72  185       --    --      --    19791980   Y
+1   Jaromir Jagr      1   Jaromir Jagr   L   R  1733  766  1155  1921  322  1167  1.11  538  1296  217  610   11   15   19  135  5637  13.6  1972-02-15            Kladno  --  CZE    CZE  75  230     1990     1       5    19901991   N
+2   Mark Messier      2   Mark Messier   L   C  1756  694  1193  1887  211  1912  1.07  452  1162  179  581   63  144    8   92  4221  16.4  1961-01-18          Edmonton  AB  CAN    CAN  74  211     1979     3      48    19791980   Y
+3    Gordie Howe      3    Gordie Howe   R   R  1767  801  1049  1850  160  1685  1.05  566  1250  211  564   24   36    0  121  3803   8.1  1928-03-31            Floral  SK  CAN    CAN  72  205       --    --      --    19461947   Y
+4    Ron Francis      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349  1040  188  727   12   31    4   79  3756  14.6  1963-03-01  Sault Ste. Marie  ON  CAN    CAN  75  200     1981     1       4    19811982   Y
+
+Getting df_nhl_top_100_extended.describe(include='all'').T...
+             count unique            top  freq         mean           std         min         25%         50%         75%         max
+index       100.0    NaN            NaN   NaN         49.5     29.011492         0.0       24.75        49.5       74.25        99.0
+Player        100    100  Wayne Gretzky     1          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+S/C           100      2              L    60          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+Pos           100      4              C    51          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+GP          100.0    NaN            NaN   NaN      1279.81    219.817909       752.0      1111.0      1257.5      1418.0      1779.0
+G           100.0    NaN            NaN   NaN       491.97    132.946747       240.0       401.5       482.0      561.75       894.0
+A           100.0    NaN            NaN   NaN        764.3    212.514836       491.0       616.5       719.5      855.25      1963.0
+P           100.0    NaN            NaN   NaN      1256.27    281.480532       972.0     1044.75      1190.5     1378.25      2857.0
++/-         100.0    NaN            NaN   NaN       124.75    148.589352      -131.0       24.75       100.0      201.25       527.0
+PIM         100.0    NaN            NaN   NaN        913.1    556.876235       117.0      530.75       825.0      1126.0      3565.0
+P/GP        100.0    NaN            NaN   NaN       0.9919      0.195002        0.67        0.87        0.97        1.07        1.92
+EVG         100.0    NaN            NaN   NaN       321.39     90.481528       122.0      267.25       311.5       375.0       617.0
+EVP         100.0    NaN            NaN   NaN       786.35    184.790429       464.0      665.75       758.5      877.25      1818.0
+PPG         100.0    NaN            NaN   NaN        154.9     48.411848        47.0       122.0       150.0       182.5       285.0
+PPP         100.0    NaN            NaN   NaN       441.22     123.79876       162.0       365.5       419.5      510.75       890.0
+SHG         100.0    NaN            NaN   NaN        15.68     13.173957         0.0         7.0        12.0        20.5        73.0
+SHP         100.0    NaN            NaN   NaN         28.7     25.357046         0.0        10.0        23.0       40.75       149.0
+OTG         100.0    NaN            NaN   NaN         5.62      5.096602         0.0         1.0         5.0         9.0        24.0
+GWG         100.0    NaN            NaN   NaN        71.09     22.179295        34.0       55.75        70.5        86.0       135.0
+S           100.0    NaN            NaN   NaN      3550.64    880.071181      1856.0      2956.5      3457.5     3949.75      6209.0
+S%          100.0    NaN            NaN   NaN       13.382      3.330374         6.6       11.65        13.6      15.825        21.2
+DOB           100     99     1980-09-26     2          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+Birth City    100     82       Montréal     7          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+S/P           100     14             ON    31          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+Ctry          100      8            CAN    72          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+Ntnlty        100      8            CAN    71          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+Ht          100.0    NaN            NaN   NaN        72.18      2.133807        66.0        71.0        72.0        73.0        77.0
+Wt          100.0    NaN            NaN   NaN       197.84     16.140619       160.0       185.0       195.0       207.5       238.0
+Draft Yr      100     35             --    20          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+Round       100.0   11.0            1.0  56.0          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+Overall       100     41             --    20          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+1st Season  100.0    NaN            NaN   NaN  19826383.44  144399.72556  19461947.0  19771978.0  19821983.0  19911992.0  20082009.0
+HOF           100      2              Y    63          NaN           NaN         NaN         NaN         NaN         NaN         NaN
+```
+
 ### Machine Learning
-#### Decision Tree
-#### Ensembling
-#### Hyperparamater Tuning
+As the data in the dataset is mostly numeric, it was decided to treat further analysis as a regression problem, using
+supervised learning techniques. The algortithm chosen for initial analysis is the DecisionTreeRegressor provided in
+`sklearn.tree`.
+
+#### DecisionTreeRegressor
+In `main.py` the variable `target` is used to define the target column of the dataset which is to be predicted by the
+machine learning model. For the purpose of this analysis the column representing goals (G) is used, as this is a direct
+measure of a player's performance. The `target` variable is used to build the target 1d array `y`, and the feature
+matrix `X`.
+
+```Python
+# Define feature matrix X, and target (labels) y.
+target = "G"
+
+# Drop target from X.
+X_all_features = df_nhl.drop(target, axis=1)
+
+# Drop non-numeric features from X.
+df_X_all_features = X_all_features.drop(["Player", "S/C", "Pos"], axis=1)
+
+# Convert DataFrame X, and Series y to numpy arrays.
+X_all_features = df_X_all_features.values
+y = df_nhl[target].values
+
+# Create single-feature array for preliminary use.
+X_single_feature = X_all_features[:, 4]
+
+print("Getting type(X_single_feature)...\n", type(X_single_feature), "\n")
+print("Getting type(X_all_features)...\n", type(X_all_features), "\n")
+print("Getting type(y)...\n", type(y), "\n")
+
+# Reshape numpy arrays to unknown number of rows, 1 column.
+y = y.reshape(-1, 1)
+X_single_feature = X_single_feature.reshape(-1, 1)
+```
+
+```
+Getting type(X_single_feature)...
+ <class 'numpy.ndarray'>
+
+Getting type(X_all_features)...
+ <class 'numpy.ndarray'>
+
+Getting type(y)...
+ <class 'numpy.ndarray'>
+```
+
+The function `implement_decision_tree()` defined in `implement_decision_tree.py` is used to train a decision tree model
+and predict a target in the test set. This function is first called with feature matrix containing only one feature.
+
+```Python
+implement_decision_tree(X_single_feature, y, SEED)
+```
+
+```
+CV MSE: 6590.631737662596
+Train MSE: 6541.544892502052
+Test MSE: 5053.990206303157
+RMSE_CV: 81.18270590256644
+RMSE_train: 80.87981758450034
+RMSE_test: 71.09142146773517
+```
+
+The function is then run again with the full feature in the feature matrix.
+
+```Python
+implement_decision_tree(X_all_features, y, SEED)
+```
+
+```
+CV MSE: 2465.5218260945253
+Train MSE: 2446.7869807578286
+Test MSE: 1687.7888702068253
+RMSE_CV: 49.654021247976736
+RMSE_train: 49.46500763931841
+RMSE_test: 41.08270767861857
+```
+
+#### Ensembling with RandomForestRegressor
+The RandomForestRegressor is used in attempt to improve the prediction score of Decision Tree model, as measured with
+root-mean-squared-error RMSE. The RandomForestRegressor model is trained in with the `implement_random_forest()`
+function in `implement_random_forest.py`, called from `main.py` as follows. Two additional arguments are supplied for
+the purpose of plotting feature importance: a DatFrame version of the feature matrix, and the target column name as
+string.
+
+```Python
+rf = implement_random_forest(X_all_features, y, SEED, df_X_all_features, target)
+```
+
+```
+RMSE_test_rf: 46.084444631038274
+```
+
+A bar plot of the feature importances is saved to file and displayed on screen.
+
+#### Hyperparamater Tuning on RandomForestRegressor
+The RandomForestRegressor with defualt parameters does not offer an improvement over DecisionTreeRegressor.
+Hyperparameter tuning is performed on the RandomForestRegressor model, using `GridSearchCV`, to determine the best
+parameters for use with the model. This is done with the `tune_random_froest()` function defined in
+`tune_random_forest.py`. The best model, with optimal parameters obtained from GridSearchCV, are used to fit and predict
+on the test set.
+
+```Python
+rf_tuned = tune_random_forest(rf, X_all_features, y, SEED, df_X_all_features, target)
+```
+
+```
+Getting RandomForestRegressor hyperparamters...
+ {'bootstrap': True, 'ccp_alpha': 0.0, 'criterion': 'squared_error', 'max_depth': None, 'max_features': 1.0, 'max_leaf_nodes': None, 'max_samples': None, 'min_impurity_decrease': 0.0, 'min_samples_leaf': 0.12, 'min_samples_split': 2, 'min_weight_fraction_leaf': 0.0, 'n_estimators': 400, 'n_jobs': None, 'oob_score': False, 'random_state': 1, 'verbose': 0, 'warm_start': False}
+
+Tuning hyperparameters with GridSearchCV...
+
+Fitting 3 folds for each of 36 candidates, totalling 108 fits
+Getting best hyperparameters...
+ {'max_depth': 4, 'max_features': 'log2', 'min_samples_leaf': 0.1, 'n_estimators': 500}
+
+Getting best model...
+ RandomForestRegressor(max_depth=4, max_features='log2', min_samples_leaf=0.1,
+                      n_estimators=500, random_state=1)
+
+Predicting test set labels with best model...
+
+RMSE_test_rf_tuned: 38.69701056342926
+```
+
+A bar plot of the feature importances is saved to file and displayed on screen.
 
 ## Results
 

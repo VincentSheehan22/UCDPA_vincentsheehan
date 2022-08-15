@@ -179,49 +179,66 @@ The `df_nhl` DataFrame is checked for duplicate entries with the custom function
 DataFrame as argument, uses the .duplicated() function to check for duplicates, prints duplicates if found, and drops
 duplicates from DataFrame, returning the DataFrame without  duplicates. In this instance no duplicate entries are found.
 
+```Python
+check_for_duplicates(df_nhl)
+```
+
+```
+Checking for duplicates...
+
+Getting duplicates...
+ Empty DataFrame
+Columns: [index, Player, S/C, Pos, GP, G, A, P, +/-, PIM, P/GP, EVG, EVP, PPG, PPP, SHG, SHP, OTG, GWG, S, S%, TOI/GP, FOW%]
+Index: []
+```
+
 #### Missing Data
 The dataset contains entries for players who played prior to modern record keeping. Some columns such as 'EVG' contain
 missing data, represented as '--'. These require replacement in order to complete type conversion.
 
 Several replacement options were considered, including those listed below:
-1. Replace '--' with `NaN`, and use `.dropna()`.
+1. Replace `--` with `NaN`, and use `.dropna()`.
     * Excludes notable players from analysis.
-2. Replace '--' with 0.
+2. Replace `--` with 0.
     * May under-represent actual value.
     * Lowers mean of the series.
-3. Replace '--' with league mean.
+3. Replace `--` with league mean.
    * May over- or under-represent actual value.
    * Preserves mean of the series.
-4. Remove columns containing '--'.
-   * Excludes features from further analysis.
+4. Remove columns containing `--`.
+   * Excludes feature from further analysis.
 
 Missing data was explored to determine how best to handle. A module, `handle_missing_data.py`, was created to define
 functions for dealing with missing data. The first function defined here, `replace_with_nan()`, takes a DataFrame as
-input and converts entries with value "--" - representing missing data in the NHL dataset - to numpy `NaN` objects. With
+input and converts entries with value `--` - representing missing data in the NHL dataset - to numpy `NaN` objects. With
 `NaN` objects populated in the dataframe, the function then obtains a count of missing data per column. The modified
 DataFrame and missing data counts are then returned.
 
 ```Python
 # Explore missing data to determine how best to handle.
-df_nhl, missing_count = handle_missing_data.handle_missing_data(df_nhl)
-print(df_nhl.head(), "\n")
-print(missing_count, "\n")
+df_nhl, missing_count = handle_missing_data.replace_with_nan(df_nhl)
+print("Getting df_nhl.head()...\n", df_nhl.head(), "\n")
+print("Getting missing_count...\n", missing_count, "\n")
 ```
 
 Passing `df_nhl` to `handle_missing_data()`, conversion of missing data to `NaN` is successful, as shown with
 `df_nhl.head()`:
+
 ```
-   index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP    EVG   EVP    PPG    PPP   SHG    SHP  OTG  GWG     S    S% TOI/GP  FOW%
+Getting df_nhl.head()...
+    index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP    EVG   EVP    PPG    PPP   SHG    SHP  OTG  GWG     S    S% TOI/GP  FOW%
 0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520   577  1.92  617.0  1818  204.0  890.0  73.0  149.0    2   91  5088  17.6    NaN  49.0
 1      1   Jaromir Jagr   L   R  1733  766  1155  1921  322  1167  1.11  538.0  1296  217.0  610.0  11.0   15.0   19  135  5637  13.6    NaN  24.5
 2      2   Mark Messier   L   C  1756  694  1193  1887  211  1912  1.07  452.0  1162  179.0  581.0  63.0  144.0    8   92  4221  16.4    NaN  54.7
 3      3    Gordie Howe   R   R  1767  801  1049  1850  160  1685  1.05  566.0  1250  211.0  564.0  24.0   36.0    0  121  3803   NaN    NaN   NaN
-4      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349.0  1040  188.0  727.0  12.0   31.0    4   79  3756  14.6    NaN  54.8 
+4      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349.0  1040  188.0  727.0  12.0   31.0    4   79  3756  14.6    NaN  54.8
 ```
 
 The missing data counts provide some insight on how to handle missing values for each column.
+
 ```
-index        0
+Getting missing_count...
+ index        0
 Player       0
 S/C         74
 Pos          0
@@ -244,7 +261,7 @@ S         1057
 S%        1461
 TOI/GP    4321
 FOW%      4680
-dtype: int64 
+dtype: int64
 ```
 
 * **S/C (Shoots/Catches)**: Represents 'handedness' of the player, either left (L) or right (R). In this in instance,
@@ -271,7 +288,7 @@ exploring only out-field players and not the Goalie position, this field refers 
 duration. Typical cumulative time-on-ice for a player in a 60-minute game can range from 5 to 20 minutes. Data likely
 unavailable due to recency of player location tracking technology.
   * As data is not available for over 50% of players in the dataset, this column will be dropped.
-* **FOW%**: Face-off win percentage. Game scenario in which two players contest possession of the puck. Typically taken
+* **FOW%**: Face-off win percentage. Game scenario in which two players contest possession of the puck. Typically, taken
 by players in the centre position.
   * As data is not available for over 50% of players in the dataset, this column will be dropped.
 
@@ -279,9 +296,40 @@ Based on the above assessment two further functions are defined in `handle_missi
 `impute_with_mean()`. Both take a Pandas series (DataFrame column) as argument and replace `NaN` values with mode and
 mean, respectively.
 
+`NaN` values are imputed as follows:
+```Python
+# S/C - Impute with mode.
+df_nhl["S/C"] = handle_missing_data.impute_with_mode(df_nhl["S/C"])
+
+# EVG, EVP, PPG, PPP, SHG, SHP - Impute with mean.
+df_nhl["EVG"] = handle_missing_data.impute_with_mean(df_nhl["EVG"])
+```
+
 TOI/GP and FOW% columns are dropped as follows:
 ```Python
 df_nhl = df_nhl.drop(["TOI/GP", "FOW%"], axis=1)
+```
+
+```
+Imputing S/C with mode: 'L'...
+
+Imputing EVG with mean: '36.007372374460985'...
+
+Imputing EVP with mean: '94.09514536096815'...
+
+Imputing PPG with mean: '11.648629851161497'...
+
+Imputing PPP with mean: '33.25441646960634'...
+
+Imputing SHG with mean: '1.598970649603561'...
+
+Imputing SHP with mean: '3.24634858812074'...
+
+Imputing S with mean: '497.60805746408494'...
+
+Imputing S% with mean: '8.098416666666697'...
+
+Dropping TOI/GP and FOW% columns...
 ```
 
 #### Type Conversion
@@ -392,7 +440,7 @@ max      99.000000  1779.000000   894.000000  1963.000000  2857.000000   722.000
 
 ### Exploratory Data Analysis
 #### Dataset Summary Statistics
-Specifying the include parameter with `.describe()` expands analysis to non-numeric fields - adding Player,
+Specifying the `include` parameter with value `all` for `.describe()` expands analysis to non-numeric fields - adding Player,
 S/C, and Pos columns.
 
 ```
@@ -418,13 +466,13 @@ Some immediate insights can be obtained from this:
 counterintuitive to the general prevalence of right-hand dominance (~90%) [2]. Some initial reading suggests that the
 reasoning for the prevalence of left side shooting is that the dominant hand is most-effective at the butt of the stick
 [3]. However, if taking L from this dataset to represent right-hand dominance, there is still a disparity with the
-general distribution. An analysis of the equivalent Goalie dataset may give insight as to whether there is adaptation in 
+general distribution. An analysis of the equivalent Goalie dataset may give insight to whether there is adaptation in 
 response to coaching, in order to exploit weaknesses in Goalie effectiveness.
-* The most frequent player position is defense, representing 33% of the dataset. Unlike the forward positions (centre,
-left wing, right wing). The defense position is not further sub-divided. A team typically plays with 1 left side
-defender and 1 right side defender on the ice at a given time - 6 per team, and 12 forwards. The ratio of defenders in
-the dataset aligns with the standard team composition. Further analysis is to be performed to confirm if the same is
-true of other positions.
+* The most frequent player position is defense (D), representing 33% of the dataset. Unlike the forward positions
+(centre, left wing, right wing). The defense position is not further sub-divided. A team typically plays with 1
+left-side defender and 1 right-side defender on the ice at a given time - 6 per team, and 12 forwards. The ratio of
+defenders in the dataset aligns with the standard team composition. Further analysis is to be performed to confirm if
+the same is true of other positions.
 
 The Pandas `.loc` function is used to retrieve players responsible for max values of columns in the `.describe()`
 table. Max. +/- is excluded here for the purpose of later comparison with min. +/-. S% is also excluded as further
@@ -435,7 +483,6 @@ cols_max = ["GP", "G", "A", "P", "PIM", "P/GP", "EVG", "EVP", "PPG", "PPP", "SHG
 for col in cols_max:
     print(f"Getting player with most {col}...\n", df_nhl.loc[df_nhl[f"{col}"] == max(df_nhl[f"{col}"])], "\n")
 ```
-
 
 ```
 Getting player with most GP...
@@ -466,13 +513,13 @@ Getting player with highest S% (min. 100 shots)...
 3073     73  Mal Davis   L   L  100  31  22  53   -5   34  0.53   20   30   11   23    0    0    0    8  125  24.8 
 ```
 
-The player with minimum +/- of -257 is also retrieved, as being a notable value, along with player with maximum +/- for
-comparison.
+The player with minimum +/- of -257 is also retrieved, as being a notable value, along with the player with maximum +/-
+for comparison.
 
-+/- represents a player's presence on the ice at the time of goals for (+1) and goals against
-(-1). A positive +/- value indicates a player is present mostly for goals for, whereas a negative score indicates a
-player is present mostly for goals against. +/- is cumulative over games played. A negative +/- may infer a player has
-defensive limitations, while also not contributing offensively.
++/- represents a player's presence on the ice at the time of goals for (+1) and goals against (-1). A positive +/- value
+indicates a player is present mostly for goals for, whereas a negative score indicates a player is present mostly for
+goals against. +/- is cumulative over games played. A negative +/- may infer a player has defensive limitations, while
+also not contributing offensively.
 
 ```Python
 # Extract player with highest +/-.
@@ -544,19 +591,34 @@ Getting player Auston Matthews...
 The points (P), goals (G), assists (A), and games played (GP) of select players retrieved above are used to annotate
 the EDA scatter plots which follow.
 
+#### Visualising the Dataset
+Multiple plots are generated to visualise the dataset. Custom functions as defined to perform the plotting operations:
+* get_pga_scatterplot(): Generate seaborn scatter plots of point, goals, and assists vs. games played for all players in
+the dataset.
+* get_p_pos_boxlot(): Generate seaborn box plots of point, breakdown by position and S/C attributes.
+* get_p_histogram(): Generate seaborn histogram plot of the distribution of player counts for all points values.
 
-#### Scatter Plot of Points-Goals-Assists vs. Games Played
-A scatter plot of Points-Goals-Assist vs Games Played is generated using the Seaborn plotting library.
+The seaborn theme is set in `main.py`, and plotting functions called as follows:
 
 ```Python
-# Set plot theme.
-sns.set()
+# Plot data for EDA.
+# Set seaborn plot theme.
+sns.set(rc={'figure.figsize': (16, 9)})
 
-# Generate figure for subplotsScatter plots of points/goals/assists vs. games played, using plt.
-fig1, axs = plt.subplots(3, 1)
-fig1.suptitle('Career Points/Goals/Assists vs. Games Played - Regular Season')
+# Run custom plotting functions.
+get_pga_scatterplot(df_nhl)
+get_p_pos_boxplot(df_nhl)
+get_p_histogram(df_nhl)
+```
 
-# Plot Points vs. Games Played.
+Plotting operations are generalised below - from `get_pga_scatterplot.py`:
+
+```Python
+# Generate figure for subplots.
+fig, axs = plt.subplots(3, 1)
+fig.suptitle('Career Points/Goals/Assists vs. Games Played - Regular Season')
+
+# Plot Points vs. Games Played on subplot 0.
 sns.scatterplot(x=df_nhl['GP'], y=df_nhl['P'], color='b', alpha=0.5, label='Points', ax=axs[0])
 axs[0].set(xlabel='Games Played')
 axs[0].set(ylabel='Count')
@@ -564,12 +626,11 @@ axs[0].set_yticks(range(0, 3500, 500))
 axs[0].legend(loc='upper left')
 axs[0].text(1487, 2857, "Wayne Gretzky")
 axs[0].text(1779, 1197, "Patrick Marleau")
-axs[0].text(915, 1723, "Mario Lemieux")
-axs[0].text(752, 1126, "Mike Bossy")
-axs[0].text(1274, 1410, "Alex Ovechkin")
-axs[0].text(1108, 1409, "Sidney Crosby")
 ```
 
+Resulting plots are show below.
+
+##### Scatter Plot of Points-Goals-Assists vs. Games Played
 ![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P-G-A%20vs.%20Games%20Played%20Scatter%20Plot.png)
 * The top plot shows points vs. games played.
 * The middle plot shows goals vs. games played.
@@ -582,21 +643,19 @@ likely to remain unsurpassed by any player in the dataset.
 213 fewer games played, requiring 186 games (2.26 full seasons) at current goal scoring pace of 0.61 goals per game
 played. Wayne Gretzky's career goals per game pace is calculated to be 0.60.
 
-#### Box Plot of Points vs. Player Position
+##### Box Plot of Points vs. Player Position
 ![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/P%20vs.%20Pos%20Box%20Plot.png)
 * Left plot shows percentiles for all player positions combined.
 * Centre plot shows percentiles for each player position: Centre (C), Right Wing (R), Defense (D), Left Wing (L).
 * Right plot shows the same categorisation as the centre plot, further broken down by shooting hand (left (L) or right
 * (R)).
 
-From this, it is clear that tha data contains many outliers, with point totals skewing low. Further analysis to be
-performed by standardizing the dataset. 
+From this, it is clear that tha data contains many outliers, with point totals skewing low.
 
-#### Histogram of Points
+##### Histogram of Points
 ![](https://github.com/VincentSheehan22/UCDPA_vincentsheehan/blob/main/Points%20Histogram.png)
 * Left plot shows complete histogram of Points for all players in the dataset.
 * Right plot shows the same histogram zoomed in at the high end (P >= 1200).
-* Model to fit such histogram?
 
 #### Merging Dataframes for Further Analysis on Top 100
 In addition to the Summary report described earlier, a supplemental Bio Info report is available on NHL.com [4]. This

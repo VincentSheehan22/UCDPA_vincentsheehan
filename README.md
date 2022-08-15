@@ -1,14 +1,13 @@
 # UCDPA Project Assignment - Analysing NHL Regular Season Career Statistics
 
-## Overview
+## GitHub URL
+https://github.com/VincentSheehan22/UCDPA_vincentsheehan
+
+## Abstract
 The aim of this project is to explore and demonstrate the learning outcomes of the UCD Professional Academy Specialist
 Certificate in Data Analytics Essentials course. The project aims to cover the scope of a typical data analytics
 workflow, including data collection, data cleaning, exploratory data analysis with summary statistics and visualisation,
 merging of DataFrames, and application of a machine learning algorithm to the dataset.
-
-The dataset chosen for this project is a mostly numeric dataset containing player statistics from the National Hockey
-League. This dataset was chosen as it is of personal interest, and as having a degree of familiarity with the contents.
-It is a large dataset offering opportunities for exploring regression and classification techniques.
 
 The workflow, described in detail below, begins with collecting and compiling the dataset into a Pandas DataFrame object
 for further analysis. The dataset is then cleaned of stray characters, missing values and incorrect data types, and 
@@ -25,25 +24,40 @@ some categorisation on player position and the 'shoots/catches' attribute. A his
 distribution of players vs. number of points.
 
 DataFrame merging is demonstrated with a subset of the top 100 entries in the dataset (sorted on points, goal, assists).
-A supplemental dataset for the same 100 players, also available from https://www.nhl.com, is supplied for the merge.
+A supplemental dataset for the same 100 players, also available from https://www.nhl.com [4], is supplied for the merge.
 This dataset provides biographical information, such as date-of-birth, height, weight, and nationality - further
 attributes that could be applied for classification use cases.
 
 Supervised machine learning is applied to the dataset using a decision tree regressor from the scikit-learn package. The
-target chosen for prediction, y, is points as being the most indicative measure of player performance.
-The model is first trained using only column of the dataset in the feature matrix, X. Games played is chosen for this as
-it ws explored earlier via scatter plot. The metric used for evaluating model performance is the
-root-mean-squared-error.
+target chosen for prediction, y, is goals (G) as being one of the most indicative measures of player performance.
+The model is first trained using only one column of the dataset in the feature matrix, X. Games played is chosen for
+this as it is explored earlier via scatter plot. The metric used for evaluating model performance is the 
+root-mean-squared-error. RMSE is calculated on the negative cross-validation score of the training data, as a baseline
+metric. The RMSE of prediction of y on the training data, and on the test data is the calculated for comparison with
+RMSE of cross-validation. Similar values are obtained for all RMSEs, though RMSE for prediction on the test set is
+lower than that on the training set, suggesting the model is not well-fitted to the data.
 
-Different columns are explored as the sole feature in X, before fitting the model with the full feature set.
+The model is then train by fit with all numeric features in the feature matrix. An improvement in RMSE is observed with
+a higher number of features included.
 
-Ensembling is used to improve the performance of the model. 
+Ensembling is explored using the RandomForestRegressor algorithm from Scikit-Learn, and RMSE measured again. With
+default, the RandomForestRegressor does not improve model performance. Feature importances are plotted as a bar chart,
+showing relatively few features taken into account.
 
-Hyperparameter tuning is used to improve the performance of the model.
+Hyperparameter tuning of the RandomForestRegresoor model, using GridSearchCV, is performed. Iterating through a set of
+hyperparameter values defined in a dictionary, best model is determined. The best model is fitted to the training set,
+and prediction for y made on test set. The RMSE of test set prediction is calculated, showing an improvement over both
+the DecisionTreeRegrssor and un-tuned RandomForestRegressor model. Feature importances are again plotted as bar chart,
+showing that more features are taken into account by the best model based on tuned hyperparameters.
 
-Insights are extracted and reported in details below.
+Output plots, along with a terminal log of `main.py` execution are included in the repository.
 
-## Data Source
+## Introduction
+The dataset chosen for this project is a mostly numeric dataset containing player statistics from the National Hockey
+League. This dataset was chosen as it is of personal interest, and as having a degree of familiarity with the contents.
+It is a large dataset offering opportunities for exploring regression and classification techniques.
+
+## Dataset
 The National Hockey League, a North American ice-hockey league, operating since 1917 maintains on its website - 
 https://www.nhl.com - a record of player statistics dating back to the inaugural 1917-18 season. This dataset includes
 entries for over 7000 players to have played a regular season game in the NHL, and offers player-by-player comparison
@@ -63,7 +77,7 @@ but left largely as an exercise, beyond the scope of this project.
 NHL all-time player statistics for regular season games - Bio Info report:  
 https://www.nhl.com/stats/skaters?report=bios&reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points,goals,assists&page=0&pageSize=100
 
-## Implementation
+## Implementation Process
 ### Data Import
 Multiple methods of data import were explored, including via API, web scraping, and Pandas read functions.
 
@@ -93,6 +107,10 @@ With the data collected and stored in the `Raw Data Files` directory, the `panda
 compile the Excel file into a DataFrame, within the `get_dataset_excel()` function defined in `get_dataset.py`. The
 returned DataFrame is assigned to the variable `df_nhl`.
 
+```Python
+df_nhl = get_dataset_excel("./Raw Data Files/")
+```
+
 ### Data Cleaning
 #### Sanity Check
 Once generated, the `df_nhl` DataFrame is inspected to assess any further operations required before analysis can be
@@ -103,14 +121,14 @@ DataFrame is transformed as data cleaning operations are performed.
 
 #### Regex Replacement
 The dataset contains text and numeric data. Numeric values greater than 3 digits are represented as `"1,234"`. This is
-problematic for sorting and for asseing the column as a continuous range, for example plotting as axis ticks. Regex is
-used to convert to the required `1234` format:  
+problematic for sorting and for assessing the column as a continuous range, for example, plotting as axis ticks. Regex
+is used to convert to the required `1234` format:  
 * Find: `(\d),(\d)(\d)(\d)`  
 * Replace: `\1\2\3\4`
 
 The above regex strings are provided as parameters to the `find_and replace()` function defined in
 `find_and_replace.py`, along with the dataframe `df_nhl`. The regex strings use capture groups (parentheses) to capture
-and return the 1st, 2nd, 3rd and 4th digit characters, eliminating the ',' character.
+and return the 1st, 2nd, 3rd and 4th digit characters, eliminating the `,` character.
 
 ```Python
 # Check format of 4-digit value.
@@ -140,20 +158,20 @@ Reformatted 4-digit values...
 #### Sorting
 With the comma characters removed from 4-digit values, the Dataframe can be sorted by 'P' (points), 'G' (goals), and 'A'
 (assists) columns, with index reset, to match the default presentation of the data on https://www.nhl.com. This is the
-most useful ranking for this analysis as point, goal, and assists are the most direct indicators of performance.
+most useful ranking for this analysis as points, goals, and assists are the most direct indicators of performance.
 
 ```Python
 df_nhl = df_nhl.sort_values(by=['P', 'G', 'A'], ascending=False).reset_index()
 ```
 
-`df_nhl.head()`:
 ```
-   index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP  EVG   EVP  PPG  PPP SHG  SHP  OTG  GWG     S    S% TOI/GP  FOW%
+Getting .head()...
+    index         Player S/C Pos    GP    G     A     P  +/-   PIM  P/GP  EVG   EVP  PPG  PPP SHG  SHP  OTG  GWG     S    S% TOI/GP  FOW%
 0      0  Wayne Gretzky   L   C  1487  894  1963  2857  520   577  1.92  617  1818  204  890  73  149    2   91  5088  17.6     --    49
 1      1   Jaromir Jagr   L   R  1733  766  1155  1921  322  1167  1.11  538  1296  217  610  11   15   19  135  5637  13.6     --  24.5
 2      2   Mark Messier   L   C  1756  694  1193  1887  211  1912  1.07  452  1162  179  581  63  144    8   92  4221  16.4     --  54.7
 3      3    Gordie Howe   R   R  1767  801  1049  1850  160  1685  1.05  566  1250  211  564  24   36    0  121  3803    --     --    --
-4      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349  1040  188  727  12   31    4   79  3756  14.6     --  54.8 
+4      4    Ron Francis   L   C  1731  549  1249  1798  -18   977  1.04  349  1040  188  727  12   31    4   79  3756  14.6     --  54.8
 ```
 
 #### Duplicate Data
@@ -581,7 +599,7 @@ performed by standardizing the dataset.
 * Model to fit such histogram?
 
 #### Merging Dataframes for Further Analysis on Top 100
-In addition to the Summary report described earlier, a supplemantal Bio Info report is available on NHL.com [4]. This
+In addition to the Summary report described earlier, a supplemental Bio Info report is available on NHL.com [4]. This
 inlcudes biographical information of players, such as first season, height, weight, nationality. This provides
 opportunities categorical classification, more so than the mostly numeric data in the Summary report.
 
@@ -611,20 +629,14 @@ The new dataframe, `df_bio_top_100` is cleaned as per `df_nhl` earlier, with som
 * Some columns duplicate data found in df_nhl. These are to be dropped, with the exception of the Player column, on
 which the merge will be performed.
 
-
-#### Clustering
-* Standardising data.
-* Scatter plot.
-* Dendrogram.
-
 ### Machine Learning
-* Decision trees
-* Ensembling
+#### Decision Tree
+#### Ensembling
+#### Hyperparamater Tuning
 
-## Ideas For Analysis
-* Define gap to Wayne Gretzky - P/G/A.
-* Players capable of matching/surpassing - P/G/A.
-* Exponential distribution on Gretzky's points total being matched/beaten - P/G/A. 
+## Results
+
+## Insights
 
 ## References
 [1] NHL Stats page - Skaters/All-Time/Regular Season/Summary - https://www.nhl.com/stats/skaters?reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points&page=0&pageSize=100  

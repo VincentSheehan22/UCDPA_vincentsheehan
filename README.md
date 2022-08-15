@@ -24,9 +24,9 @@ some categorisation on player position and the 'shoots/catches' attribute. A his
 distribution of players vs. number of points.
 
 DataFrame merging is demonstrated with a subset of the top 100 entries in the dataset (sorted on points, goal, assists).
-A supplemental dataset for the same 100 players, also available from https://www.nhl.com [4], is supplied for the merge.
-This dataset provides biographical information, such as date-of-birth, height, weight, and nationality - further
-attributes that could be applied for classification use cases.
+A supplemental dataset for the same 100 players, also available from https://www.nhl.com (National Hockey League 2022),
+is supplied for the merge. This dataset provides biographical information, such as date-of-birth, height, weight, and
+nationality - further attributes that could be applied for classification use cases.
 
 Supervised machine learning is applied to the dataset using a decision tree regressor from the scikit-learn package. The
 target chosen for prediction, y, is goals (G) as being one of the most indicative measures of player performance.
@@ -37,18 +37,18 @@ metric. The RMSE of prediction of y on the training data, and on the test data i
 RMSE of cross-validation. Similar values are obtained for all RMSEs, though RMSE for prediction on the test set is
 lower than that on the training set, suggesting the model is not well-fitted to the data.
 
-The model is then train by fit with all numeric features in the feature matrix. An improvement in RMSE is observed with
-a higher number of features included.
+The model is then trained by fitting with all numeric features in the feature matrix. An improvement in RMSE is observed
+with a higher number of features included.
 
 Ensembling is explored using the RandomForestRegressor algorithm from Scikit-Learn, and RMSE measured again. With
-default, the RandomForestRegressor does not improve model performance. Feature importances are plotted as a bar chart,
-showing relatively few features taken into account.
+default hyperparameters, the RandomForestRegressor does not improve model performance. Feature importances are plotted
+as a bar chart, showing relatively few features taken into account.
 
 Hyperparameter tuning of the RandomForestRegresoor model, using GridSearchCV, is performed. Iterating through a set of
-hyperparameter values defined in a dictionary, best model is determined. The best model is fitted to the training set,
-and prediction for y made on test set. The RMSE of test set prediction is calculated, showing an improvement over both
-the DecisionTreeRegrssor and un-tuned RandomForestRegressor model. Feature importances are again plotted as bar chart,
-showing that more features are taken into account by the best model based on tuned hyperparameters.
+hyperparameter values defined in a dictionary, the best model is determined. The best model is fitted to the training
+set, and prediction for y made on test set. The RMSE of test set prediction is calculated, showing an improvement over
+both the DecisionTreeRegrssor and un-tuned RandomForestRegressor model. Feature importances are again plotted as bar
+chart, showing that more features are taken into account by the best model based on tuned hyperparameters.
 
 Output plots, along with a terminal log of `main.py` execution are included in the repository.
 
@@ -463,11 +463,11 @@ Some immediate insights can be obtained from this:
 * Of 7461 player names, only 7413 are unique - implying that 48 players share a name with another player in the dataset.
 * The most frequent name is Mikko Lehtonen, occurring 3 times.
 * The majority of players (~63%) shoot left (i.e., carry the stick blade on their left side). This appears to be
-counterintuitive to the general prevalence of right-hand dominance (~90%) [2]. Some initial reading suggests that the
-reasoning for the prevalence of left side shooting is that the dominant hand is most-effective at the butt of the stick
-[3]. However, if taking L from this dataset to represent right-hand dominance, there is still a disparity with the
-general distribution. An analysis of the equivalent Goalie dataset may give insight to whether there is adaptation in 
-response to coaching, in order to exploit weaknesses in Goalie effectiveness.
+counterintuitive to the general prevalence of right-hand dominance (~90%) (Wikipedia 2022). Some initial reading
+suggests that the reasoning for the prevalence of left side shooting is that the dominant hand is most-effective at the
+butt of the stick (hockeyhow.com 2022). However, if taking L from this dataset to represent right-hand dominance, there
+is still a disparity with the general distribution. An analysis of the equivalent Goalie dataset may give insight to
+whether there is adaptation in response to coaching, in order to exploit weaknesses in Goalie effectiveness.
 * The most frequent player position is defense (D), representing 33% of the dataset. Unlike the forward positions
 (centre, left wing, right wing). The defense position is not further sub-divided. A team typically plays with 1
 left-side defender and 1 right-side defender on the ice at a given time - 6 per team, and 12 forwards. The ratio of
@@ -658,9 +658,10 @@ From this, it is clear that tha data contains many outliers, with point totals s
 * Right plot shows the same histogram zoomed in at the high end (P >= 1200).
 
 #### Merging Dataframes for Further Analysis on Top 100
-In addition to the Summary report described earlier, a supplemental Bio Info report is available on NHL.com [4]. This
-includes biographical information of players, such as first season, height, weight, and nationality. This provides
-opportunities for categorical classification, more so than the mostly numeric data in the Summary report.
+In addition to the Summary report described earlier, a supplemental Bio Info report is available on NHL.com (National
+Hockey League 2022). This includes biographical information of players, such as first season, height, weight, and
+nationality. This provides opportunities for categorical classification, more so than the mostly numeric data in the
+Summary report.
 
 For the purpose of further analysis on highest performing players (as sorted by P, G, A), the first 100 entries of the
 Bio Info report is merged with the top 100 entries in df_nhl (representing the same group of players). It is left as an
@@ -858,7 +859,7 @@ RMSE_test: 41.08270767861857
 The RandomForestRegressor is used in attempt to improve the prediction score of Decision Tree model, as measured with
 root-mean-squared-error RMSE. The RandomForestRegressor model is trained in with the `implement_random_forest()`
 function in `implement_random_forest.py`, called from `main.py` as follows. Two additional arguments are supplied for
-the purpose of plotting feature importance: a DatFrame version of the feature matrix, and the target column name as
+the purpose of plotting feature importance: a DataFrame version of the feature matrix, and the target column name as
 string.
 
 ```Python
@@ -956,7 +957,19 @@ set. Methods for normalising the dataset are to be explored further, to improve 
 prediction on the test set, and using more features in prediction, than non-tuned Random Forest regression.
 
 ## References
-[1] NHL Stats page - Skaters/All-Time/Regular Season/Summary - https://www.nhl.com/stats/skaters?reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points&page=0&pageSize=100  
-[2] https://en.wikipedia.org/wiki/Handedness  
-[3] https://hockeyhow.com/why-most-hockey-players-left-handed/  
-[4] NHL Stats page - Skater/All-Time/Regular Season/Bio Info - https://www.nhl.com/stats/skaters?report=bios&reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points,goals,assists&page=0&pageSize=100
+National Hockey League. (2022). *Stats* [online]. 
+Available from: https://www.nhl.com/stats/skaters?reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points&page=0&pageSize=100 
+[accessed 15 August 2022].  
+
+Wikipedia. (2022). *Handedness* [online].
+Available from: https://en.wikipedia.org/wiki/Handedness
+[accessed 15 August 2022].  
+
+hockeyhow.com. (2022). *Why are Most Hockey Players Left-Handed?* [online].
+Available from: https://hockeyhow.com/why-most-hockey-players-left-handed/
+[accessed 15 August 2022].  
+
+National Hockey League. (2022). *Stats* [online]. 
+Available from: https://www.nhl.com/stats/skaters?report=bios&reportType=allTime&seasonFrom=19171918&seasonTo=20212022&gameType=2&filter=gamesPlayed,gte,1&sort=points,goals,assists&page=0&pageSize=100
+[accessed 15 August 2022].  
+

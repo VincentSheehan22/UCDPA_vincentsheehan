@@ -872,7 +872,7 @@ RMSE_test_rf: 46.084444631038274
 A bar plot of the feature importances is saved to file and displayed on screen.
 
 #### Hyperparamater Tuning on RandomForestRegressor
-The RandomForestRegressor with defualt parameters does not offer an improvement over DecisionTreeRegressor.
+The RandomForestRegressor with default parameters does not offer an improvement over DecisionTreeRegressor.
 Hyperparameter tuning is performed on the RandomForestRegressor model, using `GridSearchCV`, to determine the best
 parameters for use with the model. This is done with the `tune_random_froest()` function defined in
 `tune_random_forest.py`. The best model, with optimal parameters obtained from GridSearchCV, are used to fit and predict
